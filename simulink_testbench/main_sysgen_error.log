@@ -1,0 +1,22 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 2014.4                 C:/Xilinx/Vivado/2014.4
+Matlab 8.4.0.150421 (R2014b)            C:\MATLAB\R2014b
+Vivado 2014.4                           C:/Xilinx/Vivado/2014.4
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Illegal Period, This blocks attempts to set period that i...
+     Block: 'main/Gateway In'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'main/Gateway In'
+
+Details:
+Illegal Period, This blocks attempts to set period that is a
+non-integer multiple of the system rate
+Error occurred during "Block Configuration".
+
+--------------------------------------------------------------------------------
