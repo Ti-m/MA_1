@@ -1,19 +1,30 @@
 --------------------------------- Version Log ----------------------------------
 Version                                 Path
 System Generator 2014.4                 C:/Xilinx/Vivado/2014.4
-Matlab 8.4.0.150421 (R2014b)            C:\MATLAB\R2014b
+Matlab 8.4.0.150421 (R2014b)            C:\matlab\R2014b
 Vivado 2014.4                           C:/Xilinx/Vivado/2014.4
 --------------------------------------------------------------------------------
 Summary of Errors:
-Error 0001: Undriven input port
-     Block: 'main/Gateway Out2'
+Error 0001: XObjectPool::Pool: lookup failed
+     Block: 'main/Gateway In'
+Error 0002: XObjectPool::Pool: lookup failed
+     Block: 'main/Constant'
 --------------------------------------------------------------------------------
 
 Error 0001:
 
 Reported by:
-  'main/Gateway Out2'
+  'main/Gateway In'
 
 Details:
-The input ports on this block must be driven by other Xilinx blocks
+XObjectPool::Pool: lookup failed
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'main/Constant'
+
+Details:
+XObjectPool::Pool: lookup failed
 --------------------------------------------------------------------------------
