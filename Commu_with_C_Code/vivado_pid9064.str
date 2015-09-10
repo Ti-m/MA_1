@@ -1,0 +1,634 @@
+/*
+
+Vivado v2014.4 (64-bit)
+SW Build 1071353 on Tue Nov 18 18:29:27 MST 2014
+Process ID: 9064
+
+Current time: 	9/10/15 2:39:43 PM
+Time zone: 	Central European Time (Europe/Berlin)
+
+OS: Windows 8
+Version: 6.2
+Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 1680x1050
+Screen resolution (DPI): 96
+Available screens: 2
+
+Java version: 	1.8.0_05 64-bit
+Java home: 	C:/Xilinx/Vivado/2014.4/tps/win64/jre
+
+User name: 	Tim-UML
+User directory: C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code
+User country: 	DE
+User language: 	de
+User locale: 	de_DE
+Vivado preferences path: C:/Users/Tim-UML/AppData/Roaming/Xilinx/Vivado/2014.4/vivado.ini
+Vivado layouts directory: C:/Users/Tim-UML/AppData/Roaming/Xilinx/Vivado/2014.4/layouts/application
+
+GUI allocated memory:	200 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 470 MB
+
+*/
+
+// TclEventType: START_GUI
+// TclEventType: PROJECT_OPEN_DIALOG
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// cm:N (ch:JFrame):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 42 MB (+41518kb) [00:00:03]
+// [Engine Memory]: 400 MB (+268327kb) [00:00:03]
+// [Engine Memory]: 423 MB (+23814kb) [00:00:03]
+// [Engine Memory]: 457 MB (+35524kb) [00:00:04]
+// [GUI Memory]: 44 MB (+2586kb) [00:00:05]
+// [Engine Memory]: 470 MB (+13877kb) [00:00:05]
+// [GUI Memory]: 50 MB (+6251kb) [00:00:05]
+// Tcl Message: open_project C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2014.4/data/ip'. 
+// [GUI Memory]: 56 MB (+6374kb) [00:00:06]
+// [Engine Memory]: 479 MB (+9068kb) [00:00:06]
+// [GUI Memory]: 57 MB (+444kb) [00:00:06]
+// [GUI Memory]: 57 MB (+444kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 479 MB (+49kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 479 MB (+36kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 480 MB (+1085kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 482 MB (+1998kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 58 MB (+497kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 58 MB (+531kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 59 MB (+1041kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 60 MB (+506kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 61 MB (+1038kb) [00:00:06]
+// [Engine Memory]: 482 MB (+40kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 61 MB (+531kb) [00:00:06]
+// [Engine Memory]: 482 MB (+475kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 62 MB (+726kb) [00:00:06]
+// HMemoryUtils.trashcanNow. Engine heap size: 485 MB. GUI used memory: 33 MB. Current time: 9/10/15 2:39:44 PM
+// [Engine Memory]: 485 MB (+2834kb) [00:00:07]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Project name: Commu_with_C_Code; location: C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code; part: xc7z020clg400-1
+// Tcl Message: open_project: Time (s): cpu = 00:00:13 ; elapsed = 00:00:05 . Memory (MB): peak = 768.457 ; gain = 205.910 
+dismissDialog("Open Project"); // cm:N (ch:JFrame)
+// [Engine Memory]: 486 MB (+1204kb) [00:00:07]
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// [Engine Memory]: 489 MB (+3293kb) [00:00:14]
+// [GUI Memory]: 66 MB (+3913kb) [00:00:31]
+// [Engine Memory]: 490 MB (+462kb) [00:00:39]
+// Elapsed time: 40 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, RTL Analysis, Open Elaborated Design]", 13, true); // w:Y (v:I, ch:JFrame) - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_RTL_DESIGN
+// cm:N (ch:JFrame):  Open Elaborated Design : addNotify
+// TclEventType: ELABORATE_START
+// [Engine Memory]: 500 MB (+10821kb) [00:00:48]
+// Tcl Message: synth_design -rtl -name rtl_1 
+// Tcl Message: Command: synth_design -rtl -name rtl_1 Starting synth_design Using part: xc7z020clg400-1 Top: design_1_wrapper 
+// HMemoryUtils.trashcanNow. Engine heap size: 544 MB. GUI used memory: 34 MB. Current time: 9/10/15 2:40:29 PM
+// TclEventType: ELABORATE_FINISH
+// [Engine Memory]: 628 MB (+134328kb) [00:00:53]
+// TclEventType: READ_XDC_FILE_START
+// TclEventType: POWER_CNS_STALE
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// [Engine Memory]: 773 MB (+151883kb) [00:00:56]
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: LOC_CONSTRAINT_ADD
+// TclEventType: SIGNAL_MODIFY
+// TclEventType: READ_XDC_FILE_END
+// TclEventType: FLOORPLAN_MODIFY
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 774 MB. GUI used memory: 33 MB. Current time: 9/10/15 2:40:34 PM
+// [Engine Memory]: 800 MB (+27930kb) [00:00:56]
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// RouteApi.loadEngineXgd elapsed time: 0.7s
+// [GUI Memory]: 72 MB (+6216kb) [00:00:57]
+// [Engine Memory]: 887 MB (+91172kb) [00:00:57]
+// [GUI Memory]: 72 MB (+910kb) [00:01:00]
+// [GUI Memory]: 73 MB (+689kb) [00:01:00]
+// TclEventType: DESIGN_NEW
+// [GUI Memory]: 73 MB (+346kb) [00:01:00]
+// [Engine Memory]: 887 MB (+184kb) [00:01:00]
+// [Engine Memory]: 888 MB (+720kb) [00:01:00]
+// [Engine Memory]: 888 MB (+913kb) [00:01:00]
+// [GUI Memory]: 78 MB (+4320kb) [00:01:00]
+// Package: addNotify
+// [Engine Memory]: 904 MB (+16760kb) [00:01:01]
+// Device: addNotify
+// [Engine Memory]: 908 MB (+4272kb) [00:01:01]
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: Starting RTL Elaboration : Time (s): cpu = 00:00:30 ; elapsed = 00:00:52 . Memory (MB): peak = 779.992 ; gain = 621.379 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12] 
+// Tcl Message: INFO: [Synth 8-638] synthesizing module 'BUFG' [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:606] INFO: [Synth 8-256] done synthesizing module 'BUFG' (2#1) [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:606] 
+// Tcl Message: INFO: [Synth 8-638] synthesizing module 'BIBUF' [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:268] INFO: [Synth 8-256] done synthesizing module 'BIBUF' (3#1) [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:268] 
+// Tcl Message: INFO: [Common 17-14] Message 'Synth 8-4446' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings. INFO: [Synth 8-638] synthesizing module 'PS7' [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:26452] INFO: [Synth 8-256] done synthesizing module 'PS7' (4#1) [C:/Xilinx/Vivado/2014.4/scripts/rt/data/unisim_comp.v:26452] 
+// Tcl Message: INFO: [Synth 8-256] done synthesizing module 'processing_system7_v5_5_processing_system7' (5#1) [c:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:154] 
+// Tcl Message: INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_0' (6#1) [c:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57] 
+// Tcl Message: INFO: [Synth 8-256] done synthesizing module 'design_1' (7#1) [C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/hdl/design_1.v:12] INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (8#1) [C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12] 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: Finished RTL Elaboration : Time (s): cpu = 00:00:31 ; elapsed = 00:00:53 . Memory (MB): peak = 796.047 ; gain = 637.434 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message:  Report Check Netlist:  +------+------------------+-------+---------+-------+------------------+ |      |Item              |Errors |Warnings |Status |Description       | +------+------------------+-------+---------+-------+------------------+ |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets | +------+------------------+-------+---------+-------+------------------+ --------------------------------------------------------------------------------- Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:31 ; elapsed = 00:00:53 . Memory (MB): peak = 796.047 ; gain = 637.434 --------------------------------------------------------------------------------- 
+// Tcl Message: Loading clock regions from C:/Xilinx/Vivado/2014.4/data\parts/xilinx/zynq/zynq/xc7z020/ClockRegion.xml Loading clock buffers from C:/Xilinx/Vivado/2014.4/data\parts/xilinx/zynq/zynq/xc7z020/ClockBuffers.xml Loading clock placement rules from C:/Xilinx/Vivado/2014.4/data/parts/xilinx/zynq/ClockPlacerRules.xml Loading package pin functions from C:/Xilinx/Vivado/2014.4/data\parts/xilinx/zynq/PinFunctions.xml... Loading package from C:/Xilinx/Vivado/2014.4/data\parts/xilinx/zynq/zynq/xc7z020/clg400/Package.xml Loading io standards from C:/Xilinx/Vivado/2014.4/data\./parts/xilinx/zynq/IOStandards.xml 
+// Tcl Message: INFO: [Project 1-570] Preparing netlist for logic optimization 
+// Tcl Message:  Processing XDC Constraints Initializing timing engine Parsing XDC File [c:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst' Finished Parsing XDC File [c:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst' 
+// Tcl Message: INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [c:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc]. Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wrapper_propImpl.xdc] to anoth XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis. 
+// Tcl Message: Completed Processing XDC Constraints  
+// Tcl Message: INFO: [Project 1-111] Unisim Transformation Summary: No Unisim elements were transformed.  
+// [GUI Memory]: 79 MB (+970kb) [00:01:01]
+// [Engine Memory]: 909 MB (+974kb) [00:01:01]
+// [GUI Memory]: 80 MB (+1501kb) [00:01:01]
+// [Engine Memory]: 915 MB (+5586kb) [00:01:01]
+// [Engine Memory]: 925 MB (+10444kb) [00:01:02]
+// Tcl Message: RTL Elaboration Complete:  : Time (s): cpu = 00:00:47 ; elapsed = 00:01:03 . Memory (MB): peak = 1171.660 ; gain = 1013.047 
+// Tcl Message: 20 Infos, 125 Warnings, 0 Critical Warnings and 0 Errors encountered. synth_design completed successfully 
+// Tcl Message: synth_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:14 . Memory (MB): peak = 1171.660 ; gain = 401.043 
+// [GUI Memory]: 89 MB (+9863kb) [00:01:02]
+// [Engine Memory]: 929 MB (+4775kb) [00:01:02]
+// [GUI Memory]: 90 MB (+558kb) [00:01:02]
+// [Engine Memory]: 930 MB (+516kb) [00:01:02]
+// 'dg' command handler elapsed time: 14 seconds
+// [GUI Memory]: 90 MB (+558kb) [00:01:02]
+// [Engine Memory]: 930 MB (+90kb) [00:01:02]
+// [GUI Memory]: 95 MB (+4508kb) [00:01:02]
+// [Engine Memory]: 931 MB (+1073kb) [00:01:02]
+// [GUI Memory]: 96 MB (+1045kb) [00:01:02]
+// [Engine Memory]: 932 MB (+1110kb) [00:01:02]
+// Elapsed time: 14 seconds
+dismissDialog("Open Elaborated Design"); // cm:N (ch:JFrame)
+// [Engine Memory]: 933 MB (+1142kb) [00:01:02]
+// [GUI Memory]: 98 MB (+2283kb) [00:01:04]
+// [Engine Memory]: 935 MB (+2347kb) [00:01:04]
+// [GUI Memory]: 100 MB (+2180kb) [00:01:06]
+// [GUI Memory]: 101 MB (+1234kb) [00:01:06]
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // w:Y (v:I, ch:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+// cm:N (ch:JFrame):  Open Block Design : addNotify
+// TclEventType: LOAD_FEATURE
+// [GUI Memory]: 104 MB (+2611kb) [00:01:07]
+// [GUI Memory]: 105 MB (+1932kb) [00:01:07]
+// Tcl Message: open_bd_design {C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/design_1.bd} 
+// Tcl Message: Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0 
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_OPEN_DIAGRAM
+// [GUI Memory]: 107 MB (+1540kb) [00:01:08]
+// [Engine Memory]: 939 MB (+3973kb) [00:01:08]
+// [Engine Memory]: 949 MB (+10629kb) [00:01:09]
+// TclEventType: RSB_CONNECTION_CHANGE
+// Tcl Message: Successfully read diagram <design_1> from BD file <C:/Users/Tim-UML/Documents/GitHub/MA_1/Commu_with_C_Code/Commu_with_C_Code.srcs/sources_1/bd/design_1/design_1.bd> 
+// [Engine Memory]: 954 MB (+4603kb) [00:01:09]
+// TclEventType: RSB_CONNECTION_CHANGE
+// [Engine Memory]: 970 MB (+17190kb) [00:01:10]
+dismissDialog("Open Block Design"); // cm:N (ch:JFrame)
+// [GUI Memory]: 115 MB (+7928kb) [00:01:11]
+// HMemoryUtils.trashcanNow. Engine heap size: 970 MB. GUI used memory: 71 MB. Current time: 9/10/15 2:40:50 PM
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_REPORT, "Report"); // W:JMenu (JPopupMenu:JComponent, ch:JFrame)
+// [Engine Memory]: 970 MB (+614kb) [00:01:15]
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // R:JideMenu (CommandMenuBar:CommandBar, ch:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_IP_PACKAGER_WIZARD
+// Z:g (ch:JFrame): Create and Package New IP: addNotify
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, Z:g)
+selectRadioButton(PAResourceItoN.NewIpWizard_CREATE_NEW_AXI4_IP_CREATE_AXI4, "Create a new AXI4 peripheral. Create  an AXI4 IP, driver, software test application, IP Integrator AXI4 BFM simulation and debug demonstration design."); // b:a (a:H, Z:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, Z:g)
+setText(PAResourceItoN.NewIpWizard_NAME_MYIP, "my_multiplierx"); // an:JTextField (JPanel:JComponent, Z:g)
+setText(PAResourceItoN.NewIpWizard_DESCRIPTION_MY_NEW_AXI_IP, "my multiplier"); // an:JTextField (JPanel:JComponent, Z:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, Z:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, Z:g)
+selectRadioButton(PAResourceItoN.NewIpWizard_EDIT_IP, "Edit IP"); // a:JRadioButton (JPanel:JComponent, Z:g)
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, Z:g)
+// 's' command handler elapsed time: 29 seconds
+dismissDialog("Create and Package New IP"); // Z:g (ch:JFrame)
+// Tcl Message: create_peripheral xilinx.com user my_multiplierx 1.0 -dir C:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo 
+// Tcl Message: add_peripheral_interface S00_AXI -interface_mode slave -axi_type lite [ipx::find_open_core xilinx.com:user:my_multiplierx:1.0] 
+// TclEventType: PACKAGER_OBJECT_ADD
+// Tcl Message: generate_peripheral -driver -bfm_example_design -debug_hw_example_design [ipx::find_open_core xilinx.com:user:my_multiplierx:1.0] 
+// Tcl Message: write_peripheral [ipx::find_open_core xilinx.com:user:my_multiplierx:1.0] 
+// TclEventType: PROJECT_CHANGE
+// Tcl Message: set_property ip_repo_paths  C:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo/my_multiplierx_1.0 [current_project] 
+// TclEventType: CREATE_IP_CATALOG
+// [Engine Memory]: 974 MB (+3751kb) [00:01:47]
+// Tcl Message: update_ip_catalog -rebuild 
+// cm:N (ch:JFrame):  Create Peripheral IP : addNotify
+// TclEventType: RSB_BITABEN_IPREPODATA_REFRESH
+// TclEventType: CREATE_IP_CATALOG
+// [Engine Memory]: 977 MB (+3112kb) [00:01:48]
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo/my_multiplierx_1.0'. 
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// [Engine Memory]: 978 MB (+966kb) [00:01:49]
+// Tcl Message: ipx::edit_ip_in_project -upgrade true -name edit_my_multiplierx_v1_0 -directory C:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo c:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo/my_multiplierx_1.0/component.xml 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2014.4/data/ip'. 
+// [Engine Memory]: 982 MB (+3993kb) [00:01:49]
+// [GUI Memory]: 116 MB (+1888kb) [00:01:50]
+// [GUI Memory]: 117 MB (+491kb) [00:01:50]
+// [Engine Memory]: 990 MB (+8949kb) [00:01:50]
+// [Engine Memory]: 990 MB (+86kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 991 MB (+761kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 117 MB (+499kb) [00:01:50]
+// [GUI Memory]: 118 MB (+1093kb) [00:01:50]
+// [GUI Memory]: 119 MB (+540kb) [00:01:50]
+// [GUI Memory]: 119 MB (+542kb) [00:01:50]
+// [GUI Memory]: 120 MB (+542kb) [00:01:50]
+// [GUI Memory]: 120 MB (+540kb) [00:01:50]
+// [GUI Memory]: 121 MB (+540kb) [00:01:50]
+// [GUI Memory]: 122 MB (+1082kb) [00:01:50]
+// [GUI Memory]: 122 MB (+540kb) [00:01:50]
+// [GUI Memory]: 123 MB (+1081kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 124 MB (+542kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 125 MB (+540kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 126 MB (+1080kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 126 MB (+552kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 127 MB (+540kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 128 MB (+1080kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 128 MB (+540kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 129 MB (+540kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 129 MB (+540kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 130 MB (+621kb) [00:01:50]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: RSB_BITABEN_IPREPODATA_REFRESH
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PACKAGER_CURRENT_CORE
+// Run Command: PAResourceCommand.PACommandNames_IP_PACKAGER
+// [Engine Memory]: 991 MB (+327kb) [00:01:51]
+// [Engine Memory]: 995 MB (+4120kb) [00:01:51]
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo/my_multiplierx_1.0'. 
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_MESSAGE_UPDATE
+// [Engine Memory]: 997 MB (+1339kb) [00:01:52]
+dismissDialog("Create Peripheral IP"); // cm:N (ch:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 998 MB. GUI used memory: 87 MB. Current time: 9/10/15 2:41:30 PM
+// [Engine Memory]: 1,001 MB (+4988kb) [00:01:53]
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: update_compile_order -fileset sim_1 
+// TclEventType: DG_UPDATE_GRAPH
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager, Add Sources]", 2, false); // w:Y (v:I, ch:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// b:g (ch:JFrame): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, b:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files..."); // a:JButton (H:JPanel, b:g)
+setFileChooser("C:/Users/Tim-UML/Desktop/multiplyer.vhd");
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, b:g)
+// 'f' command handler elapsed time: 15 seconds
+dismissDialog("Add Sources"); // b:g (ch:JFrame)
+// TclEventType: PACKAGER_MESSAGE_UPDATE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Tcl Message: add_files -norecurse -scan_for_includes -copy_to C:/Users/Tim-UML/Documents/GitHub/MA_1/ip_repo/my_multiplierx_1.0/src C:/Users/Tim-UML/Desktop/multiplyer.vhd 
+// [Engine Memory]: 1,010 MB (+8900kb) [00:02:15]
+// TclEventType: DG_UPDATE_GRAPH
+// [Engine Memory]: 1,016 MB (+5947kb) [00:02:15]
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: PACKAGER_MESSAGE_UPDATE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Tcl Message: update_compile_order -fileset sources_1 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1); // u:k (I:JPanel, ch:JFrame)
+// [Engine Memory]: 1,022 MB (+6447kb) [00:02:21]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,022 MB. GUI used memory: 86 MB. Current time: 9/10/15 2:42:00 PM
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources]", 0, true, false, false, false, true, false); // u:k (I:JPanel, ch:JFrame) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true, false, false, false, true, false); // u:k (I:JPanel, ch:JFrame) - Popup Trigger - Node
+// Elapsed time: 33 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click
+// Elapsed time: 15 seconds
+selectCodeEditor("my_multiplierx_v1_0_S00_AXI.v", 414, 254); // bi:J (JPanel:JComponent, ch:JFrame)
+// Elapsed time: 82 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true); // u:k (I:JPanel, ch:JFrame) - Node
+// [GUI Memory]: 130 MB (+474kb) [00:04:51]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, multiplier - IMP (multiplyer.vhd)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, multiplier - IMP (multiplyer.vhd)]", 2, false, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true); // u:k (I:JPanel, ch:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click - Node
+// [GUI Memory]: 132 MB (+2409kb) [00:04:55]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false); // u:k (I:JPanel, ch:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false, false, false, false, false, true); // u:k (I:JPanel, ch:JFrame) - Double Click
+// [GUI Memory]: 133 MB (+517kb) [00:05:32]
+// [GUI Memory]: 134 MB (+555kb) [00:05:35]
+// Elapsed time: 67 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v)]", 1, true, false, false, false, true, false); // u:k (I:JPanel, ch:JFrame) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, my_multiplierx_v1_0 (my_multiplierx_v1_0.v), my_multiplierx_v1_0_S00_AXI_inst - my_multiplierx_v1_0_S00_AXI (my_multiplierx_v1_0_S00_AXI.v)]", 2, false, false, false, false, true, false); // u:k (I:JPanel, ch:JFrame) - Popup Trigger
+// Elapsed time: 61 seconds
+selectCodeEditor("my_multiplierx_v1_0_S00_AXI.v", 279, 183); // bi:J (JPanel:JComponent, ch:JFrame)
