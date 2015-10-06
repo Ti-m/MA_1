@@ -1,2 +1,3 @@
 %initScript.m
-assignin('base', 'Ts', SamplingTime);
+assignin('base', 'Ts', SampleTime);
+assignin('base', 'Tb', BitTime);
