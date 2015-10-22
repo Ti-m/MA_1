@@ -21,44 +21,60 @@ T_bit = 1/R_r
 % channel. In the thesis of Manuel Gertje a duration of 20us is chosen for
 % a typical radio channel in hilly terrain 10 . In the wired situation,
 % a duration no longer then 1us can be assumed.
-T_G = 1e-6
+T_G = 1.428e-6
 
 %Bandwidth efiency. Typical value from Kammayer S.590
-beta = 0.8
+beta = 0.9
 
 %OFDM Symbolduration (T_FFT)
 T_Sym = T_G*beta/(1-beta)
 
+%OFDM full duration
+T_OFDM = T_Sym + T_G
 %Bit per Symbol with 128-QAM
 N_bit = log2(128)
 
+%Subcarriercount needed to reach Datarate in T_Sym
+% *2 for use of DMT
+%%%%T_OFDM anstelle von T_Sym??????%%%%%%%
+%N_FFT_needed = ceil(T_OFDM/(T_bit*N_bit))
+N_FFT_needed = (T_OFDM/(T_bit*N_bit))
+
+N_FFT_used = 0; k=1;
+while N_FFT_needed >= N_FFT_used
+
 %FFT Len OFDM
-N_FFT = 2^nextpow2(ceil(T_Sym/(T_bit*N_bit)))
+N_FFT = 2^nextpow2(N_FFT_needed*k);
 
 %Unuesed Carriers, constant 5 from IEE802.11a
 %Is there a better value?
-N_unused_carr = floor(N_FFT/5)
+N_unused_carr = floor(N_FFT/5);
 
 %Used Carriers
-N_FFT_used = N_FFT - N_unused_carr
+N_FFT_used = N_FFT - N_unused_carr;
+
+k=k+1;
+end
+N_FFT
 
 
-%Bit per OFDM Symbol
-N_bit_OFDM_symb = N_FFT_used * N_bit
+%Bit per OFDM Symbol (/2 because DMT)
+N_bit_OFDM_symb = N_FFT_used * N_bit /2
 
 %OFDM Symbols per second
 R_OFDM_Symb = R_r/ N_bit_OFDM_symb
 
-%OFDM Symbolduration (T_FFT)
-%T_Sym = 1/R_OFDM_Symb
-
+Bits_per_second = R_OFDM_Symb * N_bit_OFDM_symb
+%N_FFT mit DMT
+N_FFT = N_FFT *2
+N_unused_carr = N_unused_carr *2
+N_FFT_used = N_FFT_used * 2
 %Required Bandwidth
-B= R_OFDM_Symb * N_FFT
-B2=1/(T_Sym)*N_FFT
-
+B_SC=1/(T_Sym)
+B=1/(T_Sym)*N_FFT
 
 %Required Sampling Frequency for sampling theorem
-Fs_min=2*B2
+Fs_min=2*B
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%ADC/DAC%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SignaleRange/FullscaleRange 
@@ -75,7 +91,7 @@ Boltzmann = 1.3806488e-23
 N0=Boltzmann * Temp * 2
 
 %Thermical noise at receiver
-P_n = N0 * B2
+P_n = N0 * B
 
 % Bit from Symbols
 N_bit
@@ -83,4 +99,19 @@ N_bit
 % Additional Bit from Noise
 
 % Additional Bit from PAPR
+% PAR *4 corresponds to 12dB
+N_bit_PAPR = 2
+
+%ADC Resolution
+Converter_Resolution = N_bit + N_bit_PAPR
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%FPGA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Max CLK for FPGA PL with internal oszilator through PS block, higher with
+%external source
+Max_CLK = 250e6
+
+%Number of multiplications for FFT (80%-90% of effort)
+FFT_multiplication_complex = N_FFT/2*log2(N_FFT)
+FFT_multiplication_real = FFT_multiplication_complex *4
+
 
