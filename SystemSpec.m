@@ -4,7 +4,7 @@ clear,clc
 
 %%%%%%%%%%%%%%%Genrell%%%%%%%%%%%%%%%%%%%%%%
 %Channel coding code rate
-R_c = 0.5
+R_c = 0.75
 
 %Data Bitrate bit/sec
 R_b = 50e6
@@ -21,57 +21,74 @@ T_bit = 1/R_r
 % channel. In the thesis of Manuel Gertje a duration of 20us is chosen for
 % a typical radio channel in hilly terrain 10 . In the wired situation,
 % a duration no longer then 1us can be assumed.
-T_G = 1.428e-6
+%T_G = 1.428e-6
 
 %Bandwidth efiency. Typical value from Kammayer S.590
 beta = 0.9
 
-%OFDM Symbolduration (T_FFT)
-T_Sym = T_G*beta/(1-beta)
+%Bit per Symbol with 128-QAM
+M = log2(128)
+
+%FFT Len OFDM
+N_FFT = [32, 64, 128, 256, 512, 1024, 2048, 4096]
+
+%Unuesed Carriers, constant 5 from IEE802.11a
+%Is there a better value?
+N_unused_carr = ceil(N_FFT/5)
+
+%Used Carriers
+N_FFT_used = N_FFT - N_unused_carr
 
 %OFDM full duration
-T_OFDM = T_Sym + T_G
-%Bit per Symbol with 128-QAM
-N_bit = log2(128)
+T_OFDM = N_FFT_used * T_bit * M
+
+%OFDM Symbolduration (T_FFT)
+T_G = T_OFDM/(beta/(1-beta)+1)
+
+%OFDM full duration
+T_Sym = T_OFDM - T_G
 
 %Subcarriercount needed to reach Datarate in T_Sym
 % *2 for use of DMT
 %%%%T_OFDM anstelle von T_Sym??????%%%%%%%
-%N_FFT_needed = ceil(T_OFDM/(T_bit*N_bit))
-N_FFT_needed = (T_OFDM/(T_bit*N_bit))
+%N_FFT_needed = ceil(T_OFDM/(T_bit*M))
+%N_FFT_needed = (T_OFDM/(T_bit*M))
 
-N_FFT_used = 0; k=1;
-while N_FFT_needed >= N_FFT_used
+%N_FFT_used = 0; k=1;
+%while N_FFT_needed >= N_FFT_used
 
 %FFT Len OFDM
-N_FFT = 2^nextpow2(N_FFT_needed*k);
+%N_FFT = 2^nextpow2(N_FFT_needed*k);
 
 %Unuesed Carriers, constant 5 from IEE802.11a
 %Is there a better value?
-N_unused_carr = floor(N_FFT/5);
+%N_unused_carr = floor(N_FFT/5);
 
 %Used Carriers
-N_FFT_used = N_FFT - N_unused_carr;
+%N_FFT_used = N_FFT - N_unused_carr;
 
-k=k+1;
-end
-N_FFT
+%k=k+1;
+%end
+%N_FFT
 
 
-%Bit per OFDM Symbol (/2 because DMT)
-N_bit_OFDM_symb = N_FFT_used * N_bit /2
+%Bit per OFDM Symbol
+N_bit_OFDM_symb = N_FFT_used * M 
 
 %OFDM Symbols per second
-R_OFDM_Symb = R_r/ N_bit_OFDM_symb
+R_OFDM_Symb = R_r./ N_bit_OFDM_symb
 
-Bits_per_second = R_OFDM_Symb * N_bit_OFDM_symb
+Bits_per_second = R_OFDM_Symb .* N_bit_OFDM_symb
+
+
+FS2 = (4 * N_FFT)./(N_FFT_used.*T_bit.*M.*beta)
 %N_FFT mit DMT
 N_FFT = N_FFT *2
 N_unused_carr = N_unused_carr *2
 N_FFT_used = N_FFT_used * 2
 %Required Bandwidth
-B_SC=1/(T_Sym)
-B=1/(T_Sym)*N_FFT
+B_SC=1./(T_Sym)
+B=1./(T_Sym).*N_FFT
 
 %Required Sampling Frequency for sampling theorem
 Fs_min=2*B
@@ -94,7 +111,7 @@ N0=Boltzmann * Temp * 2
 P_n = N0 * B
 
 % Bit from Symbols
-N_bit
+M
 
 % Additional Bit from Noise
 
@@ -103,7 +120,7 @@ N_bit
 N_bit_PAPR = 2
 
 %ADC Resolution
-Converter_Resolution = N_bit + N_bit_PAPR
+Converter_Resolution = M + N_bit_PAPR
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%FPGA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Max CLK for FPGA PL with internal oszilator through PS block, higher with
@@ -111,7 +128,9 @@ Converter_Resolution = N_bit + N_bit_PAPR
 Max_CLK = 250e6
 
 %Number of multiplications for FFT (80%-90% of effort)
-FFT_multiplication_complex = N_FFT/2*log2(N_FFT)
+FFT_multiplication_complex = N_FFT/2.*log2(N_FFT)
 FFT_multiplication_real = FFT_multiplication_complex *4
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%FS2 = (4 * N_FFT)./(T_bit.*M.*beta)./floor(N_FFT/10)
+FS2 = (4 * N_FFT)./(N_FFT_used.*T_bit.*M.*beta)
