@@ -4,7 +4,7 @@ clear,clc
 
 %%%%%%%%%%%%%%%Genrell%%%%%%%%%%%%%%%%%%%%%%
 %Channel coding code rate
-R_c = 0.75
+R_c = 1
 
 %Data Bitrate bit/sec
 R_b = 50e6
@@ -27,7 +27,7 @@ T_bit = 1/R_r
 beta = 0.9
 
 %Bit per Symbol with 128-QAM
-M = log2(128)
+M = log2(256)
 
 %FFT Len OFDM
 N_FFT = [32, 64, 128, 256, 512, 1024, 2048, 4096]
