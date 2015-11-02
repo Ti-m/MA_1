@@ -1,18 +1,19 @@
-%SystemSpec.m
+%%SystemSpec.m
 %SystemSpecification
 clear,clc
+format shortEng
 
-%%%%%%%%%%%%%%%Genrell%%%%%%%%%%%%%%%%%%%%%%
+%% Bit rate
 %Channel coding code rate
 R_c = 1
 
-%Data Bitrate bit/sec
+% Data Bitrate bit/sec
 R_b = 50e6
 
-%Raw Transmission rate
+% Raw Transmission rate
 R_r = R_b / R_c
 
-%Duration bit
+% Duration bit
 T_bit = 1/R_r
 
 %%%%%%%%%%%%%%%OFDM Parameter%%%%%%%%%%%%%%%
@@ -23,29 +24,31 @@ T_bit = 1/R_r
 % a duration no longer then 1us can be assumed.
 %T_G = 1.428e-6
 
-%Bandwidth efiency. Typical value from Kammayer S.590
+%% Bandwidth effiency. 
+%Typical value from Kammayer S.590
 beta = 0.9
 
-%Bit per Symbol with 128-QAM
+% Bit per Symbol with 256-QAM
 M = log2(256)
 
-%FFT Len OFDM
+
+%% FFT Len OFDM
 N_FFT = [32, 64, 128, 256, 512, 1024, 2048, 4096]
 
-%Unuesed Carriers, constant 5 from IEE802.11a
+%% Unuesed Carriers, constant 5 from IEE802.11a
 %Is there a better value?
 N_unused_carr = ceil(N_FFT/5)
 
-%Used Carriers
+%% Used Carriers
 N_FFT_used = N_FFT - N_unused_carr
 
-%OFDM full duration
+%% OFDM full duration
 T_OFDM = N_FFT_used * T_bit * M
 
-%OFDM Symbolduration (T_FFT)
+%% OFDM Symbolduration (T_FFT)
 T_G = T_OFDM/(beta/(1-beta)+1)
 
-%OFDM full duration
+%% OFDM full duration
 T_Sym = T_OFDM - T_G
 
 %Subcarriercount needed to reach Datarate in T_Sym
@@ -72,36 +75,36 @@ T_Sym = T_OFDM - T_G
 %N_FFT
 
 
-%Bit per OFDM Symbol
+%% Bit per OFDM Symbol
 N_bit_OFDM_symb = N_FFT_used * M 
 
-%OFDM Symbols per second
+%% OFDM Symbols per second
 R_OFDM_Symb = R_r./ N_bit_OFDM_symb
 
 Bits_per_second = R_OFDM_Symb .* N_bit_OFDM_symb
 
 
 FS2 = (4 * N_FFT)./(N_FFT_used.*T_bit.*M.*beta)
-%N_FFT mit DMT
+%% N_FFT mit DMT
 N_FFT = N_FFT *2
 N_unused_carr = N_unused_carr *2
 N_FFT_used = N_FFT_used * 2
-%Required Bandwidth
+%% Required Bandwidth
 B_SC=1./(T_Sym)
 B=1./(T_Sym).*N_FFT
 
-%Required Sampling Frequency for sampling theorem
+%% Required Sampling Frequency for sampling theorem
 Fs_min=2*B
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%ADC/DAC%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SignaleRange/FullscaleRange 
+%% SignaleRange/FullscaleRange 
 %http://www.dataq.com/data-acquisition/general-education-tutorials/fact-folly-mathematics-analog-digital-converter-resolution.html
 RangeSignal = 10
 RangeFullScale = 12
 
 RangeDiv=RangeSignal/RangeFullScale
 
-%Temp 20 Degree Celsius in K
+%% Temp 20 Degree Celsius in K
 Temp = 293
 Boltzmann = 1.3806488e-23
 %N0 for Real valued channel in W/Hz
@@ -110,7 +113,7 @@ N0=Boltzmann * Temp * 2
 %Thermical noise at receiver
 P_n = N0 * B
 
-% Bit from Symbols
+%% Bit from Symbols
 M
 
 % Additional Bit from Noise
@@ -123,7 +126,7 @@ N_bit_PAPR = 2
 Converter_Resolution = M + N_bit_PAPR
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%FPGA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Max CLK for FPGA PL with internal oszilator through PS block, higher with
+%% Max CLK for FPGA PL with internal oszilator through PS block, higher with
 %external source
 Max_CLK = 250e6
 
