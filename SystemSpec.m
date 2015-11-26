@@ -5,7 +5,7 @@ format shortEng
 
 %% Bit rate
 %Channel coding code rate
-R_c = 1
+R_c = 0.5
 
 % Data Bitrate bit/sec
 R_b = 50e6
