@@ -25,7 +25,16 @@ assignin('base', 'rpv', precision);
 %'outFracLen'=fracLen
 %'outUDDataType'=precisionModu
 if radio_precision == 1
-   
+    
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant2','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant3','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant4','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant5','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant6','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant7','OutDataTypeStr',precision)
+    set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant8','OutDataTypeStr',precision)
+    
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/256_QAM/Rectangular_QAM_Modu','outDtype',precision)
