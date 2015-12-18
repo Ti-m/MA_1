@@ -9,6 +9,7 @@ assignin('base', 'Ts', SampleTime);
 assignin('base', 'Tb', BitTime);
 assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', radio_precision);
+assignin('base', 'dmtOfdm', dmtOfdm);
 if radio_precision == 1
     precision = 'double';
 else
@@ -24,12 +25,17 @@ assignin('base', 'rpv', precision);
 %'outFracLenMode'='User-defined'
 %'outFracLen'=fracLen
 %'outUDDataType'=precisionModu
+
+%%%%SIMULINK-BLOCKS%%%%%
+
+set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/DMT/Constant','OutDataTypeStr',precision)
+set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDM/Constant1','OutDataTypeStr',precision)
 if radio_precision == 1
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/256_QAM/Rectangular_QAM_Modu','outDtype',precision)
-    set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype',precision)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype',precision)     
 else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
@@ -37,6 +43,9 @@ else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
 
 end
+
+%%%%SYSGEN-BLOCKS%%%%%
+
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant2','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant3','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
