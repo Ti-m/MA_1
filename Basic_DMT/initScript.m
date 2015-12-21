@@ -63,6 +63,8 @@ set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant5','arith_type','Signed (
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant6','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant7','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant8','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
+
+set_param('Basic_DMT/Sysgen_IFFT & P//S/Constant','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 %get_param(gcb,'arith_type')
 %get_param(gcb,'bin_pt')
 %get_param(gcb,'n_bits')
