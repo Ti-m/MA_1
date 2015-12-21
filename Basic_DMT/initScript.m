@@ -28,8 +28,8 @@ assignin('base', 'rpv', precision);
 
 %%%%SIMULINK-BLOCKS%%%%%
 
-set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/DMT/Constant','OutDataTypeStr',precision)
-set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDM/Constant1','OutDataTypeStr',precision)
+set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDMorDMT/OFDM/Constant','OutDataTypeStr',precision)
+set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDMorDMT/DMT/Constant','OutDataTypeStr',precision)
 if radio_precision == 1
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision)
