@@ -41,6 +41,8 @@ if radio_precision == 1
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype',precision)    
     
     set_param('Basic_DMT/IFFT & P//S/IFFT','outputDataTypeStr','Inherit: Inherit via internal rule')
+    
+    set_param('Basic_DMT/S//P & FFT/FFT','outputDataTypeStr','Inherit: Inherit via internal rule')
 else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
@@ -48,6 +50,7 @@ else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
 
     set_param('Basic_DMT/IFFT & P//S/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+log2(fftLen)+1) , ',' , fracLen , ')'))
+    set_param('Basic_DMT/S//P & FFT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+(log2(fftLen)+1)*2) , ',' , fracLen , ')'))
 end
 
 
