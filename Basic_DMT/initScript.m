@@ -29,28 +29,28 @@ assignin('base', 'rpv', precision);
 
 %%%%SIMULINK-BLOCKS%%%%%
 
-set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDMorDMT/OFDM/Constant','OutDataTypeStr',precision)
-set_param('Basic_DMT/IFFT & P//S/Create Frame for IFFT/OFDMorDMT/DMT/Constant','OutDataTypeStr',precision)
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/OFDM/Constant','OutDataTypeStr',precision)
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/DMT/Constant','OutDataTypeStr',precision)
 
 
 if radio_precision == 1
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision)
-    set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype',precision)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect_QAM','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/256_QAM/Rectangular_QAM_Modu','outDtype',precision)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype',precision)    
     
-    set_param('Basic_DMT/IFFT & P//S/IFFT','outputDataTypeStr','Inherit: Inherit via internal rule')
+    set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr','Inherit: Inherit via internal rule')
     
-    set_param('Basic_DMT/S//P & FFT/FFT','outputDataTypeStr','Inherit: Inherit via internal rule')
+    set_param('Basic_DMT/SIPaFFT/FFT','outputDataTypeStr','Inherit: Inherit via internal rule')
 else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
-    set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect QAM','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect_QAM','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/256_QAM/Rectangular_QAM_Modu','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P2/16_QAM/Rectangular_QAM_Modu','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',fracLen,'outUDDataType',precisionModu)
 
-    set_param('Basic_DMT/IFFT & P//S/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+log2(fftLen)+1) , ',' , fracLen , ')'))
-    set_param('Basic_DMT/S//P & FFT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+(log2(fftLen)+1)*2) , ',' , fracLen , ')'))
+    set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+log2(fftLen)+1) , ',' , fracLen , ')'))
+    set_param('Basic_DMT/SIPaFFT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(str2double(bitCount)+(log2(fftLen)+1)*2) , ',' , fracLen , ')'))
 end
 
 
@@ -75,17 +75,17 @@ set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant6','arith_type','Signed (
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant7','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant8','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 
-set_param('Basic_DMT/Sysgen_IFFT & P//S/Constant','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
+set_param('Basic_DMT/Sysgen_IFFTaPIS/Constant','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 
-set_param('Basic_DMT/Sysgen_IFFT & P//S/Reinterpret','bin_pt',num2str(str2double(bitCount)-1))
-set_param('Basic_DMT/Sysgen_IFFT & P//S/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1))
-set_param('Basic_DMT/Sysgen_IFFT & P//S/Reinterpret2','bin_pt',fracLen)
-set_param('Basic_DMT/Sysgen_IFFT & P//S/Reinterpret3','bin_pt',fracLen)
+set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret','bin_pt',num2str(str2double(bitCount)-1))
+set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1))
+set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret2','bin_pt',fracLen)
+set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret3','bin_pt',fracLen)
 
-set_param('Basic_DMT/S//P & FFT/Reinterpret','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
-set_param('Basic_DMT/S//P & FFT/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
-set_param('Basic_DMT/S//P & FFT/Reinterpret2','bin_pt',fracLen)
-set_param('Basic_DMT/S//P & FFT/Reinterpret3','bin_pt',fracLen)
+set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
+set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
+set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret2','bin_pt',fracLen)
+set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret3','bin_pt',fracLen)
 %get_param(gcb,'arith_type')
 %get_param(gcb,'bin_pt')
 %get_param(gcb,'n_bits')
