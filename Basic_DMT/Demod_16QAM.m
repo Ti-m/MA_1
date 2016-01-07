@@ -17,7 +17,7 @@ zero = xfix({xlUnsigned,1,0}, 0);
         else
             B1 = zero;
         end;
-    end;
+ end;
     if (Q > 0)
         B2 = zero;
         if (Q > 2)
