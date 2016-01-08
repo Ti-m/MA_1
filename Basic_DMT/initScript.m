@@ -12,6 +12,7 @@ assignin('base', 'Tb', BitTime);
 assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', str2double(radio_precision));
 assignin('base', 'dmtOfdm', dmtOfdm);
+assignin('base', 'guardInterval', guardInterval);
 if radio_precision == 1
     precision_str = 'double';
 else
