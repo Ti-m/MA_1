@@ -4,7 +4,9 @@ format shortEng
 %bitCount = '8';
 %fracLen = '0';
 fftLen = 8;
+GI_Len = 4;
 assignin('base', 'fftLen', fftLen);
+assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
