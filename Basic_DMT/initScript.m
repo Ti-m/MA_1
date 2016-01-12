@@ -4,12 +4,16 @@ format shortEng
 %bitCount = '8';
 %fracLen = '0';
 fftLen = 8;
-GI_Len = 4;
+GI_Len = 4;%7
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
+
+sysgenSystemPeriod = SampleTime; %SampleTime/2;
+
+assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'Tb', BitTime);
 assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', str2double(radio_precision));
