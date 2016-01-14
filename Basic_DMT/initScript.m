@@ -11,7 +11,7 @@ assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
 
-sysgenSystemPeriod = SampleTime; %SampleTime/2;
+sysgenSystemPeriod = SampleTime/2; %SampleTime/2;
 
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'Tb', BitTime);
