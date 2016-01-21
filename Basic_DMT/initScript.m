@@ -9,6 +9,8 @@ bitPerSymb=4;
 GI_Len = 4;%7
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'GI_Len', GI_Len);
+assignin('base', 'usedSubCar', usedSubCar);
+assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
@@ -32,7 +34,7 @@ assignin('base', 'precision_str', precision_str);
 
 
 if dmtOfdm == 2
-fftLen = 32;
+%fftLen = 32;
 end
 %set_param('Basic_DMT/Constant','OutDataTypeStr',precision)
 
