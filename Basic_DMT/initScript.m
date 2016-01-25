@@ -7,6 +7,9 @@ fftLen = 16;
 usedSubCar=14;
 bitPerSymb=4;
 GI_Len = 4;%7
+
+upsampleFactor = 8; 
+
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'usedSubCar', usedSubCar);
@@ -14,6 +17,8 @@ assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
+assignin('base', 'upsample', upsample);
+assignin('base', 'upsampleFactor', upsampleFactor);
 
 %sysgenSystemPeriod = SampleTime/6;
 sysgenSystemPeriod = 1e-10;
