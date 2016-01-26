@@ -9,6 +9,8 @@ bitPerSymb=4;
 GI_Len = 4;%7
 
 upsampleFactor = 8; 
+impulseResponse=2;
+assignin('base', 'impulseResponse', impulseResponse);
 
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'GI_Len', GI_Len);
