@@ -6,19 +6,29 @@ format shortEng
 fftLen = 16;
 usedSubCar=14;
 bitPerSymb=4;
-GI_Len = 4;%7
+
 
 upsampleFactor = 8; 
 impulseResponse=2;
 assignin('base', 'impulseResponse', impulseResponse);
 
 assignin('base', 'fftLen', fftLen);
+if guardInterval == 2
+    GI_Len = 4;
+else
+    GI_Len = 0;
+end
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'usedSubCar', usedSubCar);
 assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 assignin('base', 'Ts', SampleTime);
+if upsample == 2
+    upsampleFactor = 8; 
+else
+    upsampleFactor = 1; %used in AWGN Simulink Channel sample time calculation
+end
 assignin('base', 'upsample', upsample);
 assignin('base', 'upsampleFactor', upsampleFactor);
 
@@ -31,10 +41,16 @@ assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', str2double(radio_precision));
 assignin('base', 'dmtOfdm', dmtOfdm);
 assignin('base', 'guardInterval', guardInterval);
+assignin('base', 'AWGN', AWGN);
+assignin('base', 'channel', channel);
+grpDelayChannelFilt = 1;
+assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
+
 if radio_precision == 1
     precision_str = 'double';
 else
     precision_str = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
+    precStrAftIFFT =strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)) , ',' , num2str(fracLen) , ')');
     precisionModu = strcat('sfix(',num2str(bitCount),')');
 end
 assignin('base', 'precision_str', precision_str);
@@ -57,9 +73,9 @@ end
 %blocks.
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/OFDM/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/DMT/Constant','OutDataTypeStr',precision_str)
+set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 
-
-if radio_precision == 1
+if radio_precision == 1 
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/16_QAM/Rect_QAM_Mod','outDtype',precision_str)
