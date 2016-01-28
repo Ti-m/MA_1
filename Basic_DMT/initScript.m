@@ -3,22 +3,33 @@ format shortEng
 
 %bitCount = '8';
 %fracLen = '0';
+
+sysgenSystemPeriod=.5e-9;
+assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 fftLen = 16;
+assignin('base', 'fftLen', fftLen);
+fftLenDMT = 2*fftLen;
+assignin('base', 'fftLenDMT', fftLenDMT);
 usedSubCar=14;
 bitPerSymb=4;
-
 
 upsampleFactor = 8; 
 impulseResponse=2;
 assignin('base', 'impulseResponse', impulseResponse);
 
-assignin('base', 'fftLen', fftLen);
+
 if guardInterval == 2
     GI_Len = 4;
+    GI_LenDMT=GI_Len*2;
 else
     GI_Len = 0;
+     GI_LenDMT=0;
 end
 assignin('base', 'GI_Len', GI_Len);
+assignin('base', 'GI_LenDMT', GI_LenDMT);
+beta = fftLen/(fftLen+GI_Len); 
+assignin('base', 'beta', beta);
+
 assignin('base', 'usedSubCar', usedSubCar);
 assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
@@ -32,8 +43,7 @@ end
 assignin('base', 'upsample', upsample);
 assignin('base', 'upsampleFactor', upsampleFactor);
 
-%sysgenSystemPeriod = SampleTime/6;
-sysgenSystemPeriod = 1e-10;
+
 %sysgenSystemPeriod = SampleTime*usedSubCar/fftLen;
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'Tb', BitTime);
@@ -48,13 +58,14 @@ assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
 
 if radio_precision == 1
     precision_str = 'double';
+    precStrAftIFFT = 'double';
 else
     precision_str = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
     precStrAftIFFT =strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)) , ',' , num2str(fracLen) , ')');
     precisionModu = strcat('sfix(',num2str(bitCount),')');
 end
 assignin('base', 'precision_str', precision_str);
-
+assignin('base', 'precStrAftIFFT', precStrAftIFFT);
 
 if dmtOfdm == 2
 %fftLen = 32;
