@@ -21,12 +21,23 @@ assignin('base', 'impulseResponse', impulseResponse);
 if guardInterval == 2
     GI_Len = 4;
     GI_LenDMT=GI_Len*2;
+    
 else
     GI_Len = 0;
      GI_LenDMT=0;
+     GI_Active=0;
 end
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'GI_LenDMT', GI_LenDMT);
+if dmtOfdm == 1 %% To create blocks which are not dependent on variant subsystems.
+    GI_Active = GI_Len;
+    fftLenActive = fftLen;
+else
+    GI_Active = GI_LenDMT;
+    fftLenActive = fftLenDMT;
+end
+assignin('base', 'GI_Active', GI_Active);
+assignin('base', 'fftLenActive', fftLenActive);
 beta = fftLen/(fftLen+GI_Len); 
 assignin('base', 'beta', beta);
 
@@ -82,8 +93,8 @@ end
 
 %Not possible to replace these with variables in the simulink-constant
 %blocks.
-set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/OFDM/Constant','OutDataTypeStr',precision_str)
-set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/DMT/Constant','OutDataTypeStr',precision_str)
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 
 if radio_precision == 1 
