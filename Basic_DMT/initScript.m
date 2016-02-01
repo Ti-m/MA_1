@@ -14,7 +14,7 @@ usedSubCar=14;
 bitPerSymb=4;
 
 upsampleFactor = 8; 
-impulseResponse=2;
+
 assignin('base', 'impulseResponse', impulseResponse);
 
 
@@ -167,8 +167,41 @@ else
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_DMT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
 end
 
-
-
+h=[0.04100388; 0.9179922382; 0.04100388; zeros(13,1) ];
+e=fft(h);
+e=ones(16,1);
+e0=e(1);
+e1=e(2);
+e2=e(3);
+e3=e(4);
+e4=e(5);
+e5=e(6);
+e6=e(7);
+e7=e(8);
+e8=e(9);
+e9=e(10);
+e10=e(11);
+e11=e(12);
+e12=e(13);
+e13=e(14);
+e14=e(15);
+e15=e(16);
+assignin('base', 'e0', e0);
+assignin('base', 'e1', e1);
+assignin('base', 'e2', e2);
+assignin('base', 'e3', e3);
+assignin('base', 'e4', e4);
+assignin('base', 'e5', e5);
+assignin('base', 'e6', e6);
+assignin('base', 'e7', e7);
+assignin('base', 'e8', e8);
+assignin('base', 'e9', e9);
+assignin('base', 'e10', e10);
+assignin('base', 'e11', e11);
+assignin('base', 'e12', e12);
+assignin('base', 'e13', e13);
+assignin('base', 'e14', e14);
+assignin('base', 'e15', e15);
 %%%%SYSGEN-BLOCKS%%%%%
 
 %set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
