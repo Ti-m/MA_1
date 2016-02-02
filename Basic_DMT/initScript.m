@@ -167,12 +167,31 @@ else
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_DMT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
 end
 
-h=[0.04100388; 0.9179922382; 0.04100388; zeros(13,1) ];
-e=fft(h);
-e=ones(16,1);
+%channel filter coefficients
+%TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=17.8MHz
+%a0=0.26324574007976659;
+%a1=0.47350851984046677;
+%a2=a0;
+
+%channel filter coefficients
+%lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
+a0=0.04100388;
+a1=0.9179922382;
+a2=a0;
+assignin('base', 'a0', a0);
+assignin('base', 'a1', a1);
+assignin('base', 'a2', a2);
+
+%equalizer coefficients
+h=[a0; a1; a2; zeros(17857-3,1) ];
+e1=fft(h);
+e=e1(1:893:14288);
+%e=ones(16,1);
 e0=e(1);
 e1=e(2);
+%e1=0.8314+i*0.0042;
 e2=e(3);
+%e2=0.8583+i*0.01;
 e3=e(4);
 e4=e(5);
 e5=e(6);
@@ -186,6 +205,7 @@ e12=e(13);
 e13=e(14);
 e14=e(15);
 e15=e(16);
+assignin('base', 'e', e);
 assignin('base', 'e0', e0);
 assignin('base', 'e1', e1);
 assignin('base', 'e2', e2);
