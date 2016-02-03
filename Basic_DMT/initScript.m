@@ -183,9 +183,14 @@ assignin('base', 'a1', a1);
 assignin('base', 'a2', a2);
 
 %equalizer coefficients
-h=[a0; a1; a2; zeros(17857-3,1) ];
-e1=fft(h);
-e=e1(1:893:14288);
+h=[a0; a1; a2; zeros(17857,1) ];
+%h=[a0; a1; a2; zeros(32-3,1) ];
+g=fft(h);
+e(1:8)=g(1:893:8*893);
+e(9:16)=g(13*893:893:20*893);
+
+%e=e1(1:893:17857*2);
+%e=e1(1:16);
 %e=ones(16,1);
 e0=e(1);
 e1=e(2);
