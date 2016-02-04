@@ -169,14 +169,14 @@ end
 
 %channel filter coefficients
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=17.8MHz
-%a0=0.26324574007976659;
-%a1=0.47350851984046677;
-%a2=a0;
+% a0=0.26324574007976659;
+% a1=0.47350851984046677;
+% a2=a0;
 
 %channel filter coefficients
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
-a0=0.04100388;
-a1=0.9179922382;
+ a0=0.04100388;
+ a1=0.9179922382;
 a2=a0;
 assignin('base', 'a0', a0);
 assignin('base', 'a1', a1);
@@ -185,20 +185,22 @@ assignin('base', 'a2', a2);
 %equalizer coefficients
 h=[a0; a1; a2; zeros(17857,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
-g=fft(h);
-e(1:8)=g(1:893:8*893);
-e(9:16)=g(13*893:893:20*893);
-
+g=fftshift(fft(h)/16);
+p=real(g)+1+1i*imag(g);
+e(1:8)=p(1:893:8*893);
+e(9:16)=p(13*893:893:20*893);
+eCalc=e;
+assignin('base', 'eCalc', eCalc);
 %e=e1(1:893:17857*2);
 %e=e1(1:16);
 %e=ones(16,1);
+% 
 e0=e(1);
 e1=e(2);
-%e1=0.8314+i*0.0042;
 e2=e(3);
-%e2=0.8583+i*0.01;
 e3=e(4);
 e4=e(5);
+e5=e(6);
 e5=e(6);
 e6=e(7);
 e7=e(8);
@@ -210,6 +212,46 @@ e12=e(13);
 e13=e(14);
 e14=e(15);
 e15=e(16);
+
+%lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
+e0=0.8719;
+e1=0.8801+i*0.01569;
+e2=0.889+i*0.02899;
+e3=0.9023+i*0.03788;
+e4=0.918+i*0.041;
+e5=0.9337+i*0.03788;
+e6=0.947+i*0.02899;
+e7=0.9559+i*0.01569
+e8=0.9641;
+e9=0.9559-i*0.01569
+e10=0.947-i*0.02899;
+e11=0.9337-i*0.03788;
+e12=0.918-i*0.041;
+e13=0.9023-i*0.03788;
+e14=0.889-i*0.02899;
+e15=0.8801-i*0.01569;
+
+
+%TP zweiter Ordnung
+% e0=0.1774;
+% e1=0.2303+i*0.1007;
+% e2=0.2874+i*0.1861;
+% e3=0.3728+i*0.2432;
+% e4=0.4735+i*0.2632;
+% e5=0.5742+i*0.2432;
+% e6=0.6597+i*0.1861;
+% e7=0.7167+i*0.1007;
+% e8=0.7697;
+% e9=0.7167-i*0.1007;
+% e10=0.6597-i*0.1861;
+% e11=0.5742-i*0.2432;
+% e12=0.4735-i*0.2632;
+% e13=0.3728-i*0.2432;
+% e14=0.2874-i*0.1861;
+% e15=0.2303-i*0.1007;
+
+elook=[e0 e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15];
+assignin('base', 'elook', elook);
 assignin('base', 'e', e);
 assignin('base', 'e0', e0);
 assignin('base', 'e1', e1);
