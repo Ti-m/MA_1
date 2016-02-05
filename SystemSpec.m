@@ -62,6 +62,7 @@ T_Chan = T_FFT * beta;
 T_OFDM = T_Chan .* (N_FFT+N_GI)
 
 %% Duration Payload 
+%FALSCH?
 T_Sym = T_Chan .* N_FFT
 
 %% Duration of GI

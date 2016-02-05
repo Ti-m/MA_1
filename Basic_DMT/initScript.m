@@ -168,68 +168,78 @@ else
 end
 
 %channel filter coefficients
+%TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=14.286MHz
+ a0=0.21194908595403703;
+ a1=0.576101828091926;
+ a2=a0;
+
+%channel filter coefficients
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=17.8MHz
-% a0=0.26324574007976659;
-% a1=0.47350851984046677;
-% a2=a0;
+%  a0=0.26324574007976659;
+%  a1=0.47350851984046677;
+%  a2=a0;
 
 %channel filter coefficients
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
- a0=0.04100388;
- a1=0.9179922382;
-a2=a0;
+%  a0=0.04100388;
+%  a1=0.9179922382;
+% a2=a0;
 assignin('base', 'a0', a0);
 assignin('base', 'a1', a1);
 assignin('base', 'a2', a2);
 
 %equalizer coefficients
-h=[a0; a1; a2; zeros(17857,1) ];
+h=[a0; a1; a2; zeros(13,1) ];
+%h=[a0; a1; a2; zeros(17857,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
-g=fftshift(fft(h)/16);
-p=real(g)+1+1i*imag(g);
-e(1:8)=p(1:893:8*893);
-e(9:16)=p(13*893:893:20*893);
-eCalc=e;
+g=fft(h);
+p=g;
+%p=real(g)+1+1i*imag(g);
+%e(1:8)=p(1:893:8*893);
+%e(9:16)=p(13*893:893:20*893);
+e=p;
+eCalc=g;
 assignin('base', 'eCalc', eCalc);
 %e=e1(1:893:17857*2);
 %e=e1(1:16);
 %e=ones(16,1);
 % 
-e0=e(1);
-e1=e(2);
-e2=e(3);
-e3=e(4);
-e4=e(5);
-e5=e(6);
-e5=e(6);
-e6=e(7);
-e7=e(8);
-e8=e(9);
-e9=e(10);
-e10=e(11);
-e11=e(12);
-e12=e(13);
-e13=e(14);
-e14=e(15);
-e15=e(16);
+e1=e(1);
+e2=e(2);
+e3=e(3);
+e4=e(4);
+e5=e(5);
+%e5=483.3333e-003 - 16.6667e-003i;
+e6=e(6);
+e7=e(7);
+e8=e(8);
+e9=e(9);
+e10=e(10);
+e11=e(11);
+e12=e(12);
+e13=e(13);
+e14=e(14);
+e15=e(15);
+e16=e(16);
 
+%DIE ZUORDNUNG STIMMT NICHT MEHR DURCH NEUANORDNUNG VON e1 bis 16
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
-e0=0.8719;
-e1=0.8801+i*0.01569;
-e2=0.889+i*0.02899;
-e3=0.9023+i*0.03788;
-e4=0.918+i*0.041;
-e5=0.9337+i*0.03788;
-e6=0.947+i*0.02899;
-e7=0.9559+i*0.01569
-e8=0.9641;
-e9=0.9559-i*0.01569
-e10=0.947-i*0.02899;
-e11=0.9337-i*0.03788;
-e12=0.918-i*0.041;
-e13=0.9023-i*0.03788;
-e14=0.889-i*0.02899;
-e15=0.8801-i*0.01569;
+% e0=0.8719;
+% e1=0.8801+i*0.01569;
+% e2=0.889+i*0.02899;
+% e3=0.9023+i*0.03788;
+% e4=0.918+i*0.041;
+% e5=0.9337+i*0.03788;
+% e6=0.947+i*0.02899;
+% e7=0.9559+i*0.01569
+% e8=0.9641;
+% e9=0.9559-i*0.01569
+% e10=0.947-i*0.02899;
+% e11=0.9337-i*0.03788;
+% e12=0.918-i*0.041;
+% e13=0.9023-i*0.03788;
+% e14=0.889-i*0.02899;
+% e15=0.8801-i*0.01569;
 
 
 %TP zweiter Ordnung
@@ -250,10 +260,9 @@ e15=0.8801-i*0.01569;
 % e14=0.2874-i*0.1861;
 % e15=0.2303-i*0.1007;
 
-elook=[e0 e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15];
+elook=[e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16];
 assignin('base', 'elook', elook);
 assignin('base', 'e', e);
-assignin('base', 'e0', e0);
 assignin('base', 'e1', e1);
 assignin('base', 'e2', e2);
 assignin('base', 'e3', e3);
@@ -269,6 +278,7 @@ assignin('base', 'e12', e12);
 assignin('base', 'e13', e13);
 assignin('base', 'e14', e14);
 assignin('base', 'e15', e15);
+assignin('base', 'e16', e16);
 %%%%SYSGEN-BLOCKS%%%%%
 
 %set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
