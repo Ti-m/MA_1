@@ -62,7 +62,6 @@ T_Chan = T_FFT * beta;
 T_OFDM = T_Chan .* (N_FFT+N_GI)
 
 %% Duration Payload 
-%FALSCH?
 T_Sym = T_Chan .* N_FFT
 
 %% Duration of GI
@@ -109,13 +108,15 @@ FS_OFDM = N_FFT./(N_FFT_used.*T_bit.*M.*beta)
 % N_FFT_used = N_FFT_used * 2
 %% Required Bandwidth for OFDM
 %The Bandwidth for a single subcarrier is the same for DMT and OFDM. Its
-%calculated not with the full OFDM symbol time but the payload time. Adter
+%calculated not with the full OFDM symbol time but the payload time. After
 %insertion of the GI just the carriers are getting smaller and the
 %orthogonality is broken.
-B_SC=1./(T_Sym)
-B_OFDM=B_SC.*N_FFT
+B_SC=1./T_subcarrier
+%B_OFDM=B_SC.*N_FFT
+B_OFDM=1./T_Chan
 %% Required Bandwidth for DMT
-B_DMT=B_SC.*N_FFT*2
+%B_DMT=B_SC.*N_FFT*2
+B_DMT=2./T_Chan
 
 %% Required Sampling Frequency for sampling theorem
 Fs_min_OFDM=2*B_OFDM
