@@ -2,10 +2,10 @@ function [y1_re,  y1_im,  y2_re,  y2_im,  y3_re,  y3_im,  y4_re, y4_im,...
           y5_re,  y5_im,  y6_re,  y6_im,  y7_re,  y7_im,  y8_re, y8_im,...
           y9_re,  y9_im,  y10_re, y10_im, y11_re, y11_im, y12_re, y12_im,...
           y13_re, y13_im, y14_re, y14_im, y15_re, y15_im, y16_re, y16_im...
-          ]= Extract_Subcar_16_Equal(x_re,x_im)
- M=4;
- fracLen=13;
- bitCount=16;
+          ]= Extract_Subcar_16_Equal(x_re,x_im,M,fracLen,bitCount)
+%  M=4;
+%  fracLen=13;
+%  bitCount=16;
 %Some ideas from UG958 
 x1_re  = xl_slice(x_re, (bitCount+(M+1)*2)*16-1, (bitCount+(M+1)*2)*15); 
 x2_re  = xl_slice(x_re, (bitCount+(M+1)*2)*15-1, (bitCount+(M+1)*2)*14); 
