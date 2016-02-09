@@ -7,7 +7,9 @@ format shortEng
 sysgenSystemPeriod=.5e-9;
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 fftLen = 16;
+M=log2(fftLen);
 assignin('base', 'fftLen', fftLen);
+assignin('base', 'M', M);
 fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
 usedSubCar=14;
@@ -234,9 +236,9 @@ e12=0.9023+i*0.03788;
 e13=0.918+i*0.041;
 e14=0.9337+i*0.03788;
 e15=0.947+i*0.02899;
-e16=0.9559+i*0.01569
+e16=0.9559+i*0.01569;
 e1=0.9641;
-e2=0.9559-i*0.01569
+e2=0.9559-i*0.01569;
 e3=0.947-i*0.02899;
 e4=0.9337-i*0.03788;
 e5=0.918-i*0.041;
