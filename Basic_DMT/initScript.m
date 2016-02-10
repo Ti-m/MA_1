@@ -181,11 +181,18 @@ end
 %  a1=0.47350851984046677;
 %  a2=a0;
 
+
+%channel filter coefficients
+%TP (triangular) mit nur 7dB Dämpfung, geht auch ohne equalizer
+a0=0.14442723509625877;
+a1=0.71114552980748247;
+a2=a0;
+
 %channel filter coefficients
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
- a0=0.04100388;
-  a1=0.9179922382;
- a2=a0;
+%  a0=0.04100388;
+%   a1=0.9179922382;
+%  a2=a0;
 assignin('base', 'a0', a0);
 assignin('base', 'a1', a1);
 assignin('base', 'a2', a2);
@@ -229,22 +236,22 @@ e16=e(16);
 
 
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
-e9=0.8719;
-e10=0.8801+i*0.01569;
-e11=0.889+i*0.02899;
-e12=0.9023+i*0.03788;
-e13=0.918+i*0.041;
-e14=0.9337+i*0.03788;
-e15=0.947+i*0.02899;
-e16=0.9559+i*0.01569;
-e1=0.9641;
-e2=0.9559-i*0.01569;
-e3=0.947-i*0.02899;
-e4=0.9337-i*0.03788;
-e5=0.918-i*0.041;
-e6=0.9023-i*0.03788;
-e7=0.889-i*0.02899;
-e8=0.8801-i*0.01569;
+% e9=0.8719;
+% e10=0.8801+i*0.01569;
+% e11=0.889+i*0.02899;
+% e12=0.9023+i*0.03788;
+% e13=0.918+i*0.041;
+% e14=0.9337+i*0.03788;
+% e15=0.947+i*0.02899;
+% e16=0.9559+i*0.01569;
+% e1=0.9641;
+% e2=0.9559-i*0.01569;
+% e3=0.947-i*0.02899;
+% e4=0.9337-i*0.03788;
+% e5=0.918-i*0.041;
+% e6=0.9023-i*0.03788;
+% e7=0.889-i*0.02899;
+% e8=0.8801-i*0.01569;
 
 
 %TP zweiter Ordnung
@@ -264,6 +271,24 @@ e8=0.8801-i*0.01569;
 % e6=0.3728-i*0.2432;
 % e7=0.2874-i*0.1861;
 % e8=0.2303-i*0.1007;
+
+%TP triangular 7dB
+e9=0.1444;
+e10=0.5777+i*0.05527;
+e11=0.609+i*0.1021;
+e12=0.6559+i*0.1334;
+e13=0.7111+i*0.1444;
+e14=0.7664+i*0.1334;
+e15=0.8133+i*0.1021;
+e16=0.8446+i*0.05527;
+e1=-0.1444;
+e2=0.8446-i*0.05527;
+e3=0.8133-i*0.1021;
+e4=0.7664-i*0.1334;
+e5=0.7111-i*0.1444;
+e6=0.6559-i*0.1334;
+e7=0.609-i*0.1021;
+e8=0.5777-i*0.05527;
 
 elook=[e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16];
 assignin('base', 'elook', elook);
@@ -286,6 +311,56 @@ assignin('base', 'e15', e15);
 assignin('base', 'e16', e16);
 %%%%SYSGEN-BLOCKS%%%%%
 
+%Prepare coefficients for sysgen
+e1s=1/e1;
+e2s=1/e2;
+e3s=1/e3;
+e4s=1/e4;
+e5s=1/e5;
+e6s=1/e6;
+e7s=1/e7;
+e8s=1/e8;
+e9s=1/e9;
+e10s=1/e10;
+e11s=1/e11;
+e12s=1/e12;
+e13s=1/e13;
+e14s=1/e14;
+e15s=1/e15;
+e16s=1/e16;
+
+assignin('base', 'e1_re', real(e1s));
+assignin('base', 'e1_im', imag(e1s));
+assignin('base', 'e2_re', real(e2s));
+assignin('base', 'e2_im', imag(e2s));
+assignin('base', 'e3_re', real(e3s));
+assignin('base', 'e3_im', imag(e3s));
+assignin('base', 'e4_re', real(e4s));
+assignin('base', 'e4_im', imag(e4s));
+assignin('base', 'e5_re', real(e5s));
+assignin('base', 'e5_im', imag(e5s));
+assignin('base', 'e6_re', real(e6s));
+assignin('base', 'e6_im', imag(e6s));
+assignin('base', 'e7_re', real(e7s));
+assignin('base', 'e7_im', imag(e7s));
+assignin('base', 'e8_re', real(e8s));
+assignin('base', 'e8_im', imag(e8s));
+assignin('base', 'e9_re', real(e9s));
+assignin('base', 'e9_im', imag(e9s));
+assignin('base', 'e10_re', real(e10s));
+assignin('base', 'e10_im', imag(e10s));
+assignin('base', 'e11_re', real(e11s));
+assignin('base', 'e11_im', imag(e11s));
+assignin('base', 'e12_re', real(e12s));
+assignin('base', 'e12_im', imag(e12s));
+assignin('base', 'e13_re', real(e13s));
+assignin('base', 'e13_im', imag(e13s));
+assignin('base', 'e14_re', real(e14s));
+assignin('base', 'e14_im', imag(e14s));
+assignin('base', 'e15_re', real(e15s));
+assignin('base', 'e15_im', imag(e15s));
+assignin('base', 'e16_re', real(e16s));
+assignin('base', 'e16_im', imag(e16s));
 %set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 %set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant2','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
 %set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant3','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
