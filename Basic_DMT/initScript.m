@@ -5,6 +5,7 @@ format shortEng
 %fracLen = '0';
 
 sysgenSystemPeriod=.5e-9;
+%sysgenSystemPeriod=1e-9; geht auch, aber alle delays verschieben sich
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 fftLen = 16;
 M=log2(fftLen);
