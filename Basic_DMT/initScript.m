@@ -19,7 +19,7 @@ bitPerSymb=4;
 upsampleFactor = 8; 
 
 assignin('base', 'impulseResponse', impulseResponse);
-
+assignin('base', 'equalizer', equalizer);
 
 if guardInterval == 2
     GI_Len = 4;
@@ -171,6 +171,14 @@ else
 end
 
 %channel filter coefficients
+
+%TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
+%2.5dB
+ a0=0.061461097527179653;
+ a1=0.8770778049456408;
+ a2=a0;
+
+
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=14.286MHz
  %a0=0.21194908595403703;
 % a1=0.576101828091926;
@@ -184,10 +192,10 @@ end
 
 
 %channel filter coefficients
-%TP (triangular) mit nur 7dB Dämpfung, geht auch ohne equalizer
-a0=0.14442723509625877;
-a1=0.71114552980748247;
-a2=a0;
+% %TP (triangular) mit nur 7dB Dämpfung, geht auch ohne equalizer
+% a0=0.14442723509625877;
+% a1=0.71114552980748247;
+% a2=a0;
 
 %channel filter coefficients
 %lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
@@ -201,20 +209,21 @@ assignin('base', 'a2', a2);
 %equalizer coefficients
 
 %h=[a0; a1; a2; zeros(13,1) ];
-h=[a0; a1; a2; zeros(17857,1) ];
+%h=[a0; a1; a2; zeros(17857,1) ];
+h=[a0; a1; a2; zeros(35714-3,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
 p=fft(h);
 %p=real(g)+1+1i*imag(g);
-e(1:8)=p(1:893:8*893);
-e(9:16)=p(13*893:893:20*893);
+e=p(1:893:16*893);
+%e(1:8)=p(1:893:8*893);
+%e(9:16)=p(13*893:893:20*893);
 
 eCalc=e;
 assignin('base', 'p', p);
 assignin('base', 'eCalc', eCalc);
 %e=e1(1:893:17857*2);
-%e=e1(1:16);
+e=e(1:16);
 %e=ones(16,1);
-% 
 
 
 e1=e(1);
@@ -274,22 +283,41 @@ e16=e(16);
 % e8=0.2303-i*0.1007;
 
 %TP triangular 7dB
-e9=0.1444;
-e10=0.5777+i*0.05527;
-e11=0.609+i*0.1021;
-e12=0.6559+i*0.1334;
-e13=0.7111+i*0.1444;
-e14=0.7664+i*0.1334;
-e15=0.8133+i*0.1021;
-e16=0.8446+i*0.05527;
-e1=-0.1444;
-e2=0.8446-i*0.05527;
-e3=0.8133-i*0.1021;
-e4=0.7664-i*0.1334;
-e5=0.7111-i*0.1444;
-e6=0.6559-i*0.1334;
-e7=0.609-i*0.1021;
-e8=0.5777-i*0.05527;
+% e9=0.1444;
+% e10=0.5777+i*0.05527;
+% e11=0.609+i*0.1021;
+% e12=0.6559+i*0.1334;
+% e13=0.7111+i*0.1444;
+% e14=0.7664+i*0.1334;
+% e15=0.8133+i*0.1021;
+% e16=0.8446+i*0.05527;
+% e1=-0.1444;
+% e2=0.8446-i*0.05527;
+% e3=0.8133-i*0.1021;
+% e4=0.7664-i*0.1334;
+% e5=0.7111-i*0.1444;
+% e6=0.6559-i*0.1334;
+% e7=0.609-i*0.1021;
+% e8=0.5777-i*0.05527;
+
+%%TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
+%2.5dB
+e9= 0.03073- i*0.03073;
+e10=0.8892-i*0.02414;
+e11=0.8702-i*0.01663;
+e12=0.8514-i*0.008479;
+e13=0.8336;
+e14=0.8175+i*0.008479;
+e15=0.8037+i*0.01663;
+e16=0.7927+i*0.02414;
+e1=-0.06146;
+e2=0.9735-i*0.03614;
+e3=0.974-i*0.04015;
+e4=0.9708-i*0.04262;
+e5=0.964-i*0.04346;
+e6=0.9538-i*0.04262;
+e7=0.9407-i*0.04015;
+e8=0.9252-i*0.03614;
 
 elook=[e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16];
 assignin('base', 'elook', elook);
@@ -362,47 +390,7 @@ assignin('base', 'e15_re', real(e15s));
 assignin('base', 'e15_im', imag(e15s));
 assignin('base', 'e16_re', real(e16s));
 assignin('base', 'e16_im', imag(e16s));
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant2','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant3','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant4','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant5','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant6','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant7','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM/Constant8','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant1','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant2','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant3','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant4','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant5','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant6','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant7','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_Modulation/16-QAM1/Constant8','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-
-%set_param('Basic_DMT/Sysgen_IFFTaPIS/Constant','arith_type','Signed (2''s comp)','bin_pt',fracLen,'n_bits',bitCount)
-%set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret','bin_pt',num2str(str2double(bitCount)-1))
-%set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1))
-%set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret2','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_IFFTaPIS/Reinterpret3','bin_pt',fracLen)
-
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret1','bin_pt',num2str(str2double(bitCount)-1+log2(fftLen)+1))
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret2','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret3','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret4','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret5','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret6','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret7','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret8','bin_pt',fracLen)
-%set_param('Basic_DMT/Sysgen_SIPaFFT/Reinterpret9','bin_pt',fracLen)
 
 
-%get_param(gcb,'arith_type')
-%get_param(gcb,'bin_pt')
-%get_param(gcb,'n_bits')
 %Outputs all block paths
 %BlockPaths = find_system('Basic_DMT','Type','Block')
-
-%set_param('Basic_DMT/Modulation/Bit-Mapping-P1/256-QAM/Rectangular-QAM-Modulator-Baseband1','OutDataTypeStr',precision)
-%set_param(Basic_DMT,'SimulationCommand','Update')

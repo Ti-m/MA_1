@@ -49,6 +49,7 @@ N_GI = N_FFT/beta - N_FFT
 
 %% Sample time for each individual subcarrier during modulation. (Parallel)
 %Is the duration to collect enough samples for a new OFDM symbol.
+%Ts in Kammayer
 T_subcarrier = N_FFT_used * T_bit * M ;
 
 %% Sample time after the aggregation through the FFT. (Serial)
@@ -66,30 +67,6 @@ T_Sym = T_Chan .* N_FFT
 
 %% Duration of GI
 T_GI =T_Chan .* N_GI
-
-%Subcarriercount needed to reach Datarate in T_Sym
-% *2 for use of DMT
-%%%%T_OFDM anstelle von T_Sym??????%%%%%%%
-%N_FFT_needed = ceil(T_OFDM/(T_bit*M))
-%N_FFT_needed = (T_OFDM/(T_bit*M))
-
-%N_FFT_used = 0; k=1;
-%while N_FFT_needed >= N_FFT_used
-
-%FFT Len OFDM
-%N_FFT = 2^nextpow2(N_FFT_needed*k);
-
-%Unuesed Carriers, constant 5 from IEE802.11a
-%Is there a better value?
-%N_unused_carr = floor(N_FFT/5);
-
-%Used Carriers
-%N_FFT_used = N_FFT - N_unused_carr;
-
-%k=k+1;
-%end
-%N_FFT
-
 
 %% Bit per OFDM Symbol
 N_bit_OFDM_symb = N_FFT_used * M 
@@ -113,10 +90,10 @@ FS_OFDM = N_FFT./(N_FFT_used.*T_bit.*M.*beta)
 %orthogonality is broken.
 B_SC=1./T_subcarrier
 %B_OFDM=B_SC.*N_FFT
-B_OFDM=1./T_Chan
+B_OFDM=1./T_Chan/2
 %% Required Bandwidth for DMT
 %B_DMT=B_SC.*N_FFT*2
-B_DMT=2./T_Chan
+B_DMT=1./T_Chan
 
 %% Required Sampling Frequency for sampling theorem
 Fs_min_OFDM=2*B_OFDM
