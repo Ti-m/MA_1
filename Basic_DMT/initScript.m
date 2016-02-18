@@ -20,6 +20,10 @@ upsampleFactor = 8;
 
 assignin('base', 'impulseResponse', impulseResponse);
 assignin('base', 'equalizer', equalizer);
+% state = 0;
+% k=0;
+% assignin('base', 'state', state);
+% assignin('base', 'k', k);
 
 if guardInterval == 2
     GI_Len = 4;
