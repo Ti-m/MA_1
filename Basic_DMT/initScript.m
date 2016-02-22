@@ -7,13 +7,13 @@ format shortEng
 sysgenSystemPeriod=.5e-9;
 %sysgenSystemPeriod=1e-9; geht auch, aber alle delays verschieben sich
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
-fftLen = 16;
+fftLen = 16;%16
 M=log2(fftLen);
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'M', M);
 fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
-usedSubCar=14;
+usedSubCar=14;%14
 bitPerSymb=4;
 
 upsampleFactor = 8; 
