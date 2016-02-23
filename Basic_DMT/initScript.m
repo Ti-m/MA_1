@@ -3,10 +3,11 @@ format shortEng
 
 %bitCount = '8';
 %fracLen = '0';
-
+SystemPeriod = 4e-9;
 sysgenSystemPeriod=.5e-9;
 %sysgenSystemPeriod=1e-9; geht auch, aber alle delays verschieben sich
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
+assignin('base', 'SystemPeriod', SystemPeriod);
 fftLen = 16;%16
 M=log2(fftLen);
 assignin('base', 'fftLen', fftLen);
@@ -45,7 +46,11 @@ else
 end
 assignin('base', 'GI_Active', GI_Active);
 assignin('base', 'fftLenActive', fftLenActive);
-beta = fftLen/(fftLen+GI_Len); 
+if GI_Active>0
+    beta = fftLen/(fftLen+GI_Len); 
+else
+    beta = 1;
+end
 assignin('base', 'beta', beta);
 
 assignin('base', 'usedSubCar', usedSubCar);
@@ -60,11 +65,17 @@ else
 end
 assignin('base', 'upsample', upsample);
 assignin('base', 'upsampleFactor', upsampleFactor);
-
+assignin('base', 'Tb', BitTime);
+%Samplerate on Channel
+Tchan=bitPerSymb*usedSubCar/fftLenActive*(BitTime*beta);
+%Calc factor for downsampling before channel
+chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive+GI_Active));
+assignin('base', 'Tchan', Tchan);
+assignin('base', 'chanDownFact', chanDownFact);
 
 %sysgenSystemPeriod = SampleTime*usedSubCar/fftLen;
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
-assignin('base', 'Tb', BitTime);
+
 assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', str2double(radio_precision));
 assignin('base', 'dmtOfdm', dmtOfdm);
