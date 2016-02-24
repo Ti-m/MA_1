@@ -69,7 +69,7 @@ assignin('base', 'Tb', BitTime);
 %Samplerate on Channel
 Tchan=bitPerSymb*usedSubCar/fftLenActive*(BitTime*beta);
 %Calc factor for downsampling before channel
-chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive+GI_Active));
+chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive));
 assignin('base', 'Tchan', Tchan);
 assignin('base', 'chanDownFact', chanDownFact);
 
