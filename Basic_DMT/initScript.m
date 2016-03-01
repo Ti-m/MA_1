@@ -16,8 +16,41 @@ fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
 usedSubCar=14;%14
 bitPerSymb=4;
-
 upsampleFactor = 8; 
+
+%Set to zero for not use the carrier
+u1=0;
+u2=1;
+u3=1;
+u4=1;
+u5=1;
+u6=1;
+u7=1;
+u8=1;
+u9=0;
+u10=1;
+u11=1;
+u12=1;
+u13=1;
+u14=1;
+u15=1;
+u16=1;
+assignin('base', 'u1', u1);
+assignin('base', 'u2', u2);
+assignin('base', 'u3', u3);
+assignin('base', 'u4', u4);
+assignin('base', 'u5', u5);
+assignin('base', 'u6', u6);
+assignin('base', 'u7', u7);
+assignin('base', 'u8', u8);
+assignin('base', 'u9', u9);
+assignin('base', 'u10', u10);
+assignin('base', 'u11', u11);
+assignin('base', 'u12', u12);
+assignin('base', 'u13', u13);
+assignin('base', 'u14', u14);
+assignin('base', 'u15', u15);
+assignin('base', 'u16', u16);
 
 assignin('base', 'impulseResponse', impulseResponse);
 assignin('base', 'equalizer', equalizer);
@@ -69,7 +102,8 @@ assignin('base', 'Tb', BitTime);
 %Samplerate on Channel
 Tchan=bitPerSymb*usedSubCar/fftLenActive*(BitTime*beta);
 %Calc factor for downsampling before channel
-chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive));
+%chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive));
+chanDownFact=Tchan/SystemPeriod;
 assignin('base', 'Tchan', Tchan);
 assignin('base', 'chanDownFact', chanDownFact);
 
@@ -111,7 +145,7 @@ end
 
 %Not possible to replace these with variables in the simulink-constant
 %blocks.
-set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
+%set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 
