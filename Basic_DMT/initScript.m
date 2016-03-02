@@ -73,12 +73,15 @@ assignin('base', 'GI_LenDMT', GI_LenDMT);
 if dmtOfdm == 1 %% To create blocks which are not dependent on variant subsystems.
     GI_Active = GI_Len;
     fftLenActive = fftLen;
+    freqDivDMT = 1;
 else
     GI_Active = GI_LenDMT;
     fftLenActive = fftLenDMT;
+    freqDivDMT = 2;%To achieve the half processing frequency in DMT mode
 end
 assignin('base', 'GI_Active', GI_Active);
 assignin('base', 'fftLenActive', fftLenActive);
+assignin('base', 'freqDivDMT', freqDivDMT);
 if GI_Active>0
     beta = fftLen/(fftLen+GI_Len); 
 else
@@ -146,7 +149,7 @@ end
 %Not possible to replace these with variables in the simulink-constant
 %blocks.
 %set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
-%set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 
 if radio_precision == 1 
