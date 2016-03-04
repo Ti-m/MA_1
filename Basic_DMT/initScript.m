@@ -4,8 +4,9 @@ format shortEng
 %bitCount = '8';
 %fracLen = '0';
 SystemPeriod = 4e-9;
-sysgenSystemPeriod=.5e-9;
-%sysgenSystemPeriod=1e-9; geht auch, aber alle delays verschieben sich
+%sysgenSystemPeriod=4e-9;
+%sysgenSystemPeriod=.5e-9;
+sysgenSystemPeriod=1e-9; %geht auch, aber alle delays verschieben sich
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'SystemPeriod', SystemPeriod);
 fftLen = 16;%16
