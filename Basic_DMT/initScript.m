@@ -152,7 +152,18 @@ end
 %set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
+set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
+%set_param('Basic_DMT/IFFTaPIS/Data Type Conversion1','OutDataTypeStr',precision_str)
+%set_param('Basic_DMT/IFFTaPIS/Data Type Conversion2','OutDataTypeStr',precision_str) 
 
+%set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/out','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/sel','CompiledType','uint32') 
+% set_param('Basic_DMT/SIP/MATLAB Function/sel','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/push','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/pop','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/frameStart','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/num','DataType',precision_str) 
+% set_param('Basic_DMT/SIP/MATLAB Function/frameEn','DataType',precision_str) 
 if radio_precision == 1 
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
@@ -262,20 +273,21 @@ assignin('base', 'a2', a2);
 %equalizer coefficients
 
 %h=[a0; a1; a2; zeros(13,1) ];
+h=[a0; a1; a2; zeros(1024-3,1) ];
 %h=[a0; a1; a2; zeros(17857,1) ];
-h=[a0; a1; a2; zeros(35714-3,1) ];
+%%%%%%%%h=[a0; a1; a2; zeros(35714-3,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
 p=fft(h);
 %p=real(g)+1+1i*imag(g);
-e=p(1:893:16*893);
+%%%%%%%%e=p(1:893:16*893);
 %e(1:8)=p(1:893:8*893);
 %e(9:16)=p(13*893:893:20*893);
-
+e=p;
 eCalc=e;
 assignin('base', 'p', p);
 assignin('base', 'eCalc', eCalc);
 %e=e1(1:893:17857*2);
-e=e(1:16);
+%%e=e(1:16);
 %e=ones(16,1);
 
 
@@ -284,7 +296,7 @@ e2=e(2);
 e3=e(3);
 e4=e(4);
 e5=e(5);
-%e5=483.3333e-003 - 16.6667e-003i;
+
 e6=e(6);
 e7=e(7);
 e8=e(8);
@@ -355,22 +367,22 @@ e16=e(16);
 
 %%TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
 %2.5dB
-e9= 0.03073- i*0.03073;
-e10=0.8892-i*0.02414;
-e11=0.8702-i*0.01663;
-e12=0.8514-i*0.008479;
-e13=0.8336;
-e14=0.8175+i*0.008479;
-e15=0.8037+i*0.01663;
-e16=0.7927+i*0.02414;
-e1=-0.06146;
-e2=0.9735-i*0.03614;
-e3=0.974-i*0.04015;
-e4=0.9708-i*0.04262;
-e5=0.964-i*0.04346;
-e6=0.9538-i*0.04262;
-e7=0.9407-i*0.04015;
-e8=0.9252-i*0.03614;
+% e9= 0.03073- i*0.03073;
+% e10=0.8892-i*0.02414;
+% e11=0.8702-i*0.01663;
+% e12=0.8514-i*0.008479;
+% e13=0.8336;
+% e14=0.8175+i*0.008479;
+% e15=0.8037+i*0.01663;
+% e16=0.7927+i*0.02414;
+% e1=-0.06146;
+% e2=0.9735-i*0.03614;
+% e3=0.974-i*0.04015;
+% e4=0.9708-i*0.04262;
+% e5=0.964-i*0.04346;
+% e6=0.9538-i*0.04262;
+% e7=0.9407-i*0.04015;
+% e8=0.9252-i*0.03614;
 
 elook=[e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16];
 assignin('base', 'elook', elook);
