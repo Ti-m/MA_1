@@ -1,6 +1,29 @@
 %initScript.m
 format shortEng
 
+%FixedPoint Arithmetic
+fiObject= fimath('RoundingMethod', 'Nearest', ...
+                'OverflowAction', 'Saturate', ...
+                'ProductMode', 'SpecifyPrecision', ...
+                'ProductWordLength', 16, ...
+                'ProductFractionLength', 13, ...
+                'SumMode', 'SpecifyPrecision', ...
+                'SumWordLength', 16, ...
+                'SumFractionLength', 13, ...
+                'CastBeforeSum', true);
+assignin('base', 'fiObject', fiObject);
+
+fiObjectAftIFFT= fimath('RoundingMethod', 'Nearest', ...
+                'OverflowAction', 'Saturate', ...
+                'ProductMode', 'SpecifyPrecision', ...
+                'ProductWordLength', 21, ...
+                'ProductFractionLength', 13, ...
+                'SumMode', 'SpecifyPrecision', ...
+                'SumWordLength', 21, ...
+                'SumFractionLength', 13, ...
+                'CastBeforeSum', true);
+assignin('base', 'fiObjectAftIFFT', fiObjectAftIFFT);
+
 %bitCount = '8';
 %fracLen = '0';
 SystemPeriod = 4e-9;
@@ -156,6 +179,8 @@ set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_s
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion1','OutDataTypeStr',precision_str)
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion2','OutDataTypeStr',precision_str) 
 
+% set_param('Basic_DMT/SIP/Data Type Conversion','OutDataTypeStr',precision_str) 
+% set_param('Basic_DMT/SIP/Data Type Conversion1','OutDataTypeStr',precision_str) 
 %set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/out','DataType',precision_str) 
 % set_param('Basic_DMT/SIP/MATLAB Function/sel','CompiledType','uint32') 
 % set_param('Basic_DMT/SIP/MATLAB Function/sel','DataType',precision_str) 
@@ -164,6 +189,161 @@ set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_s
 % set_param('Basic_DMT/SIP/MATLAB Function/frameStart','DataType',precision_str) 
 % set_param('Basic_DMT/SIP/MATLAB Function/num','DataType',precision_str) 
 % set_param('Basic_DMT/SIP/MATLAB Function/frameEn','DataType',precision_str) 
+
+%%% CREATE FRAME OFDM
+
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o1','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o2','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o3','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o4','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o5','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o6','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o7','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o8','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o9','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o10','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o11','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o12','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o13','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o14','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o15','OutDataTypeStr',precision_str) 
+set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o16','OutDataTypeStr',precision_str) 
+
+%%% CREATE FRAME DMT
+%Kommt scheinbar ohne aus
+
+%%% SET GI OFDM
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/Data Store Memory1','OutDataTypeStr',precStrAftIFFT) 
+
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i1','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i2','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i4','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i5','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i6','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i7','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i8','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i9','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i10','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i11','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i12','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i13','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i14','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i15','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/i16','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o1','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o2','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o4','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o5','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o6','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o7','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o8','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o9','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o10','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o11','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o12','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o13','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o14','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o15','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o16','OutDataTypeStr',precStrAftIFFT)
+
+%%% SET GI DMT
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/Data Store Memory1','OutDataTypeStr',precStrAftIFFT) 
+
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i1','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i2','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i4','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i5','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i6','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i7','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i8','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i9','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i10','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i11','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i12','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i13','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i14','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i15','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i16','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i17','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i18','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i19','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i20','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i21','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i22','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i23','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i24','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i25','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i26','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i27','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i28','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i29','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i30','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i31','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i32','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o1','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o2','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o4','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o5','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o6','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o7','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o8','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o9','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o10','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o11','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o12','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o13','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o14','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o15','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o16','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o17','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o18','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o19','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o20','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o21','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o22','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o23','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o24','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o25','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o26','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o27','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o28','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o29','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o30','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o31','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o32','OutDataTypeStr',precStrAftIFFT)
+
+
+%%%%%%%%%%%%%%%%%%%RECEIVER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%SIP
+set_param('Basic_DMT/SIPaFFT/Constant2','OutDataTypeStr',precStrAftIFFT)
+%%% REM_GI OFDM
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
+
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+
+%%% REM_GI OFDM
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
+
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+
+%%%TEST
+ testGHJ = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
+% testGHJ = 'double';
+ set_param('Basic_DMT/Subsystem1/Constant8','OutDataTypeStr',testGHJ)
+ set_param('Basic_DMT/Subsystem1/Data Store Memory','OutDataTypeStr',testGHJ)
+ %%%%
 if radio_precision == 1 
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
@@ -194,7 +374,10 @@ if radio_precision == 1
     set_param('Basic_DMT/Modulation/Bit_Mapping_P13/16_QAM/Rect_QAM_Mod','outDtype',precision_str)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P14/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P14/16_QAM/Rect_QAM_Mod','outDtype',precision_str)
-    
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P15/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P15/16_QAM/Rect_QAM_Mod','outDtype',precision_str)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P16/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P16/16_QAM/Rect_QAM_Mod','outDtype',precision_str) 
     set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr','Inherit: Inherit via internal rule')
     
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_OFDM/FFT','outputDataTypeStr','Inherit: Inherit via internal rule')
@@ -228,7 +411,10 @@ else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P13/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P14/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P14/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
-  
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P15/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P15/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P16/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
+    set_param('Basic_DMT/Modulation/Bit_Mapping_P16/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
     set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+log2(fftLen)+1) , ',' , num2str(fracLen) , ')'))
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_OFDM/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_DMT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
