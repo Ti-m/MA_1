@@ -29,7 +29,7 @@ assignin('base', 'fiObjectAftIFFT', fiObjectAftIFFT);
 SystemPeriod = 4e-9;
 %sysgenSystemPeriod=4e-9;
 %sysgenSystemPeriod=.5e-9;
-sysgenSystemPeriod=1e-9; %geht auch, aber alle delays verschieben sich
+sysgenSystemPeriod=4e-9; %geht auch, aber alle delays verschieben sich
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'SystemPeriod', SystemPeriod);
 fftLen = 16;%16
@@ -126,6 +126,16 @@ end
 assignin('base', 'upsample', upsample);
 assignin('base', 'upsampleFactor', upsampleFactor);
 assignin('base', 'Tb', BitTime);
+
+%Divider for the Input FIFO. Determines how many samples are not sampled 
+%until the next valid sample arrives. Calculated here, because it has to
+%be calculated only once. 
+freqDivSubcAlloc = BitTime/SystemPeriod;
+assignin('base', 'freqDivSubcAlloc', freqDivSubcAlloc);
+
+%How many bits are in one OFDM frame. Used in subc_alloc FSM
+bitsPerFrame=usedSubCar*bitPerSymb;
+assignin('base', 'bitsPerFrame', bitsPerFrame);
 %Samplerate on Channel
 Tchan=bitPerSymb*usedSubCar/fftLenActive*(BitTime*beta);
 %Calc factor for downsampling before channel
