@@ -167,6 +167,9 @@ end
 assignin('base', 'precision_str', precision_str);
 assignin('base', 'precStrAftIFFT', precStrAftIFFT);
 
+bitCountAftIFFT = bitCount+(log2(fftLen)+1);
+assignin('base', 'bitCountAftIFFT', bitCountAftIFFT);
+
 if dmtOfdm == 2
 %fftLen = 32;
 end
