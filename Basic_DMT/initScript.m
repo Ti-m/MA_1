@@ -189,6 +189,7 @@ end
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
+%set_param('Basic_DMT/SIPaFFT/Assert_aft_FFT/Data Type Conversion3','OutDataTypeStr',precStrAftIFFT) 
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion1','OutDataTypeStr',precision_str)
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion2','OutDataTypeStr',precision_str) 
 
@@ -340,16 +341,16 @@ set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o32','Ou
 %%%SIP
 set_param('Basic_DMT/SIPaFFT/Constant2','OutDataTypeStr',precStrAftIFFT)
 %%% REM_GI OFDM
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
 
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_OFDM/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
 
 %%% REM_GI OFDM
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
-
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
+% 
+% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
 
 %%%TEST
  testGHJ = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
