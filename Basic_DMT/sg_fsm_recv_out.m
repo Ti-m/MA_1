@@ -92,7 +92,7 @@ else
     if conPop == 1
         statei = 2;
     else
-       statei = 0;
+        statei = 0;
     end   
 end
 
