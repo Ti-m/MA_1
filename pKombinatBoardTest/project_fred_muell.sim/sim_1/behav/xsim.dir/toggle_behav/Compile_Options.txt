@@ -1,0 +1,1 @@
+--debug "typical" --relax -L "xil_defaultlib" -L "secureip" --snapshot "toggle_behav" --prj "D:/vivado_projects/project_fred_muell/project_fred_muell.sim/sim_1/behav/toggle.prj" "xil_defaultlib.toggle" 

@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2014.4 (64-bit)
+# SW Build 1071353 on Tue Nov 18 18:29:27 MST 2014
+# IP Build 1070531 on Tue Nov 18 01:10:18 MST 2014
+# Start of session at: Tue Mar 15 10:36:02 2016
+# Process ID: 11292
+# Log file: C:/Users/Tim-UML/Documents/GitHub/MA_1/Sysgen_small_test/netlistFin1/vivado.log
+# Journal file: C:/Users/Tim-UML/Documents/GitHub/MA_1/Sysgen_small_test/netlistFin1\vivado.jou
+#-----------------------------------------------------------
+source ProjectGeneration.tcl -notrace

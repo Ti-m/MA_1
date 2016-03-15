@@ -1,0 +1,19 @@
+#-----------------------------------------------------------
+# Vivado v2014.4 (64-bit)
+# SW Build 1071353 on Tue Nov 18 18:29:27 MST 2014
+# IP Build 1070531 on Tue Nov 18 01:10:18 MST 2014
+# Start of session at: Tue Mar 15 17:06:32 2016
+# Process ID: 4388
+# Log file: C:/Users/Tim-UML/Documents/GitHub/MA_1/pKombinatBoardTest/vivado.log
+# Journal file: C:/Users/Tim-UML/Documents/GitHub/MA_1/pKombinatBoardTest\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Tim-UML/Documents/GitHub/MA_1/pKombinatBoardTest/project_fred_muell.xpr
+INFO: [Project 1-313] Project file moved from 'D:/project_fred_kombinatorisch' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2014.4/data/ip'.
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 15 17:07:22 2016...

@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2014.2
+# SW Build 932637 on Wed Jun 11 13:24:38 MDT 2014
+# IP Build 924643 on Fri May 30 09:20:16 MDT 2014
+# Start of session at: Thu Jan 08 13:24:32 2015
+# Process ID: 5652
+# Log file: D:/vivado_projects/project_fred_muell/project_fred_muell.runs/impl_1/toggle.vdi
+# Journal file: D:/vivado_projects/project_fred_muell/project_fred_muell.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source toggle.tcl -notrace

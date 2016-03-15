@@ -1,0 +1,197 @@
+{
+  'Line_102' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/mux',
+    'Instance' => 'mux',
+    'SimulinkInstance' => 'small_test/16-QAM1/Mux'
+  },
+  'Line_114' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/mux1',
+    'Instance' => 'mux1',
+    'SimulinkInstance' => 'small_test/16-QAM1/Mux1'
+  },
+  'Line_200' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1',
+    'Instance' => 'x16_qam1',
+    'SimulinkInstance' => 'small_test/16-QAM1'
+  },
+  'Line_208' => {
+    'CodeInstance' => 'small_test_struct/mcode1',
+    'Instance' => 'mcode1',
+    'SimulinkInstance' => 'small_test/MCode1'
+  },
+  'Line_217' => {
+    'CodeInstance' => 'small_test_struct/parallel_to_serial',
+    'Instance' => 'parallel_to_serial',
+    'SimulinkInstance' => 'small_test/Parallel to Serial'
+  },
+  'Line_241' => {
+    'CodeInstance' => 'small_test_struct/serial_to_parallel',
+    'Instance' => 'serial_to_parallel',
+    'SimulinkInstance' => 'small_test/Serial to Parallel'
+  },
+  'Line_265' => {
+    'CodeInstance' => 'small_test_struct/up_sample',
+    'Instance' => 'up_sample',
+    'SimulinkInstance' => 'small_test/Up Sample'
+  },
+  'Line_287' => {
+    'CodeInstance' => 'small_test_struct/down_sample',
+    'Instance' => 'down_sample',
+    'SimulinkInstance' => 'small_test/Down Sample'
+  },
+  'Line_311' => {
+    'CodeInstance' => 'small_test_struct/down_sample1',
+    'Instance' => 'down_sample1',
+    'SimulinkInstance' => 'small_test/Down Sample1'
+  },
+  'Line_335' => {
+    'CodeInstance' => 'small_test_struct/up_sample1',
+    'Instance' => 'up_sample1',
+    'SimulinkInstance' => 'small_test/Up Sample1'
+  },
+  'Line_357' => {
+    'CodeInstance' => 'small_test_struct/register_x0',
+    'Instance' => 'register_x0',
+    'SimulinkInstance' => 'small_test/Register'
+  },
+  'Line_37' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/bitbasher',
+    'Instance' => 'bitbasher',
+    'SimulinkInstance' => 'small_test/16-QAM1/BitBasher'
+  },
+  'Line_370' => {
+    'CodeInstance' => 'small_test_struct/register1',
+    'Instance' => 'register1',
+    'SimulinkInstance' => 'small_test/Register1'
+  },
+  'Line_383' => {
+    'CodeInstance' => 'small_test_struct/register2',
+    'Instance' => 'register2',
+    'SimulinkInstance' => 'small_test/Register2'
+  },
+  'Line_396' => {
+    'CodeInstance' => 'small_test_struct/register3',
+    'Instance' => 'register3',
+    'SimulinkInstance' => 'small_test/Register3'
+  },
+  'Line_409' => {
+    'CodeInstance' => 'small_test_struct/register4',
+    'Instance' => 'register4',
+    'SimulinkInstance' => 'small_test/Register4'
+  },
+  'Line_422' => {
+    'CodeInstance' => 'small_test_struct/register5',
+    'Instance' => 'register5',
+    'SimulinkInstance' => 'small_test/Register5'
+  },
+  'Line_435' => {
+    'CodeInstance' => 'small_test_struct/register6',
+    'Instance' => 'register6',
+    'SimulinkInstance' => 'small_test/Register6'
+  },
+  'Line_448' => {
+    'CodeInstance' => 'small_test_struct/register7',
+    'Instance' => 'register7',
+    'SimulinkInstance' => 'small_test/Register7'
+  },
+  'Line_46' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant1',
+    'Instance' => 'constant1',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant1'
+  },
+  'Line_461' => {
+    'CodeInstance' => 'small_test_struct/register8',
+    'Instance' => 'register8',
+    'SimulinkInstance' => 'small_test/Register8'
+  },
+  'Line_474' => {
+    'CodeInstance' => 'small_test_struct/register9',
+    'Instance' => 'register9',
+    'SimulinkInstance' => 'small_test/Register9'
+  },
+  'Line_487' => {
+    'CodeInstance' => 'small_test_struct/register10',
+    'Instance' => 'register10',
+    'SimulinkInstance' => 'small_test/Register10'
+  },
+  'Line_500' => {
+    'CodeInstance' => 'small_test_struct/register11',
+    'Instance' => 'register11',
+    'SimulinkInstance' => 'small_test/Register11'
+  },
+  'Line_513' => {
+    'CodeInstance' => 'small_test_struct/up_sample2',
+    'Instance' => 'up_sample2',
+    'SimulinkInstance' => 'small_test/Up Sample2'
+  },
+  'Line_53' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant2',
+    'Instance' => 'constant2',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant2'
+  },
+  'Line_535' => {
+    'CodeInstance' => 'small_test_struct/down_sample2',
+    'Instance' => 'down_sample2',
+    'SimulinkInstance' => 'small_test/Down Sample2'
+  },
+  'Line_582' => {
+    'CodeInstance' => 'small_test_default_clock_driver/clockdriver_x2',
+    'Instance' => 'clockdriver_x2',
+    'SimulinkInstance' => ''
+  },
+  'Line_594' => {
+    'CodeInstance' => 'small_test_default_clock_driver/clockdriver_x1',
+    'Instance' => 'clockdriver_x1',
+    'SimulinkInstance' => ''
+  },
+  'Line_60' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant3',
+    'Instance' => 'constant3',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant3'
+  },
+  'Line_606' => {
+    'CodeInstance' => 'small_test_default_clock_driver/clockdriver_x0',
+    'Instance' => 'clockdriver_x0',
+    'SimulinkInstance' => ''
+  },
+  'Line_618' => {
+    'CodeInstance' => 'small_test_default_clock_driver/clockdriver',
+    'Instance' => 'clockdriver',
+    'SimulinkInstance' => ''
+  },
+  'Line_659' => {
+    'CodeInstance' => 'small_test_default_clock_driver',
+    'Instance' => 'small_test_default_clock_driver',
+    'SimulinkInstance' => ''
+  },
+  'Line_67' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant4',
+    'Instance' => 'constant4',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant4'
+  },
+  'Line_673' => {
+    'CodeInstance' => 'small_test_struct',
+    'Instance' => 'small_test_struct',
+    'SimulinkInstance' => 'small_test'
+  },
+  'Line_74' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant5',
+    'Instance' => 'constant5',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant5'
+  },
+  'Line_81' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant6',
+    'Instance' => 'constant6',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant6'
+  },
+  'Line_88' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant7',
+    'Instance' => 'constant7',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant7'
+  },
+  'Line_95' => {
+    'CodeInstance' => 'small_test_struct/x16_qam1/constant9',
+    'Instance' => 'constant9',
+    'SimulinkInstance' => 'small_test/16-QAM1/Constant9'
+  }
+}
