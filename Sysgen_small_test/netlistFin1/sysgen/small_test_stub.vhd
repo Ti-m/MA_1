@@ -10,7 +10,8 @@ entity small_test_stub is
     clk : in std_logic;
     out_recv : out std_logic_vector( 1-1 downto 0 );
     out_trans_im : out std_logic_vector( 16-1 downto 0 );
-    out_trans_re : out std_logic_vector( 16-1 downto 0 )
+    out_trans_re : out std_logic_vector( 16-1 downto 0 );
+    test_pin : out std_logic_vector( 1-1 downto 0 )
   );
 end small_test_stub;
 architecture structural of small_test_stub is 
@@ -23,6 +24,7 @@ begin
     clk => clk,
     out_recv => out_recv,
     out_trans_im => out_trans_im,
-    out_trans_re => out_trans_re
+    out_trans_re => out_trans_re,
+    test_pin => test_pin
   );
 end structural;

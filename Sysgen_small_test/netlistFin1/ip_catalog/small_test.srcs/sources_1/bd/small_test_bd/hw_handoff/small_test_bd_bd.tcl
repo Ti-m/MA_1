@@ -153,6 +153,7 @@ proc create_root_design { parentCell } {
   set out_recv [ create_bd_port -dir O -from 0 -to 0 -type data out_recv ]
   set out_trans_im [ create_bd_port -dir O -from 15 -to 0 -type data out_trans_im ]
   set out_trans_re [ create_bd_port -dir O -from 15 -to 0 -type data out_trans_re ]
+  set test_pin [ create_bd_port -dir O -from 0 -to 0 -type data test_pin ]
 
   # Create instance: small_test_1, and set properties
   set small_test_1 [ create_bd_cell -type ip -vlnv User_Company:SysGen:small_test:1.1 small_test_1 ]
@@ -165,6 +166,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net small_test_1_out_recv [get_bd_ports out_recv] [get_bd_pins small_test_1/out_recv]
   connect_bd_net -net small_test_1_out_trans_im [get_bd_ports out_trans_im] [get_bd_pins small_test_1/out_trans_im]
   connect_bd_net -net small_test_1_out_trans_re [get_bd_ports out_trans_re] [get_bd_pins small_test_1/out_trans_re]
+  connect_bd_net -net small_test_1_test_pin [get_bd_ports test_pin] [get_bd_pins small_test_1/test_pin]
 
   # Create address segments
   

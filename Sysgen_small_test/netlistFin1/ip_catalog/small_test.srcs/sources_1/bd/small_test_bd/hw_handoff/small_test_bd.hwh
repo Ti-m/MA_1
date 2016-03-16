@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Mar 15 10:36:05 2016" VIVADOVERSION="2014.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Mar 16 17:07:25 2016" VIVADOVERSION="2014.4">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:microzed_7020:part0:1.0" DEVICE="7z020" NAME="small_test_bd_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -37,6 +37,11 @@
     <PORT DIR="O" LEFT="15" NAME="out_trans_re" RIGHT="0" SIGIS="data" SIGNAME="small_test_1_out_trans_re">
       <CONNECTIONS>
         <CONNECTION INSTANCE="small_test_1" PORT="out_trans_re"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="test_pin" RIGHT="0" SIGIS="data" SIGNAME="small_test_1_test_pin">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="small_test_1" PORT="test_pin"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -82,6 +87,11 @@
         <PORT DIR="O" LEFT="15" NAME="out_trans_re" RIGHT="0" SIGIS="data" SIGNAME="small_test_1_out_trans_re">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="out_trans_re"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="test_pin" RIGHT="0" SIGIS="data" SIGNAME="small_test_1_test_pin">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="test_pin"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

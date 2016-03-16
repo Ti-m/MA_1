@@ -6,7 +6,7 @@
 <Project Version="7" Minor="2" Path="C:/Users/Tim-UML/Documents/GitHub/MA_1/Sysgen_small_test/netlistFin1/ip_catalog/small_test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="7871c01f2b864aaeba83b7cf9d5c731b"/>
+    <Option Name="Id" Val="899eef15eadc4ceeb23107c9b72cd5a6"/>
     <Option Name="Part" Val="xc7z020clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
@@ -26,15 +26,15 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
         <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="ip/small_test_bd_small_test_1_0/small_test_bd_small_test_1_0.xci"/>
-        <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="hw_handoff/small_test_bd.hwh"/>
         <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="hdl/small_test_bd.vhd"/>
-        <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="small_test_bd_ooc.xdc"/>
         <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="hw_handoff/small_test_bd_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="hw_handoff/small_test_bd.hwh"/>
+        <CompFileExtendedInfo CompFileName="small_test_bd.bd" FileRelPathName="small_test_bd_ooc.xdc"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/hdl/small_test_bd_wrapper.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/bd/small_test_bd/hdl/small_test_bd_wrapper.vhd"/>
-          <Attr Name="ImportTime" Val="1458034566"/>
+          <Attr Name="ImportTime" Val="1458144446"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -49,7 +49,7 @@
       <File Path="$PSRCDIR/sources_1/imports/sysgen/small_test_mod.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../sysgen/small_test_mod.vhd"/>
-          <Attr Name="ImportTime" Val="1458034564"/>
+          <Attr Name="ImportTime" Val="1458144445"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -70,7 +70,7 @@
       <File Path="$PSRCDIR/sim_1/imports/sysgen/small_test_tb_mod.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../sysgen/small_test_tb_mod.vhd"/>
-          <Attr Name="ImportTime" Val="1458034564"/>
+          <Attr Name="ImportTime" Val="1458144445"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -106,6 +106,12 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../small_test_out_trans_re.dat">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../small_test_test_pin.dat">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

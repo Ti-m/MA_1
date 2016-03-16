@@ -6,5 +6,6 @@
     clk => clk,
     out_recv => out_recv,
     out_trans_im => out_trans_im,
-    out_trans_re => out_trans_re
+    out_trans_re => out_trans_re,
+    test_pin => test_pin
   );

@@ -37,6 +37,216 @@
 library xil_defaultlib;
 use xil_defaultlib.conv_pkg.all;
 
+---------------------------------------------------------------------
+--
+--  Filename      : xldsamp.vhd
+--
+--  Description   : VHDL description of a block that is inserted into the
+--                  data path to down sample the data betwen two blocks
+--                  where the period is different between two blocks.
+--
+--  Mod. History  : Changed clock timing on the down sampler.  The
+--                  destination enable is delayed by one system clock
+--                  cycle and held until the next consecutive source
+--                  enable pulse.  This change allows downsampler data
+--                  transitions to occur on the rising clock edge when
+--                  the destination ce is asserted.
+--                : Added optional latency is the downsampler.  Note, if
+--                  the latency is greater than 0, no shutter is used.
+--                : Removed valid bit logic from wrapper
+--
+--
+---------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+library xil_defaultlib;
+use xil_defaultlib.conv_pkg.all;
+
+
+-- synthesis translate_off
+library unisim;
+use unisim.vcomponents.all;
+-- synthesis translate_on
+
+entity small_test_xldsamp is
+  generic (
+    d_width: integer := 12;
+    d_bin_pt: integer := 0;
+    d_arith: integer := xlUnsigned;
+    q_width: integer := 12;
+    q_bin_pt: integer := 0;
+    q_arith: integer := xlUnsigned;
+    en_width: integer := 1;
+    en_bin_pt: integer := 0;
+    en_arith: integer := xlUnsigned;
+    rst_width: integer := 1;
+    rst_bin_pt: integer := 0;
+    rst_arith: integer := xlUnsigned;
+    ds_ratio: integer := 2;
+    phase: integer := 0;
+    latency: integer := 1
+  );
+  port (
+    d: in std_logic_vector(d_width - 1 downto 0);
+    src_clk: in std_logic;
+    src_ce: in std_logic;
+    src_clr: in std_logic;
+    dest_clk: in std_logic;
+    dest_ce: in std_logic;
+    dest_clr: in std_logic;
+    en: in std_logic_vector(en_width - 1 downto 0);
+    rst: in std_logic_vector(rst_width - 1 downto 0);
+    q: out std_logic_vector(q_width - 1 downto 0)
+  );
+end small_test_xldsamp;
+
+architecture struct of small_test_xldsamp is
+  component synth_reg
+    generic (
+      width: integer := 16;
+      latency: integer := 5
+    );
+    port (
+      i: in std_logic_vector(width - 1 downto 0);
+      ce: in std_logic;
+      clr: in std_logic;
+      clk: in std_logic;
+      o: out std_logic_vector(width - 1 downto 0)
+    );
+  end component; -- end synth_reg
+
+  component synth_reg_reg
+     generic (width       : integer;
+              latency     : integer);
+     port (i       : in std_logic_vector(width-1 downto 0);
+           ce      : in std_logic;
+           clr     : in std_logic;
+           clk     : in std_logic;
+           o       : out std_logic_vector(width-1 downto 0));
+  end component;
+
+  component fdse
+    port (
+      q: out   std_ulogic;
+      d: in    std_ulogic;
+      c: in    std_ulogic;
+      s: in    std_ulogic;
+      ce: in    std_ulogic
+    );
+  end component; -- end fdse
+  attribute syn_black_box of fdse: component is true;
+  attribute fpga_dont_touch of fdse: component is "true";
+
+  signal adjusted_dest_ce: std_logic;
+  signal adjusted_dest_ce_w_en: std_logic;
+  signal dest_ce_w_en: std_logic;
+  signal smpld_d: std_logic_vector(d_width-1 downto 0);
+  signal sclr:std_logic;
+begin
+  -- An 'adjusted' destination clock enable signal must be generated for
+  -- the zero latency and double registered down-sampler implementations.
+  -- For both cases, it is necassary to adjust the timing of the clock
+  -- enable so that it is asserted at the start of the sample period,
+  -- instead of the end.  This is realized using an fdse prim. to register
+  -- the destination clock enable.  The fdse itself is enabled with the
+  -- source clock enable.  Enabling the fdse holds the adjusted CE high
+  -- for the duration of the fast sample period and is needed to satisfy
+  -- the multicycle constraint if the input data is running at a non-system
+  -- rate.
+  adjusted_ce_needed: if ((latency = 0) or (phase /= (ds_ratio - 1))) generate
+    dest_ce_reg: fdse
+      port map (
+        q => adjusted_dest_ce,
+        d => dest_ce,
+        c => src_clk,
+        s => sclr,
+        ce => src_ce
+      );
+  end generate; -- adjusted_ce_needed
+
+  -- A shutter (mux/reg pair) is used to implement a 0 latency downsampler.
+  -- The shutter uses the adjusted destination clock enable to select between
+  -- the current input and the sampled input.
+  latency_eq_0: if (latency = 0) generate
+    shutter_d_reg: synth_reg
+      generic map (
+        width => d_width,
+        latency => 1
+      )
+      port map (
+        i => d,
+        ce => adjusted_dest_ce,
+        clr => sclr,
+        clk => src_clk,
+        o => smpld_d
+      );
+
+    -- Mux selects current input value or register value.
+    shutter_mux: process (adjusted_dest_ce, d, smpld_d)
+    begin
+	  if adjusted_dest_ce = '0' then
+        q <= smpld_d;
+      else
+        q <= d;
+      end if;
+    end process; -- end select_mux
+  end generate; -- end latency_eq_0
+
+  -- A more efficient downsampler can be implemented if a latency > 0 is
+  -- allowed.  There are two possible implementations, depending on the
+  -- requested sampling phase.  A double register downsampler is needed
+  -- for all cases except when the sample phase is the last input frame
+  -- of the sample period.  In this case, only one register is needed.
+
+  latency_gt_0: if (latency > 0) generate
+    -- The first register in the double reg implementation is used to
+    -- sample the correct frame (phase) of the input data.  Both the
+    -- data and valid bit must be sampled.
+    dbl_reg_test: if (phase /= (ds_ratio-1)) generate
+        smpl_d_reg: synth_reg_reg
+          generic map (
+            width => d_width,
+            latency => 1
+          )
+          port map (
+            i => d,
+            ce => adjusted_dest_ce_w_en,
+            clr => sclr,
+            clk => src_clk,
+            o => smpld_d
+          );
+    end generate; -- end dbl_reg_test
+
+    sngl_reg_test: if (phase = (ds_ratio -1)) generate
+      smpld_d <= d;
+    end generate; -- sngl_reg_test
+
+    -- The latency pipe captures the sampled data and the END of the sample
+    -- period.  Note that if the requested sample phase is the last input
+    -- frame in the period, the first register (smpl_reg) is not needed.
+    latency_pipe: synth_reg_reg
+      generic map (
+        width => d_width,
+        latency => latency
+      )
+      port map (
+        i => smpld_d,
+        ce => dest_ce_w_en,
+        clr => sclr,
+        clk => dest_clk,
+        o => q
+      );
+  end generate; -- end latency_gt_0
+
+  -- Signal assignments
+  dest_ce_w_en <= dest_ce and en(0);
+  adjusted_dest_ce_w_en <= adjusted_dest_ce and en(0);
+  sclr <= (src_clr or rst(0)) and dest_ce;
+end architecture struct;
+library xil_defaultlib;
+use xil_defaultlib.conv_pkg.all;
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -350,6 +560,84 @@ begin
     end generate; -- end latency0
 
 end architecture synth_behavioral;
+
+library xil_defaultlib;
+use xil_defaultlib.conv_pkg.all;
+
+---------------------------------------------------------------------
+--
+--  Filename      : xlregister.vhd
+--
+--  Description   : VHDL description of an arbitrary wide register.
+--                  Unlike the delay block, an initial value is
+--                  specified and is considered valid at the start
+--                  of simulation.  The register is only one word
+--                  deep.
+--
+--  Mod. History  : Removed valid bit logic from wrapper.
+--                : Changed VHDL to use a bit_vector generic for its
+--
+---------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+library xil_defaultlib;
+use xil_defaultlib.conv_pkg.all;
+
+
+entity small_test_xlregister is
+
+   generic (d_width          : integer := 5;          -- Width of d input
+            init_value       : bit_vector := b"00");  -- Binary init value string
+
+   port (d   : in std_logic_vector (d_width-1 downto 0);
+         rst : in std_logic_vector(0 downto 0) := "0";
+         en  : in std_logic_vector(0 downto 0) := "1";
+         ce  : in std_logic;
+         clk : in std_logic;
+         q   : out std_logic_vector (d_width-1 downto 0));
+
+end small_test_xlregister;
+
+architecture behavior of small_test_xlregister is
+
+   component synth_reg_w_init
+      generic (width      : integer;
+               init_index : integer;
+               init_value : bit_vector;
+               latency    : integer);
+      port (i   : in std_logic_vector(width-1 downto 0);
+            ce  : in std_logic;
+            clr : in std_logic;
+            clk : in std_logic;
+            o   : out std_logic_vector(width-1 downto 0));
+   end component; -- end synth_reg_w_init
+
+   -- synthesis translate_off
+   signal real_d, real_q           : real;    -- For debugging info ports
+   -- synthesis translate_on
+   signal internal_clr             : std_logic;
+   signal internal_ce              : std_logic;
+
+begin
+
+   internal_clr <= rst(0) and ce;
+   internal_ce  <= en(0) and ce;
+
+   -- Synthesizable behavioral model
+   synth_reg_inst : synth_reg_w_init
+      generic map (width      => d_width,
+                   init_index => 2,
+                   init_value => init_value,
+                   latency    => 1)
+      port map (i   => d,
+                ce  => internal_ce,
+                clr => internal_clr,
+                clk => clk,
+                o   => q);
+
+end architecture behavior;
+
 
 library xil_defaultlib;
 use xil_defaultlib.conv_pkg.all;
@@ -771,294 +1059,6 @@ begin
      end generate; -- end gen_q_cp_smpls_1_and_lat_gt_0
    end generate; -- end copy_samples_true
 end architecture struct;
-
-library xil_defaultlib;
-use xil_defaultlib.conv_pkg.all;
-
----------------------------------------------------------------------
---
---  Filename      : xldsamp.vhd
---
---  Description   : VHDL description of a block that is inserted into the
---                  data path to down sample the data betwen two blocks
---                  where the period is different between two blocks.
---
---  Mod. History  : Changed clock timing on the down sampler.  The
---                  destination enable is delayed by one system clock
---                  cycle and held until the next consecutive source
---                  enable pulse.  This change allows downsampler data
---                  transitions to occur on the rising clock edge when
---                  the destination ce is asserted.
---                : Added optional latency is the downsampler.  Note, if
---                  the latency is greater than 0, no shutter is used.
---                : Removed valid bit logic from wrapper
---
---
----------------------------------------------------------------------
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-library xil_defaultlib;
-use xil_defaultlib.conv_pkg.all;
-
-
--- synthesis translate_off
-library unisim;
-use unisim.vcomponents.all;
--- synthesis translate_on
-
-entity small_test_xldsamp is
-  generic (
-    d_width: integer := 12;
-    d_bin_pt: integer := 0;
-    d_arith: integer := xlUnsigned;
-    q_width: integer := 12;
-    q_bin_pt: integer := 0;
-    q_arith: integer := xlUnsigned;
-    en_width: integer := 1;
-    en_bin_pt: integer := 0;
-    en_arith: integer := xlUnsigned;
-    rst_width: integer := 1;
-    rst_bin_pt: integer := 0;
-    rst_arith: integer := xlUnsigned;
-    ds_ratio: integer := 2;
-    phase: integer := 0;
-    latency: integer := 1
-  );
-  port (
-    d: in std_logic_vector(d_width - 1 downto 0);
-    src_clk: in std_logic;
-    src_ce: in std_logic;
-    src_clr: in std_logic;
-    dest_clk: in std_logic;
-    dest_ce: in std_logic;
-    dest_clr: in std_logic;
-    en: in std_logic_vector(en_width - 1 downto 0);
-    rst: in std_logic_vector(rst_width - 1 downto 0);
-    q: out std_logic_vector(q_width - 1 downto 0)
-  );
-end small_test_xldsamp;
-
-architecture struct of small_test_xldsamp is
-  component synth_reg
-    generic (
-      width: integer := 16;
-      latency: integer := 5
-    );
-    port (
-      i: in std_logic_vector(width - 1 downto 0);
-      ce: in std_logic;
-      clr: in std_logic;
-      clk: in std_logic;
-      o: out std_logic_vector(width - 1 downto 0)
-    );
-  end component; -- end synth_reg
-
-  component synth_reg_reg
-     generic (width       : integer;
-              latency     : integer);
-     port (i       : in std_logic_vector(width-1 downto 0);
-           ce      : in std_logic;
-           clr     : in std_logic;
-           clk     : in std_logic;
-           o       : out std_logic_vector(width-1 downto 0));
-  end component;
-
-  component fdse
-    port (
-      q: out   std_ulogic;
-      d: in    std_ulogic;
-      c: in    std_ulogic;
-      s: in    std_ulogic;
-      ce: in    std_ulogic
-    );
-  end component; -- end fdse
-  attribute syn_black_box of fdse: component is true;
-  attribute fpga_dont_touch of fdse: component is "true";
-
-  signal adjusted_dest_ce: std_logic;
-  signal adjusted_dest_ce_w_en: std_logic;
-  signal dest_ce_w_en: std_logic;
-  signal smpld_d: std_logic_vector(d_width-1 downto 0);
-  signal sclr:std_logic;
-begin
-  -- An 'adjusted' destination clock enable signal must be generated for
-  -- the zero latency and double registered down-sampler implementations.
-  -- For both cases, it is necassary to adjust the timing of the clock
-  -- enable so that it is asserted at the start of the sample period,
-  -- instead of the end.  This is realized using an fdse prim. to register
-  -- the destination clock enable.  The fdse itself is enabled with the
-  -- source clock enable.  Enabling the fdse holds the adjusted CE high
-  -- for the duration of the fast sample period and is needed to satisfy
-  -- the multicycle constraint if the input data is running at a non-system
-  -- rate.
-  adjusted_ce_needed: if ((latency = 0) or (phase /= (ds_ratio - 1))) generate
-    dest_ce_reg: fdse
-      port map (
-        q => adjusted_dest_ce,
-        d => dest_ce,
-        c => src_clk,
-        s => sclr,
-        ce => src_ce
-      );
-  end generate; -- adjusted_ce_needed
-
-  -- A shutter (mux/reg pair) is used to implement a 0 latency downsampler.
-  -- The shutter uses the adjusted destination clock enable to select between
-  -- the current input and the sampled input.
-  latency_eq_0: if (latency = 0) generate
-    shutter_d_reg: synth_reg
-      generic map (
-        width => d_width,
-        latency => 1
-      )
-      port map (
-        i => d,
-        ce => adjusted_dest_ce,
-        clr => sclr,
-        clk => src_clk,
-        o => smpld_d
-      );
-
-    -- Mux selects current input value or register value.
-    shutter_mux: process (adjusted_dest_ce, d, smpld_d)
-    begin
-	  if adjusted_dest_ce = '0' then
-        q <= smpld_d;
-      else
-        q <= d;
-      end if;
-    end process; -- end select_mux
-  end generate; -- end latency_eq_0
-
-  -- A more efficient downsampler can be implemented if a latency > 0 is
-  -- allowed.  There are two possible implementations, depending on the
-  -- requested sampling phase.  A double register downsampler is needed
-  -- for all cases except when the sample phase is the last input frame
-  -- of the sample period.  In this case, only one register is needed.
-
-  latency_gt_0: if (latency > 0) generate
-    -- The first register in the double reg implementation is used to
-    -- sample the correct frame (phase) of the input data.  Both the
-    -- data and valid bit must be sampled.
-    dbl_reg_test: if (phase /= (ds_ratio-1)) generate
-        smpl_d_reg: synth_reg_reg
-          generic map (
-            width => d_width,
-            latency => 1
-          )
-          port map (
-            i => d,
-            ce => adjusted_dest_ce_w_en,
-            clr => sclr,
-            clk => src_clk,
-            o => smpld_d
-          );
-    end generate; -- end dbl_reg_test
-
-    sngl_reg_test: if (phase = (ds_ratio -1)) generate
-      smpld_d <= d;
-    end generate; -- sngl_reg_test
-
-    -- The latency pipe captures the sampled data and the END of the sample
-    -- period.  Note that if the requested sample phase is the last input
-    -- frame in the period, the first register (smpl_reg) is not needed.
-    latency_pipe: synth_reg_reg
-      generic map (
-        width => d_width,
-        latency => latency
-      )
-      port map (
-        i => smpld_d,
-        ce => dest_ce_w_en,
-        clr => sclr,
-        clk => dest_clk,
-        o => q
-      );
-  end generate; -- end latency_gt_0
-
-  -- Signal assignments
-  dest_ce_w_en <= dest_ce and en(0);
-  adjusted_dest_ce_w_en <= adjusted_dest_ce and en(0);
-  sclr <= (src_clr or rst(0)) and dest_ce;
-end architecture struct;
-library xil_defaultlib;
-use xil_defaultlib.conv_pkg.all;
-
----------------------------------------------------------------------
---
---  Filename      : xlregister.vhd
---
---  Description   : VHDL description of an arbitrary wide register.
---                  Unlike the delay block, an initial value is
---                  specified and is considered valid at the start
---                  of simulation.  The register is only one word
---                  deep.
---
---  Mod. History  : Removed valid bit logic from wrapper.
---                : Changed VHDL to use a bit_vector generic for its
---
----------------------------------------------------------------------
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-library xil_defaultlib;
-use xil_defaultlib.conv_pkg.all;
-
-
-entity small_test_xlregister is
-
-   generic (d_width          : integer := 5;          -- Width of d input
-            init_value       : bit_vector := b"00");  -- Binary init value string
-
-   port (d   : in std_logic_vector (d_width-1 downto 0);
-         rst : in std_logic_vector(0 downto 0) := "0";
-         en  : in std_logic_vector(0 downto 0) := "1";
-         ce  : in std_logic;
-         clk : in std_logic;
-         q   : out std_logic_vector (d_width-1 downto 0));
-
-end small_test_xlregister;
-
-architecture behavior of small_test_xlregister is
-
-   component synth_reg_w_init
-      generic (width      : integer;
-               init_index : integer;
-               init_value : bit_vector;
-               latency    : integer);
-      port (i   : in std_logic_vector(width-1 downto 0);
-            ce  : in std_logic;
-            clr : in std_logic;
-            clk : in std_logic;
-            o   : out std_logic_vector(width-1 downto 0));
-   end component; -- end synth_reg_w_init
-
-   -- synthesis translate_off
-   signal real_d, real_q           : real;    -- For debugging info ports
-   -- synthesis translate_on
-   signal internal_clr             : std_logic;
-   signal internal_ce              : std_logic;
-
-begin
-
-   internal_clr <= rst(0) and ce;
-   internal_ce  <= en(0) and ce;
-
-   -- Synthesizable behavioral model
-   synth_reg_inst : synth_reg_w_init
-      generic map (width      => d_width,
-                   init_index => 2,
-                   init_value => init_value,
-                   latency    => 1)
-      port map (i   => d,
-                ce  => internal_ce,
-                clr => internal_clr,
-                clk => clk,
-                o   => q);
-
-end architecture behavior;
-
 
 library xil_defaultlib;
 use xil_defaultlib.conv_pkg.all;

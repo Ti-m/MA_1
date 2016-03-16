@@ -23,7 +23,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	set IP_LifeCycle_Menu {1}
 	set IP_Logo {sysgen_icon_100.png}
 	set IP_Name {Basic_DMT_cw}
-	set IP_Revision {88943761}
+	set IP_Revision {89053641}
 	set IP_Vendor_Text {User Company}
 	set IP_Version_Text {1.1}
 	set ImplStrategyName {Vivado Implementation Defaults}
@@ -139,6 +139,20 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	dict set TopLevelPortInterface out_trans_re ClockDomain {small_test}
 	dict set TopLevelPortInterface out_trans_re Locs {}
 	dict set TopLevelPortInterface out_trans_re IOStandard {}
+	dict set TopLevelPortInterface test_pin Name {test_pin}
+	dict set TopLevelPortInterface test_pin Type UFix_1_0
+	dict set TopLevelPortInterface test_pin ArithmeticType xlUnsigned
+	dict set TopLevelPortInterface test_pin BinaryPoint 0
+	dict set TopLevelPortInterface test_pin Width 1
+	dict set TopLevelPortInterface test_pin DatFile {small_test_test_pin.dat}
+	dict set TopLevelPortInterface test_pin IconText {test_pin}
+	dict set TopLevelPortInterface test_pin Direction out
+	dict set TopLevelPortInterface test_pin Period 5
+	dict set TopLevelPortInterface test_pin Interface 0
+	dict set TopLevelPortInterface test_pin InterfaceString {DATA}
+	dict set TopLevelPortInterface test_pin ClockDomain {small_test}
+	dict set TopLevelPortInterface test_pin Locs {}
+	dict set TopLevelPortInterface test_pin IOStandard {}
 	dict set TopLevelPortInterface clk Name {clk}
 	dict set TopLevelPortInterface clk Type -
 	dict set TopLevelPortInterface clk ArithmeticType xlUnsigned

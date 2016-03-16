@@ -2339,11 +2339,12 @@ library xil_defaultlib;
 entity small_test_tb is
 end small_test_tb;
 architecture structural of small_test_tb is 
-  signal clk_net : std_logic;
-  signal inp_recv_re1_net : std_logic_vector( 16-1 downto 0 );
-  signal out_recv_net : std_logic_vector( 1-1 downto 0 );
   signal inp_trans_net : std_logic_vector( 1-1 downto 0 );
+  signal inp_recv_re1_net : std_logic_vector( 16-1 downto 0 );
+  signal test_pin_net : std_logic_vector( 1-1 downto 0 );
   signal out_trans_im_net : std_logic_vector( 16-1 downto 0 );
+  signal out_recv_net : std_logic_vector( 1-1 downto 0 );
+  signal clk_net : std_logic;
   signal inp_recv_im1_net : std_logic_vector( 16-1 downto 0 );
   signal out_trans_re_net : std_logic_vector( 16-1 downto 0 );
 begin
@@ -2426,6 +2427,18 @@ begin
     i => out_trans_re_net,
     clk => clk_net
   );
+  test_pin_load : entity xil_defaultlib.xltbsink 
+  generic map (
+    i_arith => xlUnsigned,
+    i_bin_pt => 0,
+    i_width => 1,
+    inputFile => "small_test_test_pin.dat",
+    periodMultiplier => 5
+  )
+  port map (
+    i => test_pin_net,
+    clk => clk_net
+  );
   sysgen_dut : entity xil_defaultlib.small_test 
   port map (
     inp_recv_im1 => inp_recv_im1_net,
@@ -2434,6 +2447,7 @@ begin
     clk => clk_net,
     out_recv => out_recv_net,
     out_trans_im => out_trans_im_net,
-    out_trans_re => out_trans_re_net
+    out_trans_re => out_trans_re_net,
+    test_pin => test_pin_net
   );
 end structural;

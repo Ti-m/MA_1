@@ -13,21 +13,21 @@ entity small_test_16_qam1 is
   );
 end small_test_16_qam1;
 architecture structural of small_test_16_qam1 is 
+  signal constant4_op_net : std_logic_vector( 16-1 downto 0 );
   signal constant9_op_net : std_logic_vector( 16-1 downto 0 );
-  signal ce_net : std_logic;
-  signal mux1_y_net : std_logic_vector( 16-1 downto 0 );
+  signal constant3_op_net : std_logic_vector( 16-1 downto 0 );
+  signal bitbasher_b_net : std_logic_vector( 2-1 downto 0 );
+  signal constant6_op_net : std_logic_vector( 16-1 downto 0 );
+  signal constant5_op_net : std_logic_vector( 16-1 downto 0 );
+  signal constant2_op_net : std_logic_vector( 16-1 downto 0 );
+  signal constant1_op_net : std_logic_vector( 16-1 downto 0 );
+  signal constant7_op_net : std_logic_vector( 16-1 downto 0 );
+  signal bitbasher_c_net : std_logic_vector( 2-1 downto 0 );
   signal serial_to_parallel_dout_net : std_logic_vector( 4-1 downto 0 );
   signal mux_y_net : std_logic_vector( 16-1 downto 0 );
+  signal ce_net : std_logic;
+  signal mux1_y_net : std_logic_vector( 16-1 downto 0 );
   signal clk_net : std_logic;
-  signal bitbasher_b_net : std_logic_vector( 2-1 downto 0 );
-  signal bitbasher_c_net : std_logic_vector( 2-1 downto 0 );
-  signal constant4_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant7_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant3_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant6_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant2_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant5_op_net : std_logic_vector( 16-1 downto 0 );
-  signal constant1_op_net : std_logic_vector( 16-1 downto 0 );
 begin
   out2 <= mux_y_net;
   out3 <= mux1_y_net;
@@ -144,44 +144,45 @@ entity small_test_struct is
     ce_8 : in std_logic;
     out_recv : out std_logic_vector( 1-1 downto 0 );
     out_trans_im : out std_logic_vector( 16-1 downto 0 );
-    out_trans_re : out std_logic_vector( 16-1 downto 0 )
+    out_trans_re : out std_logic_vector( 16-1 downto 0 );
+    test_pin : out std_logic_vector( 1-1 downto 0 )
   );
 end small_test_struct;
 architecture structural of small_test_struct is 
-  signal down_sample_q_net : std_logic_vector( 16-1 downto 0 );
-  signal down_sample1_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register11_q_net : std_logic_vector( 1-1 downto 0 );
-  signal up_sample_q_net : std_logic_vector( 1-1 downto 0 );
-  signal register1_q_net : std_logic_vector( 1-1 downto 0 );
-  signal register6_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register9_q_net : std_logic_vector( 16-1 downto 0 );
-  signal dest_clk_net : std_logic;
-  signal inp_recv_re1_net : std_logic_vector( 16-1 downto 0 );
-  signal dest_ce_net_x0 : std_logic;
-  signal clk_net : std_logic;
-  signal ce_net : std_logic;
-  signal inp_trans_net : std_logic_vector( 1-1 downto 0 );
-  signal inp_recv_im1_net : std_logic_vector( 16-1 downto 0 );
   signal register5_q_net : std_logic_vector( 16-1 downto 0 );
+  signal register4_q_net : std_logic_vector( 16-1 downto 0 );
+  signal register_q_net : std_logic_vector( 1-1 downto 0 );
+  signal register10_q_net : std_logic_vector( 1-1 downto 0 );
+  signal register2_q_net : std_logic_vector( 16-1 downto 0 );
+  signal register11_q_net : std_logic_vector( 1-1 downto 0 );
+  signal register3_q_net : std_logic_vector( 16-1 downto 0 );
   signal register7_q_net : std_logic_vector( 16-1 downto 0 );
   signal register8_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register4_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register10_q_net : std_logic_vector( 1-1 downto 0 );
-  signal src_clk_net : std_logic;
-  signal mux1_y_net : std_logic_vector( 16-1 downto 0 );
-  signal mux_y_net : std_logic_vector( 16-1 downto 0 );
-  signal dest_ce_net : std_logic;
-  signal parallel_to_serial_dout_net : std_logic_vector( 1-1 downto 0 );
-  signal dest_clk_net_x0 : std_logic;
-  signal mcode1_y1_net : std_logic_vector( 4-1 downto 0 );
-  signal up_sample1_q_net : std_logic_vector( 16-1 downto 0 );
-  signal serial_to_parallel_dout_net : std_logic_vector( 4-1 downto 0 );
-  signal src_ce_net : std_logic;
-  signal up_sample2_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register3_q_net : std_logic_vector( 16-1 downto 0 );
+  signal up_sample_q_net : std_logic_vector( 1-1 downto 0 );
   signal down_sample2_q_net : std_logic_vector( 1-1 downto 0 );
-  signal register2_q_net : std_logic_vector( 16-1 downto 0 );
-  signal register_q_net : std_logic_vector( 1-1 downto 0 );
+  signal down_sample_q_net : std_logic_vector( 16-1 downto 0 );
+  signal up_sample1_q_net : std_logic_vector( 16-1 downto 0 );
+  signal mcode1_y1_net : std_logic_vector( 4-1 downto 0 );
+  signal parallel_to_serial_dout_net : std_logic_vector( 1-1 downto 0 );
+  signal up_sample2_q_net : std_logic_vector( 16-1 downto 0 );
+  signal down_sample1_q_net : std_logic_vector( 16-1 downto 0 );
+  signal ce_net : std_logic;
+  signal dest_ce_net : std_logic;
+  signal inp_recv_re1_net : std_logic_vector( 16-1 downto 0 );
+  signal register1_q_net : std_logic_vector( 1-1 downto 0 );
+  signal register6_q_net : std_logic_vector( 16-1 downto 0 );
+  signal dest_clk_net_x0 : std_logic;
+  signal mux_y_net : std_logic_vector( 16-1 downto 0 );
+  signal dest_ce_net_x0 : std_logic;
+  signal register9_q_net : std_logic_vector( 16-1 downto 0 );
+  signal mux1_y_net : std_logic_vector( 16-1 downto 0 );
+  signal serial_to_parallel_dout_net : std_logic_vector( 4-1 downto 0 );
+  signal dest_clk_net : std_logic;
+  signal inp_recv_im1_net : std_logic_vector( 16-1 downto 0 );
+  signal src_clk_net : std_logic;
+  signal inp_trans_net : std_logic_vector( 1-1 downto 0 );
+  signal src_ce_net : std_logic;
+  signal clk_net : std_logic;
 begin
   inp_recv_im1_net <= inp_recv_im1;
   inp_recv_re1_net <= inp_recv_re1;
@@ -189,14 +190,15 @@ begin
   out_recv <= register1_q_net;
   out_trans_im <= register6_q_net;
   out_trans_re <= register9_q_net;
-  dest_clk_net <= clk_1;
-  dest_ce_net_x0 <= ce_1;
+  test_pin <= inp_trans_net;
+  src_clk_net <= clk_1;
+  src_ce_net <= ce_1;
   clk_net <= clk_4;
   ce_net <= ce_4;
-  src_clk_net <= clk_5;
-  src_ce_net <= ce_5;
-  dest_clk_net_x0 <= clk_8;
-  dest_ce_net <= ce_8;
+  dest_clk_net_x0 <= clk_5;
+  dest_ce_net <= ce_5;
+  dest_clk_net <= clk_8;
+  dest_ce_net_x0 <= ce_8;
   x16_qam1 : entity xil_defaultlib.small_test_16_qam1 
   port map (
     in1 => serial_to_parallel_dout_net,
@@ -204,6 +206,78 @@ begin
     ce_4 => ce_net,
     out2 => mux_y_net,
     out3 => mux1_y_net
+  );
+  down_sample : entity xil_defaultlib.small_test_xldsamp 
+  generic map (
+    d_arith => xlSigned,
+    d_bin_pt => 13,
+    d_width => 16,
+    ds_ratio => 2,
+    latency => 1,
+    phase => 1,
+    q_arith => xlSigned,
+    q_bin_pt => 13,
+    q_width => 16
+  )
+  port map (
+    src_clr => '0',
+    dest_clr => '0',
+    en => "1",
+    rst => "0",
+    d => mux_y_net,
+    src_clk => clk_net,
+    src_ce => ce_net,
+    dest_clk => dest_clk_net,
+    dest_ce => dest_ce_net_x0,
+    q => down_sample_q_net
+  );
+  down_sample1 : entity xil_defaultlib.small_test_xldsamp 
+  generic map (
+    d_arith => xlSigned,
+    d_bin_pt => 13,
+    d_width => 16,
+    ds_ratio => 2,
+    latency => 1,
+    phase => 1,
+    q_arith => xlSigned,
+    q_bin_pt => 13,
+    q_width => 16
+  )
+  port map (
+    src_clr => '0',
+    dest_clr => '0',
+    en => "1",
+    rst => "0",
+    d => mux1_y_net,
+    src_clk => clk_net,
+    src_ce => ce_net,
+    dest_clk => dest_clk_net,
+    dest_ce => dest_ce_net_x0,
+    q => down_sample1_q_net
+  );
+  down_sample2 : entity xil_defaultlib.small_test_xldsamp 
+  generic map (
+    d_arith => xlUnsigned,
+    d_bin_pt => 0,
+    d_width => 1,
+    ds_ratio => 5,
+    latency => 1,
+    phase => 4,
+    q_arith => xlUnsigned,
+    q_bin_pt => 0,
+    q_width => 1
+  )
+  port map (
+    src_clr => '0',
+    dest_clr => '0',
+    en => "1",
+    rst => "0",
+    d => parallel_to_serial_dout_net,
+    src_clk => src_clk_net,
+    src_ce => src_ce_net,
+    dest_clk => dest_clk_net_x0,
+    dest_ce => dest_ce_net,
+    q => down_sample2_q_net
   );
   mcode1 : entity xil_defaultlib.sysgen_mcode_block_108a9ea098 
   port map (
@@ -234,9 +308,165 @@ begin
     din => mcode1_y1_net,
     src_clk => clk_net,
     src_ce => ce_net,
-    dest_clk => dest_clk_net,
-    dest_ce => dest_ce_net_x0,
+    dest_clk => src_clk_net,
+    dest_ce => src_ce_net,
     dout => parallel_to_serial_dout_net
+  );
+  register_x0 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 1,
+    init_value => b"0"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => down_sample2_q_net,
+    clk => dest_clk_net_x0,
+    ce => dest_ce_net,
+    q => register_q_net
+  );
+  register1 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 1,
+    init_value => b"0"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register_q_net,
+    clk => dest_clk_net_x0,
+    ce => dest_ce_net,
+    q => register1_q_net
+  );
+  register10 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 1,
+    init_value => b"0"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => inp_trans_net,
+    clk => dest_clk_net_x0,
+    ce => dest_ce_net,
+    q => register10_q_net
+  );
+  register11 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 1,
+    init_value => b"0"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register10_q_net,
+    clk => dest_clk_net_x0,
+    ce => dest_ce_net,
+    q => register11_q_net
+  );
+  register2 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register3_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register2_q_net
+  );
+  register3 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => inp_recv_re1_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register3_q_net
+  );
+  register4 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => inp_recv_im1_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register4_q_net
+  );
+  register5 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register4_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register5_q_net
+  );
+  register6 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register7_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register6_q_net
+  );
+  register7 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => down_sample1_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register7_q_net
+  );
+  register8 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => down_sample_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register8_q_net
+  );
+  register9 : entity xil_defaultlib.small_test_xlregister 
+  generic map (
+    d_width => 16,
+    init_value => b"0000000000000000"
+  )
+  port map (
+    en => "1",
+    rst => "0",
+    d => register8_q_net,
+    clk => dest_clk_net,
+    ce => dest_ce_net_x0,
+    q => register9_q_net
   );
   serial_to_parallel : entity xil_defaultlib.small_test_xls2p 
   generic map (
@@ -256,8 +486,8 @@ begin
     en => "1",
     rst => "0",
     din => up_sample_q_net,
-    src_clk => dest_clk_net,
-    src_ce => dest_ce_net_x0,
+    src_clk => src_clk_net,
+    src_ce => src_ce_net,
     dest_clk => clk_net,
     dest_ce => ce_net,
     dout => serial_to_parallel_dout_net
@@ -278,59 +508,11 @@ begin
     dest_clr => '0',
     en => "1",
     d => register11_q_net,
-    src_clk => src_clk_net,
-    src_ce => src_ce_net,
-    dest_clk => dest_clk_net,
-    dest_ce => dest_ce_net_x0,
+    src_clk => dest_clk_net_x0,
+    src_ce => dest_ce_net,
+    dest_clk => src_clk_net,
+    dest_ce => src_ce_net,
     q => up_sample_q_net
-  );
-  down_sample : entity xil_defaultlib.small_test_xldsamp 
-  generic map (
-    d_arith => xlSigned,
-    d_bin_pt => 13,
-    d_width => 16,
-    ds_ratio => 2,
-    latency => 1,
-    phase => 1,
-    q_arith => xlSigned,
-    q_bin_pt => 13,
-    q_width => 16
-  )
-  port map (
-    src_clr => '0',
-    dest_clr => '0',
-    en => "1",
-    rst => "0",
-    d => mux_y_net,
-    src_clk => clk_net,
-    src_ce => ce_net,
-    dest_clk => dest_clk_net_x0,
-    dest_ce => dest_ce_net,
-    q => down_sample_q_net
-  );
-  down_sample1 : entity xil_defaultlib.small_test_xldsamp 
-  generic map (
-    d_arith => xlSigned,
-    d_bin_pt => 13,
-    d_width => 16,
-    ds_ratio => 2,
-    latency => 1,
-    phase => 1,
-    q_arith => xlSigned,
-    q_bin_pt => 13,
-    q_width => 16
-  )
-  port map (
-    src_clr => '0',
-    dest_clr => '0',
-    en => "1",
-    rst => "0",
-    d => mux1_y_net,
-    src_clk => clk_net,
-    src_ce => ce_net,
-    dest_clk => dest_clk_net_x0,
-    dest_ce => dest_ce_net,
-    q => down_sample1_q_net
   );
   up_sample1 : entity xil_defaultlib.small_test_xlusamp 
   generic map (
@@ -348,167 +530,11 @@ begin
     dest_clr => '0',
     en => "1",
     d => register2_q_net,
-    src_clk => dest_clk_net_x0,
-    src_ce => dest_ce_net,
+    src_clk => dest_clk_net,
+    src_ce => dest_ce_net_x0,
     dest_clk => clk_net,
     dest_ce => ce_net,
     q => up_sample1_q_net
-  );
-  register_x0 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 1,
-    init_value => b"0"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => down_sample2_q_net,
-    clk => src_clk_net,
-    ce => src_ce_net,
-    q => register_q_net
-  );
-  register1 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 1,
-    init_value => b"0"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register_q_net,
-    clk => src_clk_net,
-    ce => src_ce_net,
-    q => register1_q_net
-  );
-  register2 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register3_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register2_q_net
-  );
-  register3 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => inp_recv_re1_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register3_q_net
-  );
-  register4 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => inp_recv_im1_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register4_q_net
-  );
-  register5 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register4_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register5_q_net
-  );
-  register6 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register7_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register6_q_net
-  );
-  register7 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => down_sample1_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register7_q_net
-  );
-  register8 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => down_sample_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register8_q_net
-  );
-  register9 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 16,
-    init_value => b"0000000000000000"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register8_q_net,
-    clk => dest_clk_net_x0,
-    ce => dest_ce_net,
-    q => register9_q_net
-  );
-  register10 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 1,
-    init_value => b"0"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => inp_trans_net,
-    clk => src_clk_net,
-    ce => src_ce_net,
-    q => register10_q_net
-  );
-  register11 : entity xil_defaultlib.small_test_xlregister 
-  generic map (
-    d_width => 1,
-    init_value => b"0"
-  )
-  port map (
-    en => "1",
-    rst => "0",
-    d => register10_q_net,
-    clk => src_clk_net,
-    ce => src_ce_net,
-    q => register11_q_net
   );
   up_sample2 : entity xil_defaultlib.small_test_xlusamp 
   generic map (
@@ -526,35 +552,11 @@ begin
     dest_clr => '0',
     en => "1",
     d => register5_q_net,
-    src_clk => dest_clk_net_x0,
-    src_ce => dest_ce_net,
+    src_clk => dest_clk_net,
+    src_ce => dest_ce_net_x0,
     dest_clk => clk_net,
     dest_ce => ce_net,
     q => up_sample2_q_net
-  );
-  down_sample2 : entity xil_defaultlib.small_test_xldsamp 
-  generic map (
-    d_arith => xlUnsigned,
-    d_bin_pt => 0,
-    d_width => 1,
-    ds_ratio => 5,
-    latency => 1,
-    phase => 4,
-    q_arith => xlUnsigned,
-    q_bin_pt => 0,
-    q_width => 1
-  )
-  port map (
-    src_clr => '0',
-    dest_clr => '0',
-    en => "1",
-    rst => "0",
-    d => parallel_to_serial_dout_net,
-    src_clk => dest_clk_net,
-    src_ce => dest_ce_net_x0,
-    dest_clk => src_clk_net,
-    dest_ce => src_ce_net,
-    q => down_sample2_q_net
   );
 end structural;
 -- Generated from Simulink block 
@@ -641,20 +643,21 @@ entity small_test is
     clk : in std_logic;
     out_recv : out std_logic_vector( 1-1 downto 0 );
     out_trans_im : out std_logic_vector( 16-1 downto 0 );
-    out_trans_re : out std_logic_vector( 16-1 downto 0 )
+    out_trans_re : out std_logic_vector( 16-1 downto 0 );
+    test_pin : out std_logic_vector( 1-1 downto 0 )
   );
 end small_test;
 architecture structural of small_test is 
   attribute core_generation_info : string;
   attribute core_generation_info of structural : architecture is "small_test,sysgen_core_2014_4,{,compilation=IP Catalog,block_icon_display=Default,family=zynq,part=xc7z020,speed=-1,package=clg400,synthesis_language=vhdl,hdl_library=xil_defaultlib,synthesis_strategy=Vivado Synthesis Defaults,implementation_strategy=Vivado Implementation Defaults,clock_loc=,testbench=1,interface_doc=1,ce_clr=0,clock_period=4,system_simulink_period=4e-09,simulation_time=4e-05,bitbasher=1,constant=8,dsamp=3,mcode=1,mux=2,p2s=1,register=12,s2p=1,usamp=3,}";
+  signal clk_5_net : std_logic;
+  signal clk_4_net : std_logic;
+  signal ce_8_net : std_logic;
+  signal ce_1_net : std_logic;
   signal clk_1_net : std_logic;
   signal ce_4_net : std_logic;
-  signal clk_4_net : std_logic;
-  signal ce_1_net : std_logic;
-  signal clk_5_net : std_logic;
   signal ce_5_net : std_logic;
   signal clk_8_net : std_logic;
-  signal ce_8_net : std_logic;
 begin
   small_test_default_clock_driver : entity xil_defaultlib.small_test_default_clock_driver 
   port map (
@@ -685,6 +688,7 @@ begin
     ce_8 => ce_8_net,
     out_recv => out_recv,
     out_trans_im => out_trans_im,
-    out_trans_re => out_trans_re
+    out_trans_re => out_trans_re,
+    test_pin => test_pin
   );
 end structural;
