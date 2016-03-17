@@ -1,33 +1,28 @@
 --------------------------------- Version Log ----------------------------------
 Version                                 Path
 System Generator 2014.4                 C:/Xilinx/Vivado/2014.4
-Matlab 8.4.0.150421 (R2014b)            C:\MATLAB\R2014b
+Matlab 8.4.0.150421 (R2014b)            C:\matlab\R2014b
 Vivado 2014.4                           C:/Xilinx/Vivado/2014.4
 --------------------------------------------------------------------------------
 Summary of Errors:
-Error 0001: Design Rule Check Failed
-     Block: 'small_test/ System Generator'
+Error 0001: ERROR: An error occurred when creating the Vivado project...
+     Block: Unspecified
 --------------------------------------------------------------------------------
 
 Error 0001:
 
 Reported by:
-  'small_test/ System Generator'
+  Unspecified
 
 Details:
-The "Simulink system period" setting on this System Generator
-token is not appropriate for the rates used in the design. 
+ERROR: An error occurred when creating the Vivado project.
+ERROR: [Common 17-39] 'ipx::save_core' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Thu Mar 17 18:33:07 2016...
+ERROR: [IP_Flow 19-395] Problem validating against XML schema:
+Required attribute(s) missing libraryRefType
+... 
 
-The current setting is:  1/2.5e+08
-An appropriate setting is:  1/5e+08
-
-Blocks with inappropriate periods included:
-  "small_test/Parallel to Serial",  port: "dout",  sample period: 1/5e+08
-  "small_test/out_recv",  port: "tdata",  sample period: 1/5e+08
-  "small_test/out_recv",  port: "gw_out_inport",  sample period: 1/5e+08
-  "small_test/Register",  port: "q",  sample period: 1/5e+08
-  "small_test/Register",  port: "d",  sample period: 1/5e+08
-  "small_test/Register1",  port: "q",  sample period: 1/5e+08
-  "small_test/Register1",  port: "d",  sample period: 1/5e+08
+For more information please refer to 'C:/MA_1/Sysgen_small_test/netlistFin3/vivado.log'
 
 --------------------------------------------------------------------------------
