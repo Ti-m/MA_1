@@ -1,28 +1,33 @@
 --------------------------------- Version Log ----------------------------------
 Version                                 Path
 System Generator 2014.4                 C:/Xilinx/Vivado/2014.4
-Matlab 8.4.0.150421 (R2014b)            C:\matlab\R2014b
+Matlab 8.4.0.150421 (R2014b)            C:\MATLAB\R2014b
 Vivado 2014.4                           C:/Xilinx/Vivado/2014.4
 --------------------------------------------------------------------------------
 Summary of Errors:
-Error 0001: ERROR: An error occurred when creating the Vivado project...
-     Block: Unspecified
+Error 0001: Incorrect rate
+     Block: 'small_test/Register10'
 --------------------------------------------------------------------------------
 
 Error 0001:
 
 Reported by:
-  Unspecified
+  'small_test/Register10'
 
 Details:
-ERROR: An error occurred when creating the Vivado project.
-ERROR: [Common 17-39] 'ipx::save_core' failed due to earlier errors.
-
-INFO: [Common 17-206] Exiting Vivado at Thu Mar 17 18:33:07 2016...
-ERROR: [IP_Flow 19-395] Problem validating against XML schema:
-Required attribute(s) missing libraryRefType
-... 
+The period of the signal driving the reset of this block is
+inappropriate.  The period must be an integer multiple of the gcd
+of signals driving the following input ports:
+d : 4e-08
+reset period: 2e-08
 
-For more information please refer to 'C:/MA_1/Sysgen_small_test/netlistFin3/vivado.log'
+In the debugging of this problem, you may find it helpful to have
+the sample rates displayed on the Simulink diagram. This will
+happen if you open the System Generator block's dialog box, set
+its "Block Icon Display" control to "Sample Rates", and then
+update the diagram.
+
+
+Error occurred during "Rate and Type Error Checking".
 
 --------------------------------------------------------------------------------
