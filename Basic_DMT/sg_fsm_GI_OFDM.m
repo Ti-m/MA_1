@@ -1,47 +1,42 @@
-function [ out_re, out_im, pop, o1_re , o2_re , o3_re, o4_re , o5_re,...
-    o6_re , o7_re , o8_re , o9_re , o10_re, o11_re, o12_re, o13_re,...
-    o14_re, o15_re, o16_re, o1_im , o2_im , o3_im, o4_im , o5_im ,...
-    o6_im , o7_im , o8_im , o9_im , o10_im, o11_im, o12_im, o13_im,...
-    o14_im, o15_im, o16_im,  stateo ]= sg_fsm_GI_OFDM( inp_re,inp_im,...
-    frameEn, i1_re , i2_re , i3_re, i4_re , i5_re , i6_re , i7_re , ...
-    i8_re , i9_re , i10_re, i11_re, i12_re, i13_re, i14_re, i15_re, ...
-    i16_re, i1_im , i2_im , i3_im, i4_im , i5_im , i6_im , i7_im ,...
-    i8_im , i9_im , i10_im, i11_im, i12_im, i13_im, i14_im, i15_im,...
-    i16_im,  statei )
+function [ out_re, out_im, pop ]= sg_fsm_GI_OFDM( inp_re,inp_im,...
+    frameEn, bitCountAftIFFT, fracLen)
 %
 %
-o1_re=i1_re;
-o2_re=i2_re;
-o3_re=i3_re;
-o4_re=i4_re;
-o5_re=i5_re;
-o6_re=i6_re;
-o7_re=i7_re;
-o8_re=i8_re;
-o9_re=i9_re;
-o10_re=i10_re;
-o11_re=i11_re;
-o12_re=i12_re;
-o13_re=i13_re;
-o14_re=i14_re;
-o15_re=i15_re;
-o16_re=i16_re;
-o1_im=i1_im;
-o2_im=i2_im;
-o3_im=i3_im;
-o4_im=i4_im;
-o5_im=i5_im;
-o6_im=i6_im;
-o7_im=i7_im;
-o8_im=i8_im;
-o9_im=i9_im;
-o10_im=i10_im;
-o11_im=i11_im;
-o12_im=i12_im;
-o13_im=i13_im;
-o14_im=i14_im;
-o15_im=i15_im;
-o16_im=i16_im;
+persistent statei, statei = xl_state(0, {xlUnsigned, 8, 0});
+persistent i1_re, i1_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i1_im, i1_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i2_re, i2_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i2_im, i2_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i3_re, i3_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i3_im, i3_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i4_re, i4_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i4_im, i4_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i5_re, i5_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i5_im, i5_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i6_re, i6_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i6_im, i6_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i7_re, i7_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i7_im, i7_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i8_re, i8_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i8_im, i8_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i9_re, i9_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i9_im, i9_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i10_re, i10_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i10_im, i10_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i11_re, i11_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i11_im, i11_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i12_re, i12_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i12_im, i12_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i13_re, i13_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i13_im, i13_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i14_re, i14_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i14_im, i14_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i15_re, i15_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i15_im, i15_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i16_re, i16_re = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+persistent i16_im, i16_im = xl_state(0, {xlSigned, bitCountAftIFFT, fracLen});
+
+
 pop = 0;
 out_re = 0;
 out_im = 0;
@@ -55,77 +50,77 @@ switch statei
         end
         
     case 1%Input
-        o1_re=inp_re;
-        o1_im=inp_im;
+        i1_re=inp_re;
+        i1_im=inp_im;
         statei=2;       
     case 2
-        o2_re=inp_re;
-        o2_im=inp_im;
+        i2_re=inp_re;
+        i2_im=inp_im;
         statei=3;
     case 3
-        o3_re=inp_re;
-        o3_im=inp_im;
+        i3_re=inp_re;
+        i3_im=inp_im;
         statei=4;
     case 4
-        o4_re=inp_re;
-        o4_im=inp_im;
+        i4_re=inp_re;
+        i4_im=inp_im;
         statei=5;
     case 5
-        o5_re=inp_re;
-        o5_im=inp_im;
+        i5_re=inp_re;
+        i5_im=inp_im;
         statei=6;
     case 6
-        o6_re=inp_re;
-        o6_im=inp_im;
+        i6_re=inp_re;
+        i6_im=inp_im;
         statei=7;
     case 7
-        o7_re=inp_re;
-        o7_im=inp_im;
+        i7_re=inp_re;
+        i7_im=inp_im;
         statei=8;
     case 8
-        o8_re=inp_re;
-        o8_im=inp_im;
+        i8_re=inp_re;
+        i8_im=inp_im;
         statei=9;
     case 9
-        o9_re=inp_re;
-        o9_im=inp_im;
+        i9_re=inp_re;
+        i9_im=inp_im;
         statei=10;
     case 10
-        o10_re=inp_re;
-        o10_im=inp_im;
+        i10_re=inp_re;
+        i10_im=inp_im;
         statei=11;
     case 11
-        o11_re=inp_re;
-        o11_im=inp_im;
+        i11_re=inp_re;
+        i11_im=inp_im;
         statei=12;
     case 12
-        o12_re=inp_re;
-        o12_im=inp_im;
+        i12_re=inp_re;
+        i12_im=inp_im;
         statei=13;
     case 13%Output prefix and Input
-        o13_re=inp_re;
-        o13_im=inp_im;
+        i13_re=inp_re;
+        i13_im=inp_im;
         out_re=inp_re;
         out_im=inp_im;
         pop=1;
         statei=14;
     case 14
-        o14_re=inp_re;
-        o14_im=inp_im;
+        i14_re=inp_re;
+        i14_im=inp_im;
         out_re=inp_re;
         out_im=inp_im;
         pop=1;
         statei=15;
     case 15
-        o15_re=inp_re;
-        o15_im=inp_im;
+        i15_re=inp_re;
+        i15_im=inp_im;
         out_re=inp_re;
         out_im=inp_im;
         pop=1;
         statei=16;
     case 16
-        o16_re=inp_re;
-        o16_im=inp_im;
+        i16_re=inp_re;
+        i16_im=inp_im;
         out_re=inp_re;
         out_im=inp_im;
         pop=1;
@@ -212,7 +207,6 @@ switch statei
         statei=0;
 end
 
-stateo =statei;
 
 
   end

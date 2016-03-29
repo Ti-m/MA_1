@@ -1,8 +1,14 @@
-function [push, pop, stateo, loopCounto, popEno]= sg_fsm_bef_chan( pushEn, statei, loopCounti, popEni, chanDownFact)
+function [push, pop]= sg_fsm_bef_chan( pushEn, chanDownFact)
 
 one=xfix({xlBoolean}, 1);
 zero=xfix({xlBoolean}, 0);
 %popEni=xfix({xlBoolean}, popEni);
+
+persistent statei, statei = xl_state(0, {xlUnsigned, 2, 0});
+persistent popEni, popEni = xl_state(0, {xlBoolean});
+persistent loopCounti, loopCounti = xl_state(0, {xlUnsigned, 8, 0});
+
+
 switch statei
     case 0
         pop = zero;

@@ -1,9 +1,16 @@
-function [push, pop,  stateo, loopCounto, subCaro, subCarCounto, starto, enableo]= ...
-    sg_fsm_recv_out(frameEn, statei, loopCounti, subCari, subCarCounti, starti, enablei, ...
-    u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, freqDivSubcAlloc, bitPerSymb, fftLen)
+function [push, pop]= sg_fsm_recv_out(frameEn, u1, u2, u3, u4, u5, u6, u7,...
+    u8, u9, u10, u11, u12, u13, u14, u15, u16, freqDivSubcAlloc, bitPerSymb, fftLen)
 
 zero = xfix({xlBoolean}, 0);
 one =  xfix({xlBoolean}, 1);
+
+persistent statei, statei = xl_state(0, {xlUnsigned, 2, 0});
+persistent subCarCounti, subCarCounti = xl_state(0, {xlUnsigned, 8, 0});
+persistent starti, starti = xl_state(0, {xlBoolean});
+persistent enablei, enablei = xl_state(0, {xlBoolean});
+persistent subCari, subCari = xl_state(0, {xlUnsigned, 8, 0});
+persistent loopCounti, loopCounti = xl_state(0, {xlUnsigned, 8, 0});
+
 
 switch statei
     case 0
@@ -95,13 +102,4 @@ else
         statei = 0;
     end   
 end
-
-
-stateo = statei;
-loopCounto = xfix({xlUnsigned, 8,0}, loopCounti);
-subCaro = xfix({xlUnsigned, 8,0}, subCari);
-subCarCounto = xfix({xlUnsigned, 8,0}, subCarCounti);
-starto = starti;
-enableo = enablei;
-
-  end
+end

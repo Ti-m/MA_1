@@ -1,8 +1,14 @@
-function [sel, push, pop, frameStart, stateo, loopCounto, loopOuto,  starto, outputBitCounto]= ...
-    sg_fsm_recv_inp(num, frameEn, statei, loopCounti, loopOuti, starti, outputBitCounti, fftLenActive, GI_Active, chanDownFact, bitPerSymb)
+function [sel, push, pop, frameStart]= ...
+    sg_fsm_recv_inp(num, frameEn,  fftLenActive, GI_Active, chanDownFact, bitPerSymb)
 
 zero = xfix({xlBoolean}, 0);
 one =  xfix({xlBoolean}, 1);
+
+persistent statei, statei = xl_state(0, {xlUnsigned, 2, 0});
+persistent outputBitCounti, outputBitCounti = xl_state(0, {xlUnsigned, 8, 0});
+persistent starti, starti = xl_state(0, {xlBoolean, 8, 0});
+persistent loopOuti, loopOuti = xl_state(0, {xlUnsigned, 8, 0});
+persistent loopCounti, loopCounti = xl_state(0, {xlUnsigned, 8, 0});
 
 switch statei
     case 0 %Müll
@@ -85,9 +91,4 @@ else
     end
 end  
 
-stateo = statei;
-loopCounto = xfix({xlUnsigned, 8,0}, loopCounti);
-starto = starti;
-loopOuto = xfix({xlUnsigned, 8,0}, loopOuti);
-outputBitCounto = xfix({xlUnsigned, 8,0}, outputBitCounti);
   end
