@@ -105,6 +105,9 @@ else
 end
 assignin('base', 'GI_Active', GI_Active);
 assignin('base', 'fftLenActive', fftLenActive);
+%Used in Mcode blocks to reduce arithmetic
+OFDMFrameSmpCntAct = GI_Active + fftLenActive;
+assignin('base', 'OFDMFrameSmpCntAct', OFDMFrameSmpCntAct);
 assignin('base', 'freqDivDMT', freqDivDMT);
 if GI_Active>0
     beta = fftLen/(fftLen+GI_Len); 

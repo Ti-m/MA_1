@@ -1,14 +1,15 @@
 function [sel, push, pop, frameStart]= ...
-    sg_fsm_recv_inp(num, frameEn,  fftLenActive, GI_Active, chanDownFact, bitPerSymb)
+    sg_fsm_recv_inp(num, frameEn, OFDMFrameSmpCntAct, chanDownFact, bitPerSymb)
 
 zero = xfix({xlBoolean}, 0);
 one =  xfix({xlBoolean}, 1);
 
+%Optimzed Bitwidths as necessary.
 persistent statei, statei = xl_state(0, {xlUnsigned, 2, 0});
-persistent outputBitCounti, outputBitCounti = xl_state(0, {xlUnsigned, 8, 0});
-persistent starti, starti = xl_state(0, {xlBoolean, 8, 0});
-persistent loopOuti, loopOuti = xl_state(0, {xlUnsigned, 8, 0});
-persistent loopCounti, loopCounti = xl_state(0, {xlUnsigned, 8, 0});
+persistent outputBitCounti, outputBitCounti = xl_state(0, {xlUnsigned, 6, 0});
+persistent starti, starti = xl_state(0, {xlBoolean});
+persistent loopOuti, loopOuti = xl_state(0, {xlUnsigned, 3, 0});
+persistent loopCounti, loopCounti = xl_state(0, {xlUnsigned, 4, 0});
 
 switch statei
     case 0 %Müll
@@ -54,7 +55,7 @@ if loopCounti >= chanDownFact %Push
 end  
 
 conPop=0;
-if ((num >= (fftLenActive+GI_Active) && outputBitCounti==0 && (frameEn == one || starti == one)) || (outputBitCounti>0 && outputBitCounti<= (fftLenActive+GI_Active) && loopOuti == 0))
+if ((num >= OFDMFrameSmpCntAct && outputBitCounti==0 && (frameEn == one || starti == one)) || (outputBitCounti>0 && outputBitCounti<= OFDMFrameSmpCntAct && loopOuti == 0))
     starti=one;
     if frameEn && outputBitCounti==0
         frameStart=one;
@@ -72,7 +73,7 @@ if loopOuti >= bitPerSymb %Slow Pop
     loopOuti = 0;
 end  
 
-if outputBitCounti >= fftLenActive+GI_Active
+if outputBitCounti >= OFDMFrameSmpCntAct
     outputBitCounti=0;
     starti=zero;
 end
