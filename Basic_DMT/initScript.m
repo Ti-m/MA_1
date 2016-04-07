@@ -456,7 +456,7 @@ end
 
 
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=14.286MHz
- %a0=0.21194908595403703;
+%  a0=0.21194908595403703;
 % a1=0.576101828091926;
 % a2=a0;
 
@@ -483,18 +483,24 @@ assignin('base', 'a1', a1);
 assignin('base', 'a2', a2);
 
 %equalizer coefficients
-
+h=[a0; a1; a2;];
 %h=[a0; a1; a2; zeros(13,1) ];
-h=[a0; a1; a2; zeros(1024-3,1) ];
+%h=[a0; a1; a2; zeros(1024-3,1) ];
 %h=[a0; a1; a2; zeros(17857,1) ];
 %%%%%%%%h=[a0; a1; a2; zeros(35714-3,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
-p=fft(h);
+p=fft(h,16);
+% e=p./(abs(p).^2);
+% for d=1:16
+%     alt(d)=p(d)'/(abs(p(d))^2);
+% end
+e=p;
+%assignin('base', 'alt', alt);
 %p=real(g)+1+1i*imag(g);
 %%%%%%%%e=p(1:893:16*893);
 %e(1:8)=p(1:893:8*893);
 %e(9:16)=p(13*893:893:20*893);
-e=p;
+%e=1./alt;
 eCalc=e;
 assignin('base', 'p', p);
 assignin('base', 'eCalc', eCalc);
