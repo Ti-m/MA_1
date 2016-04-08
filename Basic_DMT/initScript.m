@@ -450,21 +450,21 @@ end
 
 %TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
 %2.5dB
- a0=0.061461097527179653;
- a1=0.8770778049456408;
- a2=a0;
+ %a0=0.061461097527179653;
+% a1=0.8770778049456408;
+ %a2=a0;
 
 
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=14.286MHz
-%  a0=0.21194908595403703;
-% a1=0.576101828091926;
-% a2=a0;
+  a0=0.21194908595403703;
+ a1=0.576101828091926;
+ a2=a0;
 
 %channel filter coefficients
 %TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=17.8MHz
-%  a0=0.26324574007976659;
-%  a1=0.47350851984046677;
-%  a2=a0;
+%   a0=0.26324574007976659;
+%   a1=0.47350851984046677;
+%   a2=a0;
 
 
 %channel filter coefficients
@@ -489,12 +489,16 @@ h=[a0; a1; a2;];
 %h=[a0; a1; a2; zeros(17857,1) ];
 %%%%%%%%h=[a0; a1; a2; zeros(35714-3,1) ];
 %h=[a0; a1; a2; zeros(32-3,1) ];
-p=fft(h,16);
+
+H=fft(h,fftLenActive);%ofdm16 dmt32
+if dmtOfdm == 2 %DMT active
+    H = H(1:16);
+end
 % e=p./(abs(p).^2);
 % for d=1:16
 %     alt(d)=p(d)'/(abs(p(d))^2);
 % end
-e=p;
+e=H;
 %assignin('base', 'alt', alt);
 %p=real(g)+1+1i*imag(g);
 %%%%%%%%e=p(1:893:16*893);
@@ -502,7 +506,7 @@ e=p;
 %e(9:16)=p(13*893:893:20*893);
 %e=1./alt;
 eCalc=e;
-assignin('base', 'p', p);
+assignin('base', 'H', H);
 assignin('base', 'eCalc', eCalc);
 %e=e1(1:893:17857*2);
 %%e=e(1:16);

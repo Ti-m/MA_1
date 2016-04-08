@@ -1,8 +1,10 @@
 
-
+% X = [32 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0 -4 0];
+% x = fft(X)/32;
 
 sig = [0 1-1i 1-1i 1-1i 1-1i 1-1i 1-1i 1-1i  0 1-1i 1-1i 1-1i 1-1i 1-1i 1-1i 1-1i 0 1+1i 1+1i 1+1i 1+1i 1+1i 1+1i 1+1i 0 1+1i 1+1i 1+1i 1+1i 1+1i 1+1i 1+1i];
 SIG = ifft(sig)*32;
+% SIG = X;
 %insert GI
 % some extra value to handle transient effects
 SIG_GI = [SIG SIG(end-7:end) SIG];
@@ -23,7 +25,8 @@ sig_rcv_extr= [real(sig_rcv(1))+real(sig_rcv(17))*1i sig_rcv(2:16)];
 
 
 %equalizer
-H=fft(h,16);
+H=fft(h,32);
+H=H(1:16);
 % H2=[H(9:16) H(1:8)];
 sig_eql= sig_rcv_extr./H;
 % Hges = [H ; H2]
