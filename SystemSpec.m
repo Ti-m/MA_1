@@ -33,7 +33,7 @@ M = log2(16)
 
 
 %% FFT Len OFDM
-N_FFT = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+N_FFT = 16%[16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
 
 %% Unuesed Carriers, constant 5 from IEE802.11a
 %Is there a better value?
@@ -56,7 +56,7 @@ T_subcarrier = N_FFT_used * T_bit * M ;
 T_FFT =T_subcarrier ./ N_FFT;
 
 %% Sample time on the channel with GI. (Serial)
-T_Chan = T_FFT * beta;
+T_Chan = T_FFT * beta
 
 %% Duration OFDM full transmission
 
