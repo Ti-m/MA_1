@@ -43,8 +43,8 @@ bitPerSymb=4;
 upsampleFactor = 8; 
 
 %Set to zero for not use the carrier
-u1=0;
-u2=1;
+u1=0;%0
+u2=1;%1
 u3=1;
 u4=1;
 u5=1;
@@ -58,7 +58,7 @@ u12=1;
 u13=1;
 u14=1;
 u15=1;
-u16=1;
+u16=1;%1
 assignin('base', 'u1', u1);
 assignin('base', 'u2', u2);
 assignin('base', 'u3', u3);
