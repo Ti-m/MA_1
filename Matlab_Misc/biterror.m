@@ -2,11 +2,12 @@
 close all, clear
 Fs=16/896e-9;
 Rb=62.5e6;
-SNRdb = 0:0.1:30-0.1;
+SNRdb = 0:0.1:22-0.1;
 SNR=10.^(SNRdb/10);
 
 pb=3/2*erfc(sqrt(SNR*2*Fs/5/Rb));
-semilogy(SNRdb,pb),grid
+pb2=3/8*erfc(sqrt(SNR*2/5*Fs/Rb));
+semilogy(SNRdb,pb,'b',SNRdb,pb2,'r'),grid
 
 %OFDM,SNR18,no_chan 
 %theo 2e-4
