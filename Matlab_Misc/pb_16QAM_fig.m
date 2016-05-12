@@ -7,10 +7,9 @@ SNR=10.^(SNRdb/10);
 
 %pb=3/2*erfc(sqrt(SNR*2*Fs/5/Rb));
 %pb2=3/8*erfc(sqrt(SNR*2/5*Fs/Rb));
-pb1=3/8*erfc(sqrt(SNR/10));
-pb2=3/8*erfc(sqrt((SNR-0.8 ) /10));
-semilogy(SNRdb,pb1,'b',SNRdb,pb2,'m'),grid
-%semilogy(SNRdb,pb3),grid
+pb3=3/8*erfc(sqrt((SNR-0.8)/10));
+%semilogy(SNRdb,pb,'b',SNRdb,pb2,'r',SNRdb,pb3,'m'),grid
+semilogy(SNRdb,pb3),grid
 xlabel('SNR/dB')
 ylabel('P_b')
 %OFDM,SNR18,no_chan 
