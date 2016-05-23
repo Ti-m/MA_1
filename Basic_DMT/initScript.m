@@ -160,7 +160,7 @@ grpDelayChannelFilt = 1;
 assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
 
 %AWGN amplitude
-SNRdb = 42;
+SNRdb = 18;
 P_sym=10;%W Avg Power per Symbol
 amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
 assignin('base', 'amp_awgn', amp_awgn);
@@ -490,41 +490,18 @@ assignin('base', 'a2', a2);
 
 %equalizer coefficients
 h=[a0; a1; a2;];
-%h=[a0; a1; a2; zeros(13,1) ];
-%h=[a0; a1; a2; zeros(1024-3,1) ];
-%h=[a0; a1; a2; zeros(17857,1) ];
-%%%%%%%%h=[a0; a1; a2; zeros(35714-3,1) ];
-%h=[a0; a1; a2; zeros(32-3,1) ];
 
 H=fft(h,fftLenActive);%ofdm16 dmt32
 if dmtOfdm == 2 %DMT active
     H = H(1:16);
 end
-% e=p./(abs(p).^2);
-% for d=1:16
-%     alt(d)=p(d)'/(abs(p(d))^2);
-% end
+
 e=H;
-%assignin('base', 'alt', alt);
-%p=real(g)+1+1i*imag(g);
-%%%%%%%%e=p(1:893:16*893);
-%e(1:8)=p(1:893:8*893);
-%e(9:16)=p(13*893:893:20*893);
-%e=1./alt;
-eCalc=e;
-assignin('base', 'H', H);
-assignin('base', 'eCalc', eCalc);
-%e=e1(1:893:17857*2);
-%%e=e(1:16);
-%e=ones(16,1);
-
-
 e1=e(1);
 e2=e(2);
 e3=e(3);
 e4=e(4);
 e5=e(5);
-
 e6=e(6);
 e7=e(7);
 e8=e(8);
@@ -536,102 +513,6 @@ e13=e(13);
 e14=e(14);
 e15=e(15);
 e16=e(16);
-
-
-%lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
-% e9=0.8719;
-% e10=0.8801+i*0.01569;
-% e11=0.889+i*0.02899;
-% e12=0.9023+i*0.03788;
-% e13=0.918+i*0.041;
-% e14=0.9337+i*0.03788;
-% e15=0.947+i*0.02899;
-% e16=0.9559+i*0.01569;
-% e1=0.9641;
-% e2=0.9559-i*0.01569;
-% e3=0.947-i*0.02899;
-% e4=0.9337-i*0.03788;
-% e5=0.918-i*0.041;
-% e6=0.9023-i*0.03788;
-% e7=0.889-i*0.02899;
-% e8=0.8801-i*0.01569;
-
-
-%TP zweiter Ordnung
-% e9=0.1774;
-% e10=0.2303+i*0.1007;
-% e11=0.2874+i*0.1861;
-% e12=0.3728+i*0.2432;
-% e13=0.4735+i*0.2632;
-% e14=0.5742+i*0.2432;
-% e15=0.6597+i*0.1861;
-% e16=0.7167+i*0.1007;
-% e1=0.7697;
-% e2=0.7167-i*0.1007;
-% e3=0.6597-i*0.1861;
-% e4=0.5742-i*0.2432;
-% e5=0.4735-i*0.2632;
-% e6=0.3728-i*0.2432;
-% e7=0.2874-i*0.1861;
-% e8=0.2303-i*0.1007;
-
-%TP triangular 7dB
-% e9=0.1444;
-% e10=0.5777+i*0.05527;
-% e11=0.609+i*0.1021;
-% e12=0.6559+i*0.1334;
-% e13=0.7111+i*0.1444;
-% e14=0.7664+i*0.1334;
-% e15=0.8133+i*0.1021;
-% e16=0.8446+i*0.05527;
-% e1=-0.1444;
-% e2=0.8446-i*0.05527;
-% e3=0.8133-i*0.1021;
-% e4=0.7664-i*0.1334;
-% e5=0.7111-i*0.1444;
-% e6=0.6559-i*0.1334;
-% e7=0.609-i*0.1021;
-% e8=0.5777-i*0.05527;
-
-%%TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
-%2.5dB
-% e9= 0.03073- i*0.03073;
-% e10=0.8892-i*0.02414;
-% e11=0.8702-i*0.01663;
-% e12=0.8514-i*0.008479;
-% e13=0.8336;
-% e14=0.8175+i*0.008479;
-% e15=0.8037+i*0.01663;
-% e16=0.7927+i*0.02414;
-% e1=-0.06146;
-% e2=0.9735-i*0.03614;
-% e3=0.974-i*0.04015;
-% e4=0.9708-i*0.04262;
-% e5=0.964-i*0.04346;
-% e6=0.9538-i*0.04262;
-% e7=0.9407-i*0.04015;
-% e8=0.9252-i*0.03614;
-
-elook=[e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16];
-assignin('base', 'elook', elook);
-assignin('base', 'e', e);
-assignin('base', 'e1', e1);
-assignin('base', 'e2', e2);
-assignin('base', 'e3', e3);
-assignin('base', 'e4', e4);
-assignin('base', 'e5', e5);
-assignin('base', 'e6', e6);
-assignin('base', 'e7', e7);
-assignin('base', 'e8', e8);
-assignin('base', 'e9', e9);
-assignin('base', 'e10', e10);
-assignin('base', 'e11', e11);
-assignin('base', 'e12', e12);
-assignin('base', 'e13', e13);
-assignin('base', 'e14', e14);
-assignin('base', 'e15', e15);
-assignin('base', 'e16', e16);
-%%%%SYSGEN-BLOCKS%%%%%
 
 %Prepare coefficients for sysgen
 e1s=1/e1;
@@ -651,6 +532,27 @@ e14s=1/e14;
 e15s=1/e15;
 e16s=1/e16;
 
+assignin('base', 'H', H);
+
+assignin('base', 'e', e);
+assignin('base', 'e1', e1);
+assignin('base', 'e2', e2);
+assignin('base', 'e3', e3);
+assignin('base', 'e4', e4);
+assignin('base', 'e5', e5);
+assignin('base', 'e6', e6);
+assignin('base', 'e7', e7);
+assignin('base', 'e8', e8);
+assignin('base', 'e9', e9);
+assignin('base', 'e10', e10);
+assignin('base', 'e11', e11);
+assignin('base', 'e12', e12);
+assignin('base', 'e13', e13);
+assignin('base', 'e14', e14);
+assignin('base', 'e15', e15);
+assignin('base', 'e16', e16);
+
+%%%%SYSGEN-BLOCKS%%%%%
 assignin('base', 'e1_re', real(e1s));
 assignin('base', 'e1_im', imag(e1s));
 assignin('base', 'e2_re', real(e2s));
