@@ -3,7 +3,7 @@ function [y1]= Demod_16QAM(I,Q)
  one  = xfix({xlUnsigned,1,0}, 1);
 zero = xfix({xlUnsigned,1,0}, 0);
 
- if (I > 0)
+ if (I >= 0)
         Y0 = one;
         if (I > 2)
             Y1 = zero;
@@ -18,7 +18,7 @@ zero = xfix({xlUnsigned,1,0}, 0);
             Y1 = zero;
         end;
  end;
-    if (Q > 0)
+    if (Q >= 0)
         Y2 = zero;
         if (Q > 2)
             Y3 = zero;

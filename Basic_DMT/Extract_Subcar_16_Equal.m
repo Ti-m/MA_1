@@ -11,7 +11,9 @@ function [y1_re,  y1_im,  y2_re,  y2_im,  y3_re,  y3_im,  y4_re, y4_im,...
 %  M=4;
 %  fracLen=13;
 %  bitCount=16;
-%Some ideas from UG958 
+%Some ideas from UG958
+
+%Extract subcarriers
 x1_re  = xl_slice(x_re, bitCountAftFFTRec*16-1, bitCountAftFFTRec*15); 
 x2_re  = xl_slice(x_re, bitCountAftFFTRec*15-1, bitCountAftFFTRec*14); 
 x3_re  = xl_slice(x_re, bitCountAftFFTRec*14-1, bitCountAftFFTRec*13);  
@@ -46,6 +48,7 @@ x14_im = xl_slice(x_im, bitCountAftFFTRec*3-1 , bitCountAftFFTRec*2);
 x15_im = xl_slice(x_im, bitCountAftFFTRec*2-1 , bitCountAftFFTRec*1);  
 x16_im = xl_slice(x_im, bitCountAftFFTRec-1   , 0  );
 
+%Reinterpret to expected Q format
 tmp_y1_re = xl_force(x1_re,xlSigned,fracLen);
 tmp_y2_re = xl_force(x2_re,xlSigned,fracLen);
 tmp_y3_re = xl_force(x3_re,xlSigned,fracLen);
@@ -84,7 +87,7 @@ tmp_y16_im = xl_force(x16_im,xlSigned,fracLen);
 %block only supports division by power of 2. So the coefficients are
 %prepared in matlab(1/e))
 
-%convert coefficients from double to fixpoint
+%Convert coefficients from double to fixed point
 e1_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, e1_re);
 e2_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, e2_re);
 e3_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, e3_re);
@@ -119,7 +122,7 @@ e14_im = xfix({xlSigned, bitCountAftFFTRec,fracLen}, e14_im);
 e15_im = xfix({xlSigned, bitCountAftFFTRec,fracLen}, e15_im);
 e16_im = xfix({xlSigned,bitCountAftFFTRec,fracLen}, e16_im);
 
-%apply coefficients (complex multiplication)
+%Apply coefficients (complex multiplication)
 y1_re = tmp_y1_re*e1_re- tmp_y1_im*e1_im;
 y2_re = tmp_y2_re*e2_re- tmp_y2_im*e2_im;
 y3_re = tmp_y3_re*e3_re- tmp_y3_im*e3_im;
@@ -154,40 +157,7 @@ y14_im = tmp_y14_re*e14_im+ tmp_y14_im*e14_re;
 y15_im = tmp_y15_re*e15_im+ tmp_y15_im*e15_re;
 y16_im = tmp_y16_re*e16_im+ tmp_y16_im*e16_re;
 
-% y1_re = xl_force(y1_re,xlSigned,fracLen);
-% y2_re = xl_force(y2_re,xlSigned,fracLen);
-% y3_re = xl_force(y3_re,xlSigned,fracLen);
-% y4_re = xl_force(y4_re,xlSigned,fracLen);
-% y5_re = xl_force(y5_re,xlSigned,fracLen);
-% y6_re = xl_force(y6_re,xlSigned,fracLen);
-% y7_re = xl_force(y7_re,xlSigned,fracLen);
-% y8_re = xl_force(y8_re,xlSigned,fracLen);
-% y9_re = xl_force(y9_re,xlSigned,fracLen);
-% y10_re = xl_force(y10_re,xlSigned,fracLen);
-% y11_re = xl_force(y11_re,xlSigned,fracLen);
-% y12_re = xl_force(y12_re,xlSigned,fracLen);
-% y13_re = xl_force(y13_re,xlSigned,fracLen);
-% y14_re = xl_force(y14_re,xlSigned,fracLen);
-% y15_re = xl_force(y15_re,xlSigned,fracLen);
-% y16_re = xl_force(y16_re,xlSigned,fracLen);
-% 
-% y1_im = xl_force(y1_im,xlSigned,fracLen);
-% y2_im = xl_force(y2_im,xlSigned,fracLen);
-% y3_im = xl_force(y3_im,xlSigned,fracLen);
-% y4_im = xl_force(y4_im,xlSigned,fracLen);
-% y5_im = xl_force(y5_im,xlSigned,fracLen);
-% y6_im = xl_force(y6_im,xlSigned,fracLen);
-% y7_im = xl_force(y7_im,xlSigned,fracLen);
-% y8_im = xl_force(y8_im,xlSigned,fracLen);
-% y9_im = xl_force(y9_im,xlSigned,fracLen);
-% y10_im = xl_force(y10_im,xlSigned,fracLen);
-% y11_im = xl_force(y11_im,xlSigned,fracLen);
-% y12_im = xl_force(y12_im,xlSigned,fracLen);
-% y13_im = xl_force(y13_im,xlSigned,fracLen);
-% y14_im = xl_force(y14_im,xlSigned,fracLen);
-% y15_im = xl_force(y15_im,xlSigned,fracLen);
-% y16_im = xl_force(y16_im,xlSigned,fracLen);
-
+%Cast to output Q format
 y1_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, y1_re);
 y2_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, y2_re);
 y3_re = xfix({xlSigned, bitCountAftFFTRec,fracLen}, y3_re);
