@@ -162,7 +162,8 @@ assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
 %AWGN amplitude
 SNRdb = 18;
 P_sym=10;%W Avg Power per Symbol
-amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
+%amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
+amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10)*(bitPerSymb*BitTime)/Tchan);
 assignin('base', 'amp_awgn', amp_awgn);
 
 if radio_precision == 1
