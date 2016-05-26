@@ -40,7 +40,7 @@ fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
 usedSubCar=14;%14
 bitPerSymb=4;
-upsampleFactor = 8; 
+%upsampleFactor = 8; 
 
 %Set to zero for not use the carrier
 u1=0;%0
@@ -75,7 +75,7 @@ assignin('base', 'u13', u13);
 assignin('base', 'u14', u14);
 assignin('base', 'u15', u15);
 assignin('base', 'u16', u16);
-
+impulseResponse = 1;%removed from GUI
 assignin('base', 'impulseResponse', impulseResponse);
 assignin('base', 'equalizer', equalizer);
 % state = 0;
@@ -83,15 +83,16 @@ assignin('base', 'equalizer', equalizer);
 % assignin('base', 'state', state);
 % assignin('base', 'k', k);
 
-if guardInterval == 2
+%if guardInterval == 2
+guardInterval = 2;%activated - Removed from GUI
     GI_Len = 4;
     GI_LenDMT=GI_Len*2;
     
-else
-    GI_Len = 0;
-     GI_LenDMT=0;
-     GI_Active=0;
-end
+%else
+%    GI_Len = 0;
+%     GI_LenDMT=0;
+ %    GI_Active=0;
+%end
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'GI_LenDMT', GI_LenDMT);
 if dmtOfdm == 1 %% To create blocks which are not dependent on variant subsystems.
@@ -120,12 +121,14 @@ assignin('base', 'usedSubCar', usedSubCar);
 assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
+SampleTime = 20e-9;
 assignin('base', 'Ts', SampleTime);
-if upsample == 2
-    upsampleFactor = 8; 
-else
+upsample = 1; %Removed from GUI
+%if upsample == 2
+%    upsampleFactor = 8; 
+%else
     upsampleFactor = 1; %used in AWGN Simulink Channel sample time calculation
-end
+%end
 assignin('base', 'upsample', upsample);
 assignin('base', 'upsampleFactor', upsampleFactor);
 assignin('base', 'Tb', BitTime);
@@ -149,7 +152,7 @@ assignin('base', 'chanDownFact', chanDownFact);
 
 %sysgenSystemPeriod = SampleTime*usedSubCar/fftLen;
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
-
+modu_mode=0;%removed from GUI
 assignin('base', 'modu_mode', modu_mode);
 assignin('base', 'radio_precision', str2double(radio_precision));
 assignin('base', 'dmtOfdm', dmtOfdm);
@@ -160,12 +163,16 @@ grpDelayChannelFilt = 1;
 assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
 
 %AWGN amplitude
-SNRdb = 18;
+%SNRdb = 18;
+SNRdb = SNR_AWGN;
 P_sym=10;%W Avg Power per Symbol
+assignin('base', 'P_sym', P_sym);
+assignin('base', 'SNRdb', SNRdb);
 %amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
-amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10)*(bitPerSymb*BitTime)/Tchan);
+amp_awgn2=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb*(bitPerSymb*BitTime*beta)/Tchan/10)*(bitPerSymb*BitTime*beta)/Tchan);
+amp_awgn=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb/10)*(bitPerSymb*BitTime*beta)/Tchan);
 assignin('base', 'amp_awgn', amp_awgn);
-
+assignin('base', 'amp_awgn2', amp_awgn2);
 if radio_precision == 1
     precision_str = 'double';
     precStrAftIFFT = 'double';
