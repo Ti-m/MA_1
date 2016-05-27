@@ -212,6 +212,8 @@ end
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
+set_param('Basic_DMT/Data Type Conversion2','OutDataTypeStr',precStrAftIFFT)  
+set_param('Basic_DMT/AWGN/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)  
 %set_param('Basic_DMT/SIPaFFT/Assert_aft_FFT/Data Type Conversion3','OutDataTypeStr',precStrAftIFFT) 
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion1','OutDataTypeStr',precision_str)
 %set_param('Basic_DMT/IFFTaPIS/Data Type Conversion2','OutDataTypeStr',precision_str) 
