@@ -171,6 +171,10 @@ assignin('base', 'SNRdb', SNRdb);
 %amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
 amp_awgn2=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb*(bitPerSymb*BitTime*beta)/Tchan/10)*(bitPerSymb*BitTime*beta)/Tchan);
 amp_awgn=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb/10)*(bitPerSymb*BitTime*beta)/Tchan);
+%sigPowAWGN = (fftLen+GI_Len)*P_sym*(bitPerSymb*BitTime*beta)/Tchan;
+sigPowAWGN = P_sym*(fftLen-2)/fftLen*fftLenActive/(fftLenActive+GI_Active)*fftLenActive*2;
+
+assignin('base', 'sigPowAWGN', sigPowAWGN);
 assignin('base', 'amp_awgn', amp_awgn);
 assignin('base', 'amp_awgn2', amp_awgn2);
 if radio_precision == 1
