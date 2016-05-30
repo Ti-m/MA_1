@@ -30,8 +30,9 @@ A11=fftshift(fft(a11,4096));
 plot(f11,20*log10(abs(A11))),grid
 hold
 stem(f11,bin)
-axis([-9e6 9e6 20 30])
-xlabel('f/Hz'),ylabel('20*log(|S_{OFDM}|)'),grid
+%axis([-9e6 9e6 20 30])
+axis([-9e6 9e6 0 30])
+xlabel('f/Hz'),ylabel('20*log(|S_{OFDM}(f)|)/dB'),grid
 %%%plot(f11,20*log10(fftshift(abs(e))))
 
 %stem(a11)
