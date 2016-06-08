@@ -24,12 +24,9 @@ fiObjectAftIFFT= fimath('RoundingMethod', 'Nearest', ...
                 'CastBeforeSum', true);
 assignin('base', 'fiObjectAftIFFT', fiObjectAftIFFT);
 
-%bitCount = '8';
-%fracLen = '0';
+
 SystemPeriod = 4e-9;
-%sysgenSystemPeriod=4e-9;
-%sysgenSystemPeriod=.5e-9;
-sysgenSystemPeriod=4e-9; %geht auch, aber alle delays verschieben sich
+sysgenSystemPeriod=4e-9; 
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'SystemPeriod', SystemPeriod);
 fftLen = 16;%16
@@ -40,25 +37,25 @@ fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
 usedSubCar=14;%14
 bitPerSymb=4;
-%upsampleFactor = 8; 
+
 
 %Set to zero for not use the carrier
-u1=0;%0
-u2=1;%1
+u1=0;
+u2=1;
 u3=1;
 u4=1;
 u5=1;
 u6=1;
 u7=1;
 u8=1;
-u9=0;%0
+u9=0;
 u10=1;
 u11=1;
 u12=1;
 u13=1;
 u14=1;
 u15=1;
-u16=1;%1
+u16=1;
 assignin('base', 'u1', u1);
 assignin('base', 'u2', u2);
 assignin('base', 'u3', u3);
@@ -75,13 +72,8 @@ assignin('base', 'u13', u13);
 assignin('base', 'u14', u14);
 assignin('base', 'u15', u15);
 assignin('base', 'u16', u16);
-impulseResponse = 1;%removed from GUI
-assignin('base', 'impulseResponse', impulseResponse);
+
 assignin('base', 'equalizer', equalizer);
-% state = 0;
-% k=0;
-% assignin('base', 'state', state);
-% assignin('base', 'k', k);
 
 %if guardInterval == 2
 guardInterval = 2;%activated - Removed from GUI
@@ -162,77 +154,39 @@ assignin('base', 'channel', channel);
 grpDelayChannelFilt = 1;
 assignin('base', 'grpDelayChannelFilt', grpDelayChannelFilt);
 
-%AWGN amplitude
-%SNRdb = 18;
 SNRdb = SNR_AWGN;
 P_sym=10;%W Avg Power per Symbol
 assignin('base', 'P_sym', P_sym);
 assignin('base', 'SNRdb', SNRdb);
-%amp_awgn=sqrt((fftLenActive+GI_Active)*P_sym/10^(SNRdb/10));
-amp_awgn2=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb*(bitPerSymb*BitTime*beta)/Tchan/10)*(bitPerSymb*BitTime*beta)/Tchan);
-amp_awgn=sqrt((fftLen+GI_Len)*P_sym/10^(SNRdb/10)*(bitPerSymb*BitTime*beta)/Tchan);
-%sigPowAWGN = (fftLen+GI_Len)*P_sym*(bitPerSymb*BitTime*beta)/Tchan;
+
 sigPowAWGN = P_sym*(fftLen-2)/fftLen*fftLenActive/(fftLenActive+GI_Active)*fftLenActive*2;
 
 assignin('base', 'sigPowAWGN', sigPowAWGN);
-assignin('base', 'amp_awgn', amp_awgn);
-assignin('base', 'amp_awgn2', amp_awgn2);
+
 if radio_precision == 1
     precision_str = 'double';
     precStrAftIFFT = 'double';
 else
     precision_str = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
     precStrAftIFFT =strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
-    %precStrAftIFFT =strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)) , ',' , num2str(fracLen) , ')');
     precisionModu = strcat('sfix(',num2str(bitCount),')');
 end
 assignin('base', 'precision_str', precision_str);
 assignin('base', 'precStrAftIFFT', precStrAftIFFT);
 
 bitCountAftIFFT = bitCount;
-%bitCountAftIFFT = bitCount+(log2(fftLen)+1);
 assignin('base', 'bitCountAftIFFT', bitCountAftIFFT);
 
-
-%bitCountAftFFTRec = bitCount+(log2(fftLen)+1)*2;
 bitCountAftFFTRec = bitCount;
 assignin('base', 'bitCountAftFFTRec', bitCountAftFFTRec);
-if dmtOfdm == 2
-%fftLen = 32;
-end
-%set_param('Basic_DMT/Constant','OutDataTypeStr',precision)
-
-%Rectangular QAM Modulator Data Type
-%'outDtype' = 'double' or 'User-defined'
-%'outFracLenMode'='User-defined'
-%'outFracLen'=fracLen
-%'outUDDataType'=precisionModu
 
 %%%%SIMULINK-BLOCKS%%%%%
 
-%Not possible to replace these with variables in the simulink-constant
-%blocks.
-%set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/Constant','OutDataTypeStr',precision_str)
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
-set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
+%set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
-%set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion','OutDataTypeStr',precStrAftIFFT)  
 set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
 set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
-%set_param('Basic_DMT/SIPaFFT/Assert_aft_FFT/Data Type Conversion3','OutDataTypeStr',precStrAftIFFT) 
-%set_param('Basic_DMT/IFFTaPIS/Data Type Conversion1','OutDataTypeStr',precision_str)
-%set_param('Basic_DMT/IFFTaPIS/Data Type Conversion2','OutDataTypeStr',precision_str) 
-
-% set_param('Basic_DMT/SIP/Data Type Conversion','OutDataTypeStr',precision_str) 
-% set_param('Basic_DMT/SIP/Data Type Conversion1','OutDataTypeStr',precision_str) 
-%set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/out','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/sel','CompiledType','uint32') 
-% set_param('Basic_DMT/SIP/MATLAB Function/sel','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/push','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/pop','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/frameStart','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/num','DataType',precision_str) 
-% set_param('Basic_DMT/SIP/MATLAB Function/frameEn','DataType',precision_str) 
 
 %%% CREATE FRAME OFDM
 
@@ -252,9 +206,6 @@ set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB 
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o14','OutDataTypeStr',precision_str) 
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o15','OutDataTypeStr',precision_str) 
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_OFDM/MATLAB Function/o16','OutDataTypeStr',precision_str) 
-
-%%% CREATE FRAME DMT
-%Kommt scheinbar ohne aus
 
 %%% SET GI OFDM
 set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/Data Store Memory1','OutDataTypeStr',precStrAftIFFT) 
@@ -296,7 +247,6 @@ set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_OFDM/MATLAB Function/o16','O
 
 %%% SET GI DMT
 set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/Data Store Memory1','OutDataTypeStr',precStrAftIFFT) 
-
 set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
 set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
 set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/i1','OutDataTypeStr',precStrAftIFFT)
@@ -376,18 +326,6 @@ set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/Data Store Memory3','O
 set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
 set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
 
-%%% REM_GI OFDM
-% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
-% 
-% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
-% set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI_DMT/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
-
-%%%TEST
- testGHJ = strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')');
-% testGHJ = 'double';
- set_param('Basic_DMT/Subsystem1/Constant8','OutDataTypeStr',testGHJ)
- set_param('Basic_DMT/Subsystem1/Data Store Memory','OutDataTypeStr',testGHJ)
- %%%%
 if radio_precision == 1 
     
     set_param('Basic_DMT/Modulation/Bit_Mapping_P1/256_QAM/Rect_QAM_Mod','outDtype',precision_str)
@@ -459,46 +397,17 @@ else
     set_param('Basic_DMT/Modulation/Bit_Mapping_P15/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P16/256_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
     set_param('Basic_DMT/Modulation/Bit_Mapping_P16/16_QAM/Rect_QAM_Mod','outDtype','User-defined','outFracLenMode','User-defined','outFracLen',num2str(fracLen),'outUDDataType',precisionModu)
-    %set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+log2(fftLen)+1) , ',' , num2str(fracLen) , ')'))
-    %set_param('Basic_DMT/SIPaFFT/FFT/FFT_OFDM/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
-    %set_param('Basic_DMT/SIPaFFT/FFT/FFT_DMT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount+(log2(fftLen)+1)*2) , ',' , num2str(fracLen) , ')'))
     set_param('Basic_DMT/IFFTaPIS/IFFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')'))
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_OFDM/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')'))
     set_param('Basic_DMT/SIPaFFT/FFT/FFT_DMT/FFT','outputDataTypeStr',strcat('fixdt(1,' , num2str(bitCount) , ',' , num2str(fracLen) , ')'))
 end
 
 %channel filter coefficients
-
-%TP zweiter ordnung, Fenstermethode, Hamming-window, fc=5MHz, Fs=35.71MHz,
-%2.5dB
- %a0=0.061461097527179653;
-% a1=0.8770778049456408;
- %a2=a0;
-
-
-%TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=14.286MHz
+%LP, second order,Windowmethod, rect-windows, fc=5MHz, Fs=14.286MHz
   a0=0.21194908595403703;
  a1=0.576101828091926;
  a2=a0;
 
-%channel filter coefficients
-%TP zweiter ordnung, Fenstermethode, rect-windows, fc=5MHz, Fs=17.8MHz
-%   a0=0.26324574007976659;
-%   a1=0.47350851984046677;
-%   a2=a0;
-
-
-%channel filter coefficients
-% %TP (triangular) mit nur 7dB Dämpfung, geht auch ohne equalizer
-% a0=0.14442723509625877;
-% a1=0.71114552980748247;
-% a2=a0;
-
-%channel filter coefficients
-%lahmer TP mit nur 3dB Dämpfung, geht auch ohne equalizer
-%  a0=0.04100388;
-%   a1=0.9179922382;
-%  a2=a0;
 assignin('base', 'a0', a0);
 assignin('base', 'a1', a1);
 assignin('base', 'a2', a2);
