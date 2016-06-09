@@ -1,7 +1,7 @@
 %initScript.m
 format shortEng
 
-%FixedPoint Arithmetic
+%Define the fixed-point arithmetic used by the simulink blocks
 fiObject= fimath('RoundingMethod', 'Nearest', ...
                 'OverflowAction', 'Saturate', ...
                 'ProductMode', 'SpecifyPrecision', ...
@@ -24,22 +24,23 @@ fiObjectAftIFFT= fimath('RoundingMethod', 'Nearest', ...
                 'CastBeforeSum', true);
 assignin('base', 'fiObjectAftIFFT', fiObjectAftIFFT);
 
-
+%
 SystemPeriod = 4e-9;
 sysgenSystemPeriod=4e-9; 
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'SystemPeriod', SystemPeriod);
 fftLen = 16;%16
-M=log2(fftLen);
+K=16; %Modulation alphabet depth
+M=log2(K);
 assignin('base', 'fftLen', fftLen);
 assignin('base', 'M', M);
 fftLenDMT = 2*fftLen;
 assignin('base', 'fftLenDMT', fftLenDMT);
-usedSubCar=14;%14
-bitPerSymb=4;
+usedSubCar=14;
+bitPerSymb=M;
 
 
-%Set to zero for not use the carrier
+%Set to zero for not used carriers
 u1=0;
 u2=1;
 u3=1;
