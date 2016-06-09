@@ -1,0 +1,5 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../CLK_WIZ_SIMU.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0_clk_wiz.vhd"
+vhdl xil_defaultlib  "../../../CLK_WIZ_SIMU.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0.vhd"
+vhdl xil_defaultlib  "../../../CLK_WIZ_SIMU.srcs/sources_1/bd/design_1/hdl/design_1.vhd"
+vhdl xil_defaultlib  "../../../CLK_WIZ_SIMU.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd"

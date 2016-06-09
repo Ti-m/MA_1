@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="basic_dmt_0_synth_1" LaunchDir="D:/MA_1/Basic_DMT/netlistFinishDMT2/ip_catalog/basic_dmt.runs/basic_dmt_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+</Runs>
+

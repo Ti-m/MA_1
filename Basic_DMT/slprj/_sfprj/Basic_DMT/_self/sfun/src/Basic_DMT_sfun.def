@@ -1,0 +1,3 @@
+LIBRARY Basic_DMT_sfun.mexw64
+EXPORTS
+mexFunction

@@ -185,7 +185,12 @@ assignin('base', 'bitCountAftFFTRec', bitCountAftFFTRec);
 set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant','OutDataTypeStr',precision_str)
 %set_param('Basic_DMT/AWGN/Yes_AWGN/Data_Type_Conversion','OutDataTypeStr',precStrAftIFFT)  
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
+<<<<<<< HEAD
 set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
+=======
+%set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion','OutDataTypeStr',precStrAftIFFT)  
+%set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
+>>>>>>> origin/master
 set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
 
 %%% CREATE FRAME OFDM

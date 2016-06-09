@@ -1,0 +1,4 @@
+Vivado Simulator 2014.4
+Time resolution is 1 ps
+FATAL_ERROR: License for using AXI BFM could not be checked out. Please contact a Xilinx FAE to resolve the problem.
+FATAL_ERROR: FATAL_ERROR: BFM Xilinx: License failed for Xilinx_AXI_BFM, version 2010.0999999999999

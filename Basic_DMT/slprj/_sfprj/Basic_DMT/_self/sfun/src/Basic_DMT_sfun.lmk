@@ -1,0 +1,63 @@
+CC     = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\MATLAB\R2014b\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"Basic_DMT_sfun.obj"\
+	"c3_Basic_DMT.obj"\
+	"c4_Basic_DMT.obj"\
+	"c5_Basic_DMT.obj"\
+	"c7_Basic_DMT.obj"\
+	"c9_Basic_DMT.obj"\
+	"c13_Basic_DMT.obj"\
+	"c14_Basic_DMT.obj"\
+	"c16_Basic_DMT.obj"\
+	"c17_Basic_DMT.obj"\
+	"Basic_DMT_sfun_registry.obj"\
+	"lccstub.obj"\
+	"Basic_DMT_sfun.def"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\sf_runtime.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwblas.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libut.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsl_log_load_blocks.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsimulink.lib"\
+	"C:\MATLAB\R2014b\lib\win64\libmwipp.lib"\
+
+INCLUDE_PATH= -I"C:\MATLAB\R2014b\sys\lcc64\lcc64\include64"  -I"C:\MATLAB\R2014b\extern\include"  -I"C:\MATLAB\R2014b\simulink\include"  -I"C:\MATLAB\R2014b\stateflow\c\mex\include"  -I"C:\MATLAB\R2014b\rtw\c\src"  -I"D:\MA_1\Basic_DMT\slprj\_sfprj\Basic_DMT\_self\sfun\src" 
+ 
+
+Basic_DMT_sfun.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o Basic_DMT_sfun.mexw64 @Basic_DMT_sfun.lmko
+Basic_DMT_sfun.obj :	"Basic_DMT_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Basic_DMT_sfun.c"
+c3_Basic_DMT.obj :	"c3_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c3_Basic_DMT.c"
+c4_Basic_DMT.obj :	"c4_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c4_Basic_DMT.c"
+c5_Basic_DMT.obj :	"c5_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_Basic_DMT.c"
+c7_Basic_DMT.obj :	"c7_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c7_Basic_DMT.c"
+c9_Basic_DMT.obj :	"c9_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c9_Basic_DMT.c"
+c13_Basic_DMT.obj :	"c13_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c13_Basic_DMT.c"
+c14_Basic_DMT.obj :	"c14_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c14_Basic_DMT.c"
+c16_Basic_DMT.obj :	"c16_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c16_Basic_DMT.c"
+c17_Basic_DMT.obj :	"c17_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c17_Basic_DMT.c"
+Basic_DMT_sfun_registry.obj :	"Basic_DMT_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Basic_DMT_sfun_registry.c"
+lccstub.obj :	"C:\MATLAB\R2014b\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\MATLAB\R2014b\sys\lcc64\lcc64\mex\lccstub.c"

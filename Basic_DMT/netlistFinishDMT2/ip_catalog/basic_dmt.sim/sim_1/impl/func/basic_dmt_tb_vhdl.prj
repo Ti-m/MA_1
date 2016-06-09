@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "basic_dmt_tb_func_impl.vhd"
+vhdl xil_defaultlib  "../../../../basic_dmt.srcs/sources_1/ipshared/User_Company/basic_dmt_v8_41210/e13c4507/testbench/basic_dmt_tb.vhd"
+vhdl xil_defaultlib  "../../../../basic_dmt.srcs/sim_1/imports/sysgen/basic_dmt_tb_mod.vhd"
+
+# Do not sort compile order
+nosort

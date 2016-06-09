@@ -1,0 +1,3 @@
+LIBRARY AWGN_SNR_test_sfun.mexw64
+EXPORTS
+mexFunction

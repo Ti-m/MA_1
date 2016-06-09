@@ -1,0 +1,53 @@
+CC     = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\MATLAB\R2014b\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"hdlmdlgenlib_sfun.obj"\
+	"c5_1TmN54LPk8kIORPc9sIuQE_hdlmdlgenlib.obj"\
+	"c5_J9ZL1xBj1yQicYgY8ZGPTH_hdlmdlgenlib.obj"\
+	"c5_MH4rdTzZM3AzjP03jr8sgD_hdlmdlgenlib.obj"\
+	"c5_RSKrmfct3MY4yuXQLbkmzC_hdlmdlgenlib.obj"\
+	"c5_UPbFSQSsluEqmANVGQ0wVH_hdlmdlgenlib.obj"\
+	"c5_YReYssZ4nohWJHGDbcUR4F_hdlmdlgenlib.obj"\
+	"c5_f5AKlsTFv2bRDspNtV5RyE_hdlmdlgenlib.obj"\
+	"c5_pD5K2tCy1Vk2Pud2nfMlXG_hdlmdlgenlib.obj"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\sf_runtime.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwblas.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libut.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsl_log_load_blocks.lib"\
+	"C:\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsimulink.lib"\
+	"C:\MATLAB\R2014b\lib\win64\libmwipp.lib"\
+
+INCLUDE_PATH= -I"C:\MATLAB\R2014b\sys\lcc64\lcc64\include64"  -I"C:\MATLAB\R2014b\extern\include"  -I"C:\MATLAB\R2014b\simulink\include"  -I"C:\MATLAB\R2014b\stateflow\c\mex\include"  -I"C:\MATLAB\R2014b\rtw\c\src"  -I"D:\MA_1\Basic_DMT\slprj\_sfprj\Basic_DMT\hdlmdlgenlib\sfun\src" 
+ 
+
+hdlmdlgenlib_sfun.lib : $(MAKEFILE) $(OBJECTS)
+	$(LIBCMD) $(LIBFLAGS) /OUT:hdlmdlgenlib_sfun.lib *.obj
+hdlmdlgenlib_sfun.obj :	"hdlmdlgenlib_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "hdlmdlgenlib_sfun.c"
+c5_1TmN54LPk8kIORPc9sIuQE_hdlmdlgenlib.obj :	"c5_1TmN54LPk8kIORPc9sIuQE_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_1TmN54LPk8kIORPc9sIuQE_hdlmdlgenlib.c"
+c5_J9ZL1xBj1yQicYgY8ZGPTH_hdlmdlgenlib.obj :	"c5_J9ZL1xBj1yQicYgY8ZGPTH_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_J9ZL1xBj1yQicYgY8ZGPTH_hdlmdlgenlib.c"
+c5_MH4rdTzZM3AzjP03jr8sgD_hdlmdlgenlib.obj :	"c5_MH4rdTzZM3AzjP03jr8sgD_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_MH4rdTzZM3AzjP03jr8sgD_hdlmdlgenlib.c"
+c5_RSKrmfct3MY4yuXQLbkmzC_hdlmdlgenlib.obj :	"c5_RSKrmfct3MY4yuXQLbkmzC_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_RSKrmfct3MY4yuXQLbkmzC_hdlmdlgenlib.c"
+c5_UPbFSQSsluEqmANVGQ0wVH_hdlmdlgenlib.obj :	"c5_UPbFSQSsluEqmANVGQ0wVH_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_UPbFSQSsluEqmANVGQ0wVH_hdlmdlgenlib.c"
+c5_YReYssZ4nohWJHGDbcUR4F_hdlmdlgenlib.obj :	"c5_YReYssZ4nohWJHGDbcUR4F_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_YReYssZ4nohWJHGDbcUR4F_hdlmdlgenlib.c"
+c5_f5AKlsTFv2bRDspNtV5RyE_hdlmdlgenlib.obj :	"c5_f5AKlsTFv2bRDspNtV5RyE_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_f5AKlsTFv2bRDspNtV5RyE_hdlmdlgenlib.c"
+c5_pD5K2tCy1Vk2Pud2nfMlXG_hdlmdlgenlib.obj :	"c5_pD5K2tCy1Vk2Pud2nfMlXG_hdlmdlgenlib.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_pD5K2tCy1Vk2Pud2nfMlXG_hdlmdlgenlib.c"

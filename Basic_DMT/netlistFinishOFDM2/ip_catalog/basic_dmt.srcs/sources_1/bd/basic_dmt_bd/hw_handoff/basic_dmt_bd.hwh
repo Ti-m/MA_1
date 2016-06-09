@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon May 30 16:46:25 2016" VIVADOVERSION="2014.4">
+
+  <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:microzed_7020:part0:1.0" DEVICE="7z020" NAME="basic_dmt_bd_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="clk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="diffsig" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_diffsig">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="diffsig"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="8" NAME="inp_recv_im" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_recv_im">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="inp_recv_im"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="8" NAME="inp_recv_re" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_recv_re">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="inp_recv_re"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="inp_trans" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_trans">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="inp_trans"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="out_recv" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_recv">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="out_recv"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="8" NAME="out_trans_im" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_trans_im">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="out_trans_im"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="8" NAME="out_trans_re" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_trans_re">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="basic_dmt_1" PORT="out_trans_re"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <MODULES>
+    <MODULE FULLNAME="/basic_dmt_1" HWVERSION="8.41210" INSTANCE="basic_dmt_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="basic_dmt" VLNV="User_Company:SysGen:basic_dmt:8.41210">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="basic_dmt_bd_basic_dmt_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="8" NAME="inp_recv_im" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_recv_im">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="inp_recv_im"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="8" NAME="inp_recv_re" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_recv_re">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="inp_recv_re"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="inp_trans" RIGHT="0" SIGIS="data" SIGNAME="External_Ports_inp_trans">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="inp_trans"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="diffsig" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_diffsig">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="diffsig"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="out_recv" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_recv">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out_recv"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="8" NAME="out_trans_im" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_trans_im">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out_trans_im"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="8" NAME="out_trans_re" RIGHT="0" SIGIS="data" SIGNAME="basic_dmt_1_out_trans_re">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out_trans_re"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+  <REPOSITORIES/>
+
+</EDKSYSTEM>
