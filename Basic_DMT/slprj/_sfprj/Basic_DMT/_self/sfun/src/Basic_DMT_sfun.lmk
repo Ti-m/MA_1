@@ -9,9 +9,9 @@ OBJECTS = \
 	"Basic_DMT_sfun.obj"\
 	"c3_Basic_DMT.obj"\
 	"c4_Basic_DMT.obj"\
-	"c5_Basic_DMT.obj"\
 	"c7_Basic_DMT.obj"\
-	"c9_Basic_DMT.obj"\
+	"c10_Basic_DMT.obj"\
+	"c12_Basic_DMT.obj"\
 	"c13_Basic_DMT.obj"\
 	"c14_Basic_DMT.obj"\
 	"c16_Basic_DMT.obj"\
@@ -43,12 +43,12 @@ c3_Basic_DMT.obj :	"c3_Basic_DMT.c"
 	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c3_Basic_DMT.c"
 c4_Basic_DMT.obj :	"c4_Basic_DMT.c"
 	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c4_Basic_DMT.c"
-c5_Basic_DMT.obj :	"c5_Basic_DMT.c"
-	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_Basic_DMT.c"
 c7_Basic_DMT.obj :	"c7_Basic_DMT.c"
 	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c7_Basic_DMT.c"
-c9_Basic_DMT.obj :	"c9_Basic_DMT.c"
-	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c9_Basic_DMT.c"
+c10_Basic_DMT.obj :	"c10_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c10_Basic_DMT.c"
+c12_Basic_DMT.obj :	"c12_Basic_DMT.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c12_Basic_DMT.c"
 c13_Basic_DMT.obj :	"c13_Basic_DMT.c"
 	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c13_Basic_DMT.c"
 c14_Basic_DMT.obj :	"c14_Basic_DMT.c"
