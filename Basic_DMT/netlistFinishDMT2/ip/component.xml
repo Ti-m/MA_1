@@ -395,6 +395,10 @@
         <spirit:userFileType>xci</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>basic_dmt_fifo_generator_v12_0_5/basic_dmt_fifo_generator_v12_0_5.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>basic_dmt_xfft_v9_0_0/basic_dmt_xfft_v9_0_0.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
       </spirit:file>
@@ -449,7 +453,7 @@
       <spirit:file>
         <spirit:name>hdl/basic_dmt.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_5ee0b8e2</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_5796ad38</spirit:userFileType>
         <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
@@ -477,6 +481,10 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>basic_dmt_fifo_generator_v12_0_4/basic_dmt_fifo_generator_v12_0_4.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>basic_dmt_fifo_generator_v12_0_5/basic_dmt_fifo_generator_v12_0_5.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
       </spirit:file>
       <spirit:file>
@@ -645,9 +653,9 @@
         <xilinx:taxonomy>/System_Generator_for_DSP</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>basic_dmt</xilinx:displayName>
-      <xilinx:coreRevision>95514859</xilinx:coreRevision>
+      <xilinx:coreRevision>96480496</xilinx:coreRevision>
       <xilinx:paymentRequired>false</xilinx:paymentRequired>
-      <xilinx:coreCreationDateTime>2016-05-30T09:54:33Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2016-06-10T14:08:32Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2014.4</xilinx:xilinxVersion>

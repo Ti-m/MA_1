@@ -1,1 +1,0 @@
--wto "576aecf68fd942139765ebfa6631fd86" --debug "typical" --relax -L "xil_defaultlib" -L "secureip" --snapshot "basic_dmt_tb_func_impl" "xil_defaultlib.basic_dmt_tb" -log "elaborate.log" 

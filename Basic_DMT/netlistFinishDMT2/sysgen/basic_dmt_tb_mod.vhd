@@ -2339,14 +2339,14 @@ library xil_defaultlib;
 entity basic_dmt_tb is
 end basic_dmt_tb;
 architecture structural of basic_dmt_tb is 
+  signal out_recv_net : std_logic_vector( 1-1 downto 0 );
+  signal inp_trans_net : std_logic_vector( 1-1 downto 0 );
+  signal inp_recv_re_net : std_logic_vector( 9-1 downto 0 );
+  signal inp_recv_im_net : std_logic_vector( 9-1 downto 0 );
   signal diffsig_net : std_logic_vector( 1-1 downto 0 );
   signal out_trans_im_net : std_logic_vector( 9-1 downto 0 );
-  signal inp_recv_im_net : std_logic_vector( 9-1 downto 0 );
-  signal out_trans_re_net : std_logic_vector( 9-1 downto 0 );
-  signal inp_recv_re_net : std_logic_vector( 9-1 downto 0 );
-  signal out_recv_net : std_logic_vector( 1-1 downto 0 );
   signal clk_net : std_logic;
-  signal inp_trans_net : std_logic_vector( 1-1 downto 0 );
+  signal out_trans_re_net : std_logic_vector( 9-1 downto 0 );
 begin
   clk_driver : entity xil_defaultlib.xlclk 
   generic map (
@@ -2361,7 +2361,7 @@ begin
     o_bin_pt => 3,
     o_width => 9,
     inputFile => "basic_dmt_inp_recv_im.dat",
-    periodMultiplier => 14
+    periodMultiplier => 7
   )
   port map (
     clk => clk_net,
@@ -2373,7 +2373,7 @@ begin
     o_bin_pt => 3,
     o_width => 9,
     inputFile => "basic_dmt_inp_recv_re.dat",
-    periodMultiplier => 14
+    periodMultiplier => 7
   )
   port map (
     clk => clk_net,
@@ -2421,7 +2421,7 @@ begin
     i_bin_pt => 3,
     i_width => 9,
     inputFile => "basic_dmt_out_trans_im.dat",
-    periodMultiplier => 14
+    periodMultiplier => 7
   )
   port map (
     i => out_trans_im_net,
@@ -2433,7 +2433,7 @@ begin
     i_bin_pt => 3,
     i_width => 9,
     inputFile => "basic_dmt_out_trans_re.dat",
-    periodMultiplier => 14
+    periodMultiplier => 7
   )
   port map (
     i => out_trans_re_net,

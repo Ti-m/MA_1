@@ -6,7 +6,7 @@
 <Project Version="7" Minor="2" Path="D:/MA_1/Basic_DMT/netlistFinishDMT2/ip_catalog/basic_dmt.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="576aecf68fd942139765ebfa6631fd86"/>
+    <Option Name="Id" Val="af5bd24ee4734f05b31b2dfd9c9fe186"/>
     <Option Name="Part" Val="xc7z020clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
@@ -25,24 +25,31 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="hdl/basic_dmt_bd.vhd"/>
         <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="ip/basic_dmt_bd_basic_dmt_1_0/basic_dmt_bd_basic_dmt_1_0.xci"/>
         <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="hw_handoff/basic_dmt_bd_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="hw_handoff/basic_dmt_bd.hwh"/>
         <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="basic_dmt_bd_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="hw_handoff/basic_dmt_bd.hwh"/>
+        <CompFileExtendedInfo CompFileName="basic_dmt_bd.bd" FileRelPathName="hdl/basic_dmt_bd.vhd"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/hdl/basic_dmt_bd_wrapper.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/bd/basic_dmt_bd/hdl/basic_dmt_bd_wrapper.vhd"/>
-          <Attr Name="ImportTime" Val="1464602075"/>
+          <Attr Name="ImportTime" Val="1465567713"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/basic_dmt_0/basic_dmt_0.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sysgen/basic_dmt_mod.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../sysgen/basic_dmt_mod.vhd"/>
-          <Attr Name="ImportTime" Val="1464602073"/>
+          <Attr Name="ImportTime" Val="1465567712"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -54,14 +61,7 @@
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
       <Filter Type="Constrs"/>
-      <File Path="$PSRCDIR/constrs_1/new/own.xdc">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-        </FileInfo>
-      </File>
       <Config>
-        <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/own.xdc"/>
         <Option Name="ConstrsType" Val="XDC"/>
       </Config>
     </FileSet>
@@ -70,7 +70,7 @@
       <File Path="$PSRCDIR/sim_1/imports/sysgen/basic_dmt_tb_mod.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../sysgen/basic_dmt_tb_mod.vhd"/>
-          <Attr Name="ImportTime" Val="1464602073"/>
+          <Attr Name="ImportTime" Val="1465567712"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -180,24 +180,9 @@
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="basic_dmt_tb"/>
-        <Option Name="SimMode" Val="post-implementation"/>
         <Option Name="SrcSet" Val="sources_1"/>
-        <Option Name="xsim.simulate.runtime" Val="46870.66666667 ns"/>
-        <Option Name="NLNetlistMode" Val="funcsim"/>
+        <Option Name="xsim.simulate.runtime" Val="35204.00000000 ns"/>
         <Option Name="NLSdfAnno" Val="0"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="basic_dmt_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/basic_dmt_0">
-      <File Path="$PSRCDIR/sources_1/ip/basic_dmt_0/basic_dmt_0.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="basic_dmt_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
   </FileSets>
@@ -217,42 +202,15 @@
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="9">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2014"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="basic_dmt_0_synth_1" Type="Ft3:Synth" SrcSet="basic_dmt_0" Part="xc7z020clg400-1" ConstrsSet="basic_dmt_0" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/basic_dmt_0_synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2014">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-    </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2014"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-    </Run>
-    <Run Id="basic_dmt_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="basic_dmt_0" Description="Vivado Implementation Defaults" SynthRun="basic_dmt_0_synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2014">
-          <Desc>Vivado Implementation Defaults</Desc>
-        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

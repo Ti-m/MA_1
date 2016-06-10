@@ -76,18 +76,12 @@ assignin('base', 'u16', u16);
 
 assignin('base', 'equalizer', equalizer);
 
-%if guardInterval == 2
-guardInterval = 2;%activated - Removed from GUI
-    GI_Len = 4;
-    GI_LenDMT=GI_Len*2;
-    
-%else
-%    GI_Len = 0;
-%     GI_LenDMT=0;
- %    GI_Active=0;
-%end
+%GI length
+GI_Len = 4;
+GI_LenDMT=GI_Len*2;    
 assignin('base', 'GI_Len', GI_Len);
 assignin('base', 'GI_LenDMT', GI_LenDMT);
+
 if dmtOfdm == 1 %% To create blocks which are not dependent on variant subsystems.
     GI_Active = GI_Len;
     fftLenActive = fftLen;
@@ -99,31 +93,20 @@ else
 end
 assignin('base', 'GI_Active', GI_Active);
 assignin('base', 'fftLenActive', fftLenActive);
-%Used in Mcode blocks to reduce arithmetic
+
+%Used in Mcode blocks to as pre calculated values
 OFDMFrameSmpCntAct = GI_Active + fftLenActive;
 assignin('base', 'OFDMFrameSmpCntAct', OFDMFrameSmpCntAct);
 assignin('base', 'freqDivDMT', freqDivDMT);
-if GI_Active>0
-    beta = fftLen/(fftLen+GI_Len); 
-else
-    beta = 1;
-end
-assignin('base', 'beta', beta);
 
+beta = fftLen/(fftLen+GI_Len); 
+assignin('base', 'beta', beta);
 assignin('base', 'usedSubCar', usedSubCar);
 assignin('base', 'bitPerSymb', bitPerSymb);
 assignin('base', 'bitCount',bitCount);
 assignin('base', 'fracLen',fracLen);
 SampleTime = 20e-9;
 assignin('base', 'Ts', SampleTime);
-upsample = 1; %Removed from GUI
-%if upsample == 2
-%    upsampleFactor = 8; 
-%else
-    upsampleFactor = 1; %used in AWGN Simulink Channel sample time calculation
-%end
-assignin('base', 'upsample', upsample);
-assignin('base', 'upsampleFactor', upsampleFactor);
 assignin('base', 'Tb', BitTime);
 
 %Divider for the Input FIFO. Determines how many samples are not sampled 
@@ -138,17 +121,13 @@ assignin('base', 'bitsPerFrame', bitsPerFrame);
 %Samplerate on Channel
 Tchan=bitPerSymb*usedSubCar/fftLenActive*(BitTime*beta);
 %Calc factor for downsampling before channel
-%chanDownFact=Tchan/(SystemPeriod*bitPerSymb*usedSubCar/(fftLenActive));
 chanDownFact=Tchan/SystemPeriod;
 assignin('base', 'Tchan', Tchan);
 assignin('base', 'chanDownFact', chanDownFact);
-
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 modu_mode=0;%removed from GUI
 assignin('base', 'modu_mode', modu_mode);
-assignin('base', 'radio_precision', str2double(radio_precision));
 assignin('base', 'dmtOfdm', dmtOfdm);
-assignin('base', 'guardInterval', guardInterval);
 assignin('base', 'AWGN', AWGN);
 assignin('base', 'channel', channel);
 grpDelayChannelFilt = 1;
@@ -158,11 +137,12 @@ SNRdb = SNR_AWGN;
 P_sym=10;%W Avg Power per Symbol
 assignin('base', 'P_sym', P_sym);
 assignin('base', 'SNRdb', SNRdb);
-
+%Calculating signal power for AWGN channel model.
 sigPowAWGN = P_sym*(fftLen-2)/fftLen*fftLenActive/(fftLenActive+GI_Active)*fftLenActive*2;
 
 assignin('base', 'sigPowAWGN', sigPowAWGN);
 
+assignin('base', 'radio_precision', str2double(radio_precision));
 if radio_precision == 1
     precision_str = 'double';
     precStrAftIFFT = 'double';

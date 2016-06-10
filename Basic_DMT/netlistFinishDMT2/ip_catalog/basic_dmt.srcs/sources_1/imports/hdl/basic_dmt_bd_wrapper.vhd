@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:29:27 MST 2014
---Date        : Mon May 30 11:54:35 2016
+--Date        : Fri Jun 10 16:08:33 2016
 --Host        : UML-02 running 64-bit major release  (build 9200)
 --Command     : generate_target basic_dmt_bd_wrapper.bd
 --Design      : basic_dmt_bd_wrapper

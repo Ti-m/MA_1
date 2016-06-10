@@ -132,7 +132,7 @@ lappend params_list CONFIG.implementation {Fabric}
 lappend params_list CONFIG.increment_value {1}
 lappend params_list CONFIG.latency {1}
 lappend params_list CONFIG.load {false}
-lappend params_list CONFIG.output_width {4}
+lappend params_list CONFIG.output_width {5}
 lappend params_list CONFIG.restrict_count {false}
 lappend params_list CONFIG.sclr {false}
 lappend params_list CONFIG.sinit {true}
@@ -154,7 +154,7 @@ lappend params_list CONFIG.Component_Name {basic_dmt_fifo_generator_v12_0_2}
 lappend params_list CONFIG.almost_empty_flag {false}
 lappend params_list CONFIG.almost_full_flag {false}
 lappend params_list CONFIG.data_count {false}
-lappend params_list CONFIG.data_count_width {4}
+lappend params_list CONFIG.data_count_width {5}
 lappend params_list CONFIG.disable_timing_violations {false}
 lappend params_list CONFIG.dout_reset_value {0}
 lappend params_list CONFIG.enable_ecc {false}
@@ -164,9 +164,9 @@ lappend params_list CONFIG.full_flags_reset_value {0}
 lappend params_list CONFIG.inject_dbit_error {false}
 lappend params_list CONFIG.inject_sbit_error {false}
 lappend params_list CONFIG.input_data_width {9}
-lappend params_list CONFIG.input_depth {16}
+lappend params_list CONFIG.input_depth {32}
 lappend params_list CONFIG.output_data_width {9}
-lappend params_list CONFIG.output_depth {16}
+lappend params_list CONFIG.output_depth {32}
 lappend params_list CONFIG.overflow_flag {false}
 lappend params_list CONFIG.overflow_sense {Active_High}
 lappend params_list CONFIG.performance_options {Standard_FIFO}
@@ -196,7 +196,7 @@ lappend params_list CONFIG.Component_Name {basic_dmt_fifo_generator_v12_0_3}
 lappend params_list CONFIG.almost_empty_flag {false}
 lappend params_list CONFIG.almost_full_flag {false}
 lappend params_list CONFIG.data_count {true}
-lappend params_list CONFIG.data_count_width {4}
+lappend params_list CONFIG.data_count_width {5}
 lappend params_list CONFIG.disable_timing_violations {false}
 lappend params_list CONFIG.dout_reset_value {0}
 lappend params_list CONFIG.enable_ecc {false}
@@ -206,9 +206,9 @@ lappend params_list CONFIG.full_flags_reset_value {0}
 lappend params_list CONFIG.inject_dbit_error {false}
 lappend params_list CONFIG.inject_sbit_error {false}
 lappend params_list CONFIG.input_data_width {9}
-lappend params_list CONFIG.input_depth {16}
+lappend params_list CONFIG.input_depth {32}
 lappend params_list CONFIG.output_data_width {9}
-lappend params_list CONFIG.output_depth {16}
+lappend params_list CONFIG.output_depth {32}
 lappend params_list CONFIG.overflow_flag {false}
 lappend params_list CONFIG.overflow_sense {Active_High}
 lappend params_list CONFIG.performance_options {Standard_FIFO}
@@ -258,7 +258,7 @@ lappend params_list CONFIG.scaling_options {unscaled}
 lappend params_list CONFIG.target_clock_frequency {250}
 lappend params_list CONFIG.target_data_throughput {50}
 lappend params_list CONFIG.throttle_scheme {nonrealtime}
-lappend params_list CONFIG.transform_length {16}
+lappend params_list CONFIG.transform_length {32}
 lappend params_list CONFIG.xk_index {true}
 
 set_property -dict $params_list [get_ips basic_dmt_xfft_v9_0_0]
@@ -304,6 +304,48 @@ lappend params_list CONFIG.write_acknowledge_flag {false}
 lappend params_list CONFIG.write_acknowledge_sense {Active_High}
 
 set_property -dict $params_list [get_ips basic_dmt_fifo_generator_v12_0_4]
+}
+
+
+set existingipslist [get_ips]
+if {[lsearch $existingipslist basic_dmt_fifo_generator_v12_0_5] < 0} {
+create_ip -name fifo_generator -version 12.0 -vendor xilinx.com -library ip -module_name basic_dmt_fifo_generator_v12_0_5
+set params_list [list]
+lappend params_list CONFIG.Component_Name {basic_dmt_fifo_generator_v12_0_5}
+lappend params_list CONFIG.almost_empty_flag {false}
+lappend params_list CONFIG.almost_full_flag {false}
+lappend params_list CONFIG.data_count {true}
+lappend params_list CONFIG.data_count_width {4}
+lappend params_list CONFIG.disable_timing_violations {false}
+lappend params_list CONFIG.dout_reset_value {0}
+lappend params_list CONFIG.enable_ecc {false}
+lappend params_list CONFIG.enable_reset_synchronization {true}
+lappend params_list CONFIG.fifo_implementation {Common_Clock_Block_RAM}
+lappend params_list CONFIG.full_flags_reset_value {0}
+lappend params_list CONFIG.inject_dbit_error {false}
+lappend params_list CONFIG.inject_sbit_error {false}
+lappend params_list CONFIG.input_data_width {9}
+lappend params_list CONFIG.input_depth {16}
+lappend params_list CONFIG.output_data_width {9}
+lappend params_list CONFIG.output_depth {16}
+lappend params_list CONFIG.overflow_flag {false}
+lappend params_list CONFIG.overflow_sense {Active_High}
+lappend params_list CONFIG.performance_options {Standard_FIFO}
+lappend params_list CONFIG.programmable_empty_type {No_Programmable_Empty_Threshold}
+lappend params_list CONFIG.programmable_full_type {No_Programmable_Full_Threshold}
+lappend params_list CONFIG.reset_pin {false}
+lappend params_list CONFIG.reset_type {Asynchronous_Reset}
+lappend params_list CONFIG.underflow_flag {false}
+lappend params_list CONFIG.underflow_sense {Active_High}
+lappend params_list CONFIG.use_dout_reset {true}
+lappend params_list CONFIG.use_embedded_registers {false}
+lappend params_list CONFIG.use_extra_logic {false}
+lappend params_list CONFIG.valid_flag {false}
+lappend params_list CONFIG.valid_sense {Active_High}
+lappend params_list CONFIG.write_acknowledge_flag {false}
+lappend params_list CONFIG.write_acknowledge_sense {Active_High}
+
+set_property -dict $params_list [get_ips basic_dmt_fifo_generator_v12_0_5]
 }
 
 

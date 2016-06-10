@@ -23,7 +23,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	set IP_LifeCycle_Menu {1}
 	set IP_Logo {sysgen_icon_100.png}
 	set IP_Name {Basic_DMT_cw}
-	set IP_Revision {95514859}
+	set IP_Revision {96480496}
 	set IP_Vendor_Text {User Company}
 	set IP_Version_Text {8.41210}
 	set ImplStrategyName {Vivado Implementation Defaults}
@@ -46,8 +46,8 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 		{{basic_dmt.htm}}
 	}
 	set SimPeriod 4e-09
-	set SimTime 4.66667e-05
-	set SimulationTime {46870.66666667 ns}
+	set SimTime 3.5e-05
+	set SimulationTime {35204.00000000 ns}
 	set SynthStrategyName {Vivado Synthesis Defaults}
 	set SynthesisTool {Vivado}
 	set TargetDir {D:/MA_1/Basic_DMT/netlistFinishDMT2}
@@ -78,7 +78,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	dict set TopLevelPortInterface inp_recv_re DatFile {basic_dmt_inp_recv_re.dat}
 	dict set TopLevelPortInterface inp_recv_re IconText {inp_recv_re}
 	dict set TopLevelPortInterface inp_recv_re Direction in
-	dict set TopLevelPortInterface inp_recv_re Period 14
+	dict set TopLevelPortInterface inp_recv_re Period 7
 	dict set TopLevelPortInterface inp_recv_re Interface 0
 	dict set TopLevelPortInterface inp_recv_re InterfaceString {DATA}
 	dict set TopLevelPortInterface inp_recv_re ClockDomain {basic_dmt}
@@ -92,7 +92,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	dict set TopLevelPortInterface inp_recv_im DatFile {basic_dmt_inp_recv_im.dat}
 	dict set TopLevelPortInterface inp_recv_im IconText {inp_recv_im}
 	dict set TopLevelPortInterface inp_recv_im Direction in
-	dict set TopLevelPortInterface inp_recv_im Period 14
+	dict set TopLevelPortInterface inp_recv_im Period 7
 	dict set TopLevelPortInterface inp_recv_im Interface 0
 	dict set TopLevelPortInterface inp_recv_im InterfaceString {DATA}
 	dict set TopLevelPortInterface inp_recv_im ClockDomain {basic_dmt}
@@ -134,7 +134,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	dict set TopLevelPortInterface out_trans_im DatFile {basic_dmt_out_trans_im.dat}
 	dict set TopLevelPortInterface out_trans_im IconText {out_trans_im}
 	dict set TopLevelPortInterface out_trans_im Direction out
-	dict set TopLevelPortInterface out_trans_im Period 14
+	dict set TopLevelPortInterface out_trans_im Period 7
 	dict set TopLevelPortInterface out_trans_im Interface 0
 	dict set TopLevelPortInterface out_trans_im InterfaceString {DATA}
 	dict set TopLevelPortInterface out_trans_im ClockDomain {basic_dmt}
@@ -148,7 +148,7 @@ namespace eval ::xilinx::dsp::planaheaddriver {
 	dict set TopLevelPortInterface out_trans_re DatFile {basic_dmt_out_trans_re.dat}
 	dict set TopLevelPortInterface out_trans_re IconText {out_trans_re}
 	dict set TopLevelPortInterface out_trans_re Direction out
-	dict set TopLevelPortInterface out_trans_re Period 14
+	dict set TopLevelPortInterface out_trans_re Period 7
 	dict set TopLevelPortInterface out_trans_re Interface 0
 	dict set TopLevelPortInterface out_trans_re InterfaceString {DATA}
 	dict set TopLevelPortInterface out_trans_re ClockDomain {basic_dmt}
