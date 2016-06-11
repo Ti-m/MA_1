@@ -109,6 +109,8 @@ static cint16_T c9_m_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
   cint16_T c9_a0);
 static cint16_T c9_n_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
   cint16_T c9_a0);
+static cint16_T c9_o_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
+  cint16_T c9_a0);
 static const mxArray *c9_c_sf_marshallOut(void *chartInstanceVoid, void
   *c9_inData);
 static int32_T c9_c_emlrt_marshallIn(SFc9_Basic_DMTInstanceStruct *chartInstance,
@@ -596,10 +598,6 @@ static void c9_chartstep_c9_Basic_DMT(SFc9_Basic_DMTInstanceStruct
   int16_T c9_ai;
   int16_T c9_cr;
   int16_T c9_ci;
-  int16_T c9_b_ar;
-  int16_T c9_b_ai;
-  int16_T c9_b_cr;
-  int16_T c9_b_ci;
   _SFD_CC_CALL(CHART_ENTER_DURING_FUNCTION_TAG, 4U, chartInstance->c9_sfEvent);
   c9_b_i1 = *chartInstance->c9_i1;
   c9_b_i2 = *chartInstance->c9_i2;
@@ -733,7 +731,9 @@ static void c9_chartstep_c9_Basic_DMT(SFc9_Basic_DMTInstanceStruct
   _SFD_EML_CALL(0U, chartInstance->c9_sfEvent, 22);
   c9_b_o14 = c9_n_mtimes(chartInstance, c9_b_i14);
   _SFD_EML_CALL(0U, chartInstance->c9_sfEvent, 23);
-  c9_a = c9_b_i15;
+  c9_b_o15 = c9_o_mtimes(chartInstance, c9_b_i15);
+  _SFD_EML_CALL(0U, chartInstance->c9_sfEvent, 24);
+  c9_a = c9_b_i16;
   c9_strcmpi(chartInstance);
   c9_b_strcmpi(chartInstance);
   c9_ar = c9_a.re;
@@ -742,17 +742,6 @@ static void c9_chartstep_c9_Basic_DMT(SFc9_Basic_DMTInstanceStruct
   c9_ci = c9_ai;
   c9_a.re = c9_cr;
   c9_a.im = c9_ci;
-  c9_b_o15 = c9_a;
-  _SFD_EML_CALL(0U, chartInstance->c9_sfEvent, 24);
-  c9_a = c9_b_i16;
-  c9_strcmpi(chartInstance);
-  c9_b_strcmpi(chartInstance);
-  c9_b_ar = c9_a.re;
-  c9_b_ai = c9_a.im;
-  c9_b_cr = c9_b_ar;
-  c9_b_ci = c9_b_ai;
-  c9_a.re = c9_b_cr;
-  c9_a.im = c9_b_ci;
   c9_b_o16 = c9_a;
   _SFD_EML_CALL(0U, chartInstance->c9_sfEvent, -24);
   _SFD_SYMBOL_SCOPE_POP();
@@ -1967,6 +1956,25 @@ static cint16_T c9_m_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
 }
 
 static cint16_T c9_n_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
+  cint16_T c9_a0)
+{
+  cint16_T c9_cout;
+  int16_T c9_ar;
+  int16_T c9_ai;
+  int16_T c9_cr;
+  int16_T c9_ci;
+  c9_strcmpi(chartInstance);
+  c9_b_strcmpi(chartInstance);
+  c9_ar = c9_a0.re;
+  c9_ai = c9_a0.im;
+  c9_cr = c9_ar;
+  c9_ci = c9_ai;
+  c9_cout.re = c9_cr;
+  c9_cout.im = c9_ci;
+  return c9_cout;
+}
+
+static cint16_T c9_o_mtimes(SFc9_Basic_DMTInstanceStruct *chartInstance,
   cint16_T c9_a0)
 {
   cint16_T c9_cout;

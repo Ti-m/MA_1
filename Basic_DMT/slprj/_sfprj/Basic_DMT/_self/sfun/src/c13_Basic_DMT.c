@@ -13,8 +13,8 @@
 
 /* Named Constants */
 #define CALL_EVENT                     (-1)
-#define c13_b_fftLenActive             (32.0)
-#define c13_b_GI_Active                (8.0)
+#define c13_b_fftLenActive             (16.0)
+#define c13_b_GI_Active                (4.0)
 #define c13_b_bitPerSymb               (4.0)
 
 /* Variable Declarations */
@@ -422,8 +422,8 @@ static void c13_chartstep_c13_Basic_DMT(SFc13_Basic_DMTInstanceStruct
   guard4 = false;
   guard5 = false;
   guard6 = false;
-  if (CV_EML_COND(0, 1, 0, CV_RELATIONAL_EVAL(4U, 0U, 2, (real_T)c13_b_num, 40.0,
-        -1, 5U, (real_T)c13_b_num >= 40.0))) {
+  if (CV_EML_COND(0, 1, 0, CV_RELATIONAL_EVAL(4U, 0U, 2, (real_T)c13_b_num, 20.0,
+        -1, 5U, (real_T)c13_b_num >= 20.0))) {
     if (CV_EML_COND(0, 1, 1, CV_RELATIONAL_EVAL(4U, 0U, 3,
           c13_get_outputBitCount(chartInstance, 0), 0.0, -1, 0U,
           c13_get_outputBitCount(chartInstance, 0) == 0.0))) {
@@ -450,8 +450,8 @@ static void c13_chartstep_c13_Basic_DMT(SFc13_Basic_DMTInstanceStruct
           c13_get_outputBitCount(chartInstance, 0), 0.0, -1, 4U,
           c13_get_outputBitCount(chartInstance, 0) > 0.0))) {
       if (CV_EML_COND(0, 1, 5, CV_RELATIONAL_EVAL(4U, 0U, 5,
-            c13_get_outputBitCount(chartInstance, 0), 40.0, -1, 3U,
-            c13_get_outputBitCount(chartInstance, 0) <= 40.0))) {
+            c13_get_outputBitCount(chartInstance, 0), 20.0, -1, 3U,
+            c13_get_outputBitCount(chartInstance, 0) <= 20.0))) {
         if (CV_EML_COND(0, 1, 6, CV_RELATIONAL_EVAL(4U, 0U, 6, c13_get_loopOut
               (chartInstance, 0), 0.0, -1, 0U, c13_get_loopOut(chartInstance, 0)
               == 0.0))) {
@@ -533,8 +533,8 @@ static void c13_chartstep_c13_Basic_DMT(SFc13_Basic_DMTInstanceStruct
 
   _SFD_EML_CALL(0U, chartInstance->c13_sfEvent, 72);
   if (CV_EML_IF(0, 1, 5, CV_RELATIONAL_EVAL(4U, 0U, 9, c13_get_outputBitCount
-        (chartInstance, 0), 40.0, -1, 5U, c13_get_outputBitCount(chartInstance,
-         0) >= 40.0))) {
+        (chartInstance, 0), 20.0, -1, 5U, c13_get_outputBitCount(chartInstance,
+         0) >= 20.0))) {
     _SFD_EML_CALL(0U, chartInstance->c13_sfEvent, 73);
     c13_set_outputBitCount(chartInstance, 0, 0.0);
     ssUpdateDataStoreLog(chartInstance->S, 2);
@@ -941,10 +941,10 @@ extern void utFree(void*);
 
 void sf_c13_Basic_DMT_get_check_sum(mxArray *plhs[])
 {
-  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1530755036U);
-  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1190690576U);
-  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1991335832U);
-  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(2595762580U);
+  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(3065723927U);
+  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(2171394867U);
+  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1832433931U);
+  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(3296007390U);
 }
 
 mxArray* sf_c13_Basic_DMT_get_post_codegen_info(void);
@@ -958,7 +958,7 @@ mxArray *sf_c13_Basic_DMT_get_autoinheritance_info(void)
     autoinheritanceFields);
 
   {
-    mxArray *mxChecksum = mxCreateString("oJ6Gta3KSy8dFIuwJpfAoD");
+    mxArray *mxChecksum = mxCreateString("mYbrBsQFE0vDLFlKySG2P");
     mxSetField(mxAutoinheritanceInfo,0,"checksum",mxChecksum);
   }
 
@@ -1435,7 +1435,7 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
 
 static const char* sf_get_instance_specialization(void)
 {
-  return "apWkzRJylZe8dOk6eS6SOB";
+  return "6tpghhZdPl1L2MslTCMwIC";
 }
 
 static void sf_opaque_initialize_c13_Basic_DMT(void *chartInstanceVar)
@@ -1586,10 +1586,10 @@ static void mdlSetWorkWidths_c13_Basic_DMT(SimStruct *S)
   }
 
   ssSetOptions(S,ssGetOptions(S)|SS_OPTION_WORKS_WITH_CODE_REUSE);
-  ssSetChecksum0(S,(1719944293U));
-  ssSetChecksum1(S,(2596214093U));
-  ssSetChecksum2(S,(552402715U));
-  ssSetChecksum3(S,(3590202294U));
+  ssSetChecksum0(S,(3367062628U));
+  ssSetChecksum1(S,(2925689800U));
+  ssSetChecksum2(S,(632720615U));
+  ssSetChecksum3(S,(4050461134U));
   ssSetmdlDerivatives(S, NULL);
   ssSetExplicitFCSSCtrl(S,1);
   ssSupportsMultipleExecInstances(S,0);

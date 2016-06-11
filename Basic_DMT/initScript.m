@@ -1,4 +1,8 @@
 %initScript.m
+%This script is used to initliaze the 'Basic_DMT' model. It is run after
+%opening the model and after clicking the 'OK' button of the 'Edit Model
+%Parameters' block.
+
 format shortEng
 
 %Define the fixed-point arithmetic used by the simulink blocks
@@ -24,8 +28,9 @@ fiObjectAftIFFT= fimath('RoundingMethod', 'Nearest', ...
                 'CastBeforeSum', true);
 assignin('base', 'fiObjectAftIFFT', fiObjectAftIFFT);
 
-%
+%System Period for Simulink blocks
 SystemPeriod = 4e-9;
+%System Period for System Generator blocks
 sysgenSystemPeriod=4e-9; 
 assignin('base', 'sysgenSystemPeriod', sysgenSystemPeriod);
 assignin('base', 'SystemPeriod', SystemPeriod);
@@ -142,7 +147,11 @@ sigPowAWGN = P_sym*(fftLen-2)/fftLen*fftLenActive/(fftLenActive+GI_Active)*fftLe
 
 assignin('base', 'sigPowAWGN', sigPowAWGN);
 
+%radio button for precision
 assignin('base', 'radio_precision', str2double(radio_precision));
+%To assign the number of bits to the blocks behind the IFFT, a different
+%variable us used. this shall allow to change the number of bits
+%independently if necessary
 if radio_precision == 1
     precision_str = 'double';
     precStrAftIFFT = 'double';
@@ -153,10 +162,8 @@ else
 end
 assignin('base', 'precision_str', precision_str);
 assignin('base', 'precStrAftIFFT', precStrAftIFFT);
-
 bitCountAftIFFT = bitCount;
 assignin('base', 'bitCountAftIFFT', bitCountAftIFFT);
-
 bitCountAftFFTRec = bitCount;
 assignin('base', 'bitCountAftFFTRec', bitCountAftFFTRec);
 
@@ -167,7 +174,7 @@ set_param('Basic_DMT/IFFTaPIS/Create_Frame_for_IFFT/OFDMorDMT/Frame_DMT/Constant
 set_param('Basic_DMT/AWGN/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
 
 set_param('Basic_DMT/AWGN1/Yes_AWGN/Data Type Conversion1','OutDataTypeStr',precStrAftIFFT)
-
+set_param('Basic_DMT/SIPaFFT/Index Vector','OutDataTypeStr',precStrAftIFFT)
 set_param('Basic_DMT/IFFTaPIS/Data Type Conversion','OutDataTypeStr',precision_str)
 
 %%% CREATE FRAME OFDM
@@ -303,10 +310,10 @@ set_param('Basic_DMT/IFFTaPIS/Guard_Interval/Set_GI_DMT/MATLAB Function/o32','Ou
 %%%SIP
 set_param('Basic_DMT/SIPaFFT/Constant2','OutDataTypeStr',precStrAftIFFT)
 %%% REM_GI OFDM
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/SIPaFFT/Rem_GI/Data Store Memory3','OutDataTypeStr',precStrAftIFFT) 
 
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
-set_param('Basic_DMT/SIPaFFT/Remove_Guard_Interval/Rem_GI/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
+set_param('Basic_DMT/SIPaFFT/Rem_GI/MATLAB Function/out','OutDataTypeStr',precStrAftIFFT)
+set_param('Basic_DMT/SIPaFFT/Rem_GI/MATLAB Function/inp','OutDataTypeStr',precStrAftIFFT) 
 
 if radio_precision == 1 
     
@@ -491,7 +498,5 @@ assignin('base', 'e15_re', real(e15s));
 assignin('base', 'e15_im', imag(e15s));
 assignin('base', 'e16_re', real(e16s));
 assignin('base', 'e16_im', imag(e16s));
-
-
 %Outputs all block paths
 %BlockPaths = find_system('Basic_DMT','Type','Block')
