@@ -128,20 +128,21 @@ static void initialize_c10_Basic_DMT(SFc10_Basic_DMTInstanceStruct
   _sfTime_ = sf_get_time(chartInstance->S);
   chartInstance->c10_is_active_c10_Basic_DMT = 0U;
   sf_mex_assign(&c10_b_eml_mx, sf_mex_call_debug(sfGlobalDebugInstanceStruct,
-    "numerictype", 1U, 8U, 15, "FractionLength", 6, 7.0, 15, "BinaryPoint", 6,
-    7.0, 15, "Slope", 6, 0.0078125, 15, "FixedExponent", 6, -7.0), true);
+    "numerictype", 1U, 10U, 15, "WordLength", 6, 9.0, 15, "FractionLength", 6,
+    3.0, 15, "BinaryPoint", 6, 3.0, 15, "Slope", 6, 0.125, 15, "FixedExponent",
+    6, -3.0), true);
   sf_mex_assign(&c10_eml_mx, sf_mex_call_debug(sfGlobalDebugInstanceStruct,
     "fimath", 1U, 42U, 15, "RoundMode", 15, "nearest", 15, "RoundingMethod", 15,
     "Nearest", 15, "OverflowMode", 15, "saturate", 15, "OverflowAction", 15,
     "Saturate", 15, "ProductMode", 15, "SpecifyPrecision", 15,
-    "ProductWordLength", 6, 16.0, 15, "MaxProductWordLength", 6, 65535.0, 15,
-    "ProductFractionLength", 6, 7.0, 15, "ProductFixedExponent", 6, -7.0, 15,
-    "ProductSlope", 6, 0.0078125, 15, "ProductSlopeAdjustmentFactor", 6, 1.0, 15,
+    "ProductWordLength", 6, 9.0, 15, "MaxProductWordLength", 6, 65535.0, 15,
+    "ProductFractionLength", 6, 3.0, 15, "ProductFixedExponent", 6, -3.0, 15,
+    "ProductSlope", 6, 0.125, 15, "ProductSlopeAdjustmentFactor", 6, 1.0, 15,
     "ProductBias", 6, 0.0, 15, "SumMode", 15, "SpecifyPrecision", 15,
-    "SumWordLength", 6, 16.0, 15, "MaxSumWordLength", 6, 65535.0, 15,
-    "SumFractionLength", 6, 7.0, 15, "SumFixedExponent", 6, -7.0, 15, "SumSlope",
-    6, 0.0078125, 15, "SumSlopeAdjustmentFactor", 6, 1.0, 15, "SumBias", 6, 0.0,
-    15, "CastBeforeSum", 3, true), true);
+    "SumWordLength", 6, 9.0, 15, "MaxSumWordLength", 6, 65535.0, 15,
+    "SumFractionLength", 6, 3.0, 15, "SumFixedExponent", 6, -3.0, 15, "SumSlope",
+    6, 0.125, 15, "SumSlopeAdjustmentFactor", 6, 1.0, 15, "SumBias", 6, 0.0, 15,
+    "CastBeforeSum", 3, true), true);
 }
 
 static void initialize_params_c10_Basic_DMT(SFc10_Basic_DMTInstanceStruct
@@ -3063,7 +3064,7 @@ static cint16_T c10_plus(SFc10_Basic_DMTInstanceStruct *chartInstance, real_T
   int16_T c10_a;
   int32_T c10_b_i1;
   c10_strcmpi(chartInstance);
-  c10_u = c10_a0 * 128.0;
+  c10_u = c10_a0 * 8.0;
   c10_v = muDoubleScalarAbs(c10_u);
   if (c10_v < 4.503599627370496E+15) {
     if (c10_v >= 0.5) {
@@ -3075,14 +3076,14 @@ static cint16_T c10_plus(SFc10_Basic_DMTInstanceStruct *chartInstance, real_T
     c10_d1 = c10_u;
   }
 
-  if (c10_d1 < 32768.0) {
-    if (c10_d1 >= -32768.0) {
+  if (c10_d1 < 256.0) {
+    if (c10_d1 >= -256.0) {
       c10_i0 = (int16_T)c10_d1;
     } else {
-      c10_i0 = MIN_int16_T;
+      c10_i0 = -256;
     }
-  } else if (c10_d1 >= 32768.0) {
-    c10_i0 = MAX_int16_T;
+  } else if (c10_d1 >= 256.0) {
+    c10_i0 = 255;
   } else {
     c10_i0 = 0;
   }
@@ -3090,11 +3091,11 @@ static cint16_T c10_plus(SFc10_Basic_DMTInstanceStruct *chartInstance, real_T
   c10_a = c10_i0;
   c10_b_strcmpi(chartInstance);
   c10_b_i1 = c10_a + c10_b0.re;
-  if (c10_b_i1 > 32767) {
-    c10_b_i1 = 32767;
+  if (c10_b_i1 > 255) {
+    c10_b_i1 = 255;
   } else {
-    if (c10_b_i1 < -32768) {
-      c10_b_i1 = -32768;
+    if (c10_b_i1 < -256) {
+      c10_b_i1 = -256;
     }
   }
 
@@ -3129,23 +3130,23 @@ static cint16_T c10_b_mtimes(SFc10_Basic_DMTInstanceStruct *chartInstance,
   c10_ar = c10_a0.re;
   c10_ai = c10_a0.im;
   c10_b_i2 = c10_ar * c10_b_b;
-  c10_b_i3 = (c10_b_i2 >> 7) + ((c10_b_i2 & 64) != 0);
-  if (c10_b_i3 > 32767) {
-    c10_b_i3 = 32767;
+  c10_b_i3 = (c10_b_i2 >> 3) + ((c10_b_i2 & 4) != 0);
+  if (c10_b_i3 > 255) {
+    c10_b_i3 = 255;
   } else {
-    if (c10_b_i3 < -32768) {
-      c10_b_i3 = -32768;
+    if (c10_b_i3 < -256) {
+      c10_b_i3 = -256;
     }
   }
 
   c10_cr = (int16_T)c10_b_i3;
   c10_b_i4 = c10_ai * c10_b_b;
-  c10_b_i5 = (c10_b_i4 >> 7) + ((c10_b_i4 & 64) != 0);
-  if (c10_b_i5 > 32767) {
-    c10_b_i5 = 32767;
+  c10_b_i5 = (c10_b_i4 >> 3) + ((c10_b_i4 & 4) != 0);
+  if (c10_b_i5 > 255) {
+    c10_b_i5 = 255;
   } else {
-    if (c10_b_i5 < -32768) {
-      c10_b_i5 = -32768;
+    if (c10_b_i5 < -256) {
+      c10_b_i5 = -256;
     }
   }
 
@@ -3614,10 +3615,10 @@ extern void utFree(void*);
 
 void sf_c10_Basic_DMT_get_check_sum(mxArray *plhs[])
 {
-  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(739107879U);
-  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(981425016U);
-  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1558710192U);
-  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(3410824516U);
+  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1771044116U);
+  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1960174994U);
+  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(3655313251U);
+  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(3562321180U);
 }
 
 mxArray* sf_c10_Basic_DMT_get_post_codegen_info(void);
@@ -3631,7 +3632,7 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
     autoinheritanceFields);
 
   {
-    mxArray *mxChecksum = mxCreateString("0jHneDQsgIyV5tdfrzOFe");
+    mxArray *mxChecksum = mxCreateString("GvH7NdF04G6EcnZRlABHnC");
     mxSetField(mxAutoinheritanceInfo,0,"checksum",mxChecksum);
   }
 
@@ -3660,10 +3661,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3693,10 +3694,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3726,10 +3727,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3759,10 +3760,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3792,10 +3793,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3825,10 +3826,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3858,10 +3859,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3891,10 +3892,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3924,10 +3925,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3957,10 +3958,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -3990,10 +3991,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4023,10 +4024,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4056,10 +4057,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4089,10 +4090,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4122,10 +4123,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4155,10 +4156,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4188,10 +4189,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4221,10 +4222,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4254,10 +4255,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4287,10 +4288,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4320,10 +4321,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4353,10 +4354,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4386,10 +4387,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4419,10 +4420,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4452,10 +4453,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4485,10 +4486,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4518,10 +4519,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4551,10 +4552,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4584,10 +4585,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4617,10 +4618,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4650,10 +4651,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4683,10 +4684,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4716,10 +4717,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4780,10 +4781,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4813,10 +4814,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4846,10 +4847,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4879,10 +4880,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4912,10 +4913,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4945,10 +4946,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -4978,10 +4979,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5011,10 +5012,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5044,10 +5045,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5077,10 +5078,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5110,10 +5111,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5143,10 +5144,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5176,10 +5177,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5209,10 +5210,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5242,10 +5243,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5275,10 +5276,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5308,10 +5309,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5341,10 +5342,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5374,10 +5375,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5407,10 +5408,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5440,10 +5441,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5473,10 +5474,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5506,10 +5507,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5539,10 +5540,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5572,10 +5573,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5605,10 +5606,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5638,10 +5639,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5671,10 +5672,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5704,10 +5705,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5737,10 +5738,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5770,10 +5771,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5803,10 +5804,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -5836,10 +5837,10 @@ mxArray *sf_c10_Basic_DMT_get_autoinheritance_info(void)
 
         mxArray *mxFixpt = mxCreateStructMatrix(1,1,6,fixptFields);
         mxSetField(mxFixpt,0,"isSigned",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(16));
+        mxSetField(mxFixpt,0,"wordLength",mxCreateDoubleScalar(9));
         mxSetField(mxFixpt,0,"bias",mxCreateDoubleScalar(0));
         mxSetField(mxFixpt,0,"slope",mxCreateDoubleScalar(1));
-        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-7));
+        mxSetField(mxFixpt,0,"exponent",mxCreateDoubleScalar(-3));
         mxSetField(mxFixpt,0,"isScaledDouble",mxCreateDoubleScalar(0));
         mxSetField(mxType,0,"fixpt",mxFixpt);
       }
@@ -6105,177 +6106,177 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
             &(caseExprEnd[0]));
         }
 
-        _SFD_SET_DATA_COMPILED_PROPS(0,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(0,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(1,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(1,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(2,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(2,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(3,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(3,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(4,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(4,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(5,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(5,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(6,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(6,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(7,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(7,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(8,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(8,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(9,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(9,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(10,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(10,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(11,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(11,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(12,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(12,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(13,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(13,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(14,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(14,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(15,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(15,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(16,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(16,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(17,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(17,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(18,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(18,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(19,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(19,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(20,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(20,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(21,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(21,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(22,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(22,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(23,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(23,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(24,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(24,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(25,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(25,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(26,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(26,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(27,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(27,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(28,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(28,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(29,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(29,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(30,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(30,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(31,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(31,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(32,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(32,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(33,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(33,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(34,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(34,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)
           c10_d_sf_marshallIn);
         _SFD_SET_DATA_COMPILED_PROPS(35,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c10_sf_marshallOut,(MexInFcnForType)c10_sf_marshallIn);
         _SFD_SET_DATA_COMPILED_PROPS(36,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c10_sf_marshallOut,(MexInFcnForType)c10_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(37,SF_INT16,0,NULL,1,1,16,0,1,-7,0,
+        _SFD_SET_DATA_COMPILED_PROPS(37,SF_INT16,0,NULL,1,1,9,0,1,-3,0,
           (MexFcnForType)c10_e_sf_marshallOut,(MexInFcnForType)
           c10_e_sf_marshallIn);
-        _SFD_SET_DATA_COMPILED_PROPS(38,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(38,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(39,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(39,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(40,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(40,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(41,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(41,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(42,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(42,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(43,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(43,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(44,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(44,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(45,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(45,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(46,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(46,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(47,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(47,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(48,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(48,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(49,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(49,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(50,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(50,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(51,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(51,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(52,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(52,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(53,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(53,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(54,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(54,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(55,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(55,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(56,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(56,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(57,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(57,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(58,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(58,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(59,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(59,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(60,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(60,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(61,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(61,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(62,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(62,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(63,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(63,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(64,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(64,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(65,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(65,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(66,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(66,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(67,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(67,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
-        _SFD_SET_DATA_COMPILED_PROPS(68,SF_INT16,0,NULL,1,1,16,0,1,-7,1,
+        _SFD_SET_DATA_COMPILED_PROPS(68,SF_INT16,0,NULL,1,1,9,0,1,-3,1,
           (MexFcnForType)c10_d_sf_marshallOut,(MexInFcnForType)NULL);
         _SFD_SET_DATA_COMPILED_PROPS(69,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c10_sf_marshallOut,(MexInFcnForType)NULL);
@@ -6360,7 +6361,7 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
 
 static const char* sf_get_instance_specialization(void)
 {
-  return "3anZgYYgDpDTlp9XOCQVrG";
+  return "UEQGMbl6DXViF1w9uaGplH";
 }
 
 static void sf_opaque_initialize_c10_Basic_DMT(void *chartInstanceVar)
@@ -6524,10 +6525,10 @@ static void mdlSetWorkWidths_c10_Basic_DMT(SimStruct *S)
   }
 
   ssSetOptions(S,ssGetOptions(S)|SS_OPTION_WORKS_WITH_CODE_REUSE);
-  ssSetChecksum0(S,(173240146U));
-  ssSetChecksum1(S,(970438202U));
-  ssSetChecksum2(S,(4124801248U));
-  ssSetChecksum3(S,(3160621427U));
+  ssSetChecksum0(S,(2350232073U));
+  ssSetChecksum1(S,(1775576207U));
+  ssSetChecksum2(S,(683820810U));
+  ssSetChecksum3(S,(1100760488U));
   ssSetmdlDerivatives(S, NULL);
   ssSetExplicitFCSSCtrl(S,1);
   ssSupportsMultipleExecInstances(S,0);

@@ -32,7 +32,7 @@
 #define c16_b_Tb                       (2.0E-8)
 #define c16_b_SystemPeriod             (4.0E-9)
 #define c16_b_fftLen                   (16.0)
-#define c16_b_GI_Active                (4.0)
+#define c16_b_GI_Active                (8.0)
 
 /* Variable Declarations */
 
@@ -1564,10 +1564,10 @@ extern void utFree(void*);
 
 void sf_c16_Basic_DMT_get_check_sum(mxArray *plhs[])
 {
-  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(3202763848U);
-  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(631254875U);
-  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1398602035U);
-  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(3107768387U);
+  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1111237039U);
+  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1396479622U);
+  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(4102815715U);
+  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(381230029U);
 }
 
 mxArray* sf_c16_Basic_DMT_get_post_codegen_info(void);
@@ -1581,7 +1581,7 @@ mxArray *sf_c16_Basic_DMT_get_autoinheritance_info(void)
     autoinheritanceFields);
 
   {
-    mxArray *mxChecksum = mxCreateString("Fe7NsCsoqng7YLbFDguTgC");
+    mxArray *mxChecksum = mxCreateString("bT1Dhox4PfhnSWeUlyc2lE");
     mxSetField(mxAutoinheritanceInfo,0,"checksum",mxChecksum);
   }
 
@@ -2397,7 +2397,7 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
 
 static const char* sf_get_instance_specialization(void)
 {
-  return "ehadYJODBKjdE9dv2JD8YC";
+  return "5fuTVj1NREvMLzp1IMnRwE";
 }
 
 static void sf_opaque_initialize_c16_Basic_DMT(void *chartInstanceVar)
@@ -2599,10 +2599,10 @@ static void mdlSetWorkWidths_c16_Basic_DMT(SimStruct *S)
   }
 
   ssSetOptions(S,ssGetOptions(S)|SS_OPTION_WORKS_WITH_CODE_REUSE);
-  ssSetChecksum0(S,(1771611016U));
-  ssSetChecksum1(S,(166624910U));
-  ssSetChecksum2(S,(2632753773U));
-  ssSetChecksum3(S,(2655167399U));
+  ssSetChecksum0(S,(2615119179U));
+  ssSetChecksum1(S,(2377528064U));
+  ssSetChecksum2(S,(1124137637U));
+  ssSetChecksum3(S,(3580043831U));
   ssSetmdlDerivatives(S, NULL);
   ssSetExplicitFCSSCtrl(S,1);
   ssSupportsMultipleExecInstances(S,0);
